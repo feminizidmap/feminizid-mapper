@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SigninController, type: :controller do
-
   describe 'POST #create' do
     let(:password) { 'querty' }
     let(:user) { FactoryBot.create(:user, { password: 'querty' }) }
@@ -16,7 +17,7 @@ RSpec.describe SigninController, type: :controller do
 
     it 'returns unauthorized for invalid params' do
       post :create, params: { email: user.email, password: 'incorrect' }
-      expect(response).to have_http_status(401)
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 end

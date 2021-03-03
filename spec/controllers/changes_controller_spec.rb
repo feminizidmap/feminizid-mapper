@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ChangesController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     { status: :created }
-  }
+  end
 
-  let(:invalid_attributes) {
-    { status: "foo" }
-  }
+  let(:invalid_attributes) do
+    { status: 'foo' }
+  end
 
   before do
     payload = { user_id: user.id }
@@ -20,7 +22,7 @@ RSpec.describe ChangesController, type: :controller do
   describe 'GET #index' do
     let!(:change) { FactoryBot.create(:change, user: user) }
 
-    pending 'returns a success response' do
+    it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
       get :index
       expect(response).to be_successful
@@ -33,7 +35,7 @@ RSpec.describe ChangesController, type: :controller do
     # the quick spec is here only for the presentation purposes
     it 'unauth without cookie' do
       get :index
-      expect(response).to have_http_status(401)
+      expect(response).to have_http_status(:unauthorized)
     end
   end
 
@@ -48,14 +50,13 @@ RSpec.describe ChangesController, type: :controller do
   end
 
   describe 'POST #create' do
-
     context 'with valid params' do
       it 'creates a new Change' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        expect {
+        expect do
           post :create, params: { change: valid_attributes }
-        }.to change(Change, :count).by(1)
+        end.to change(Change, :count).by(1)
       end
 
       it 'renders a JSON response with the new change' do
@@ -70,7 +71,7 @@ RSpec.describe ChangesController, type: :controller do
       it 'unauth without CSRF' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         post :create, params: { change: valid_attributes }
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(:unauthorized)
       end
     end
 
@@ -89,9 +90,9 @@ RSpec.describe ChangesController, type: :controller do
     let!(:change) { FactoryBot.create(:change, user: user) }
 
     context 'with valid params' do
-      let(:new_attributes) {
+      let(:new_attributes) do
         { status: :reviewed }
-      }
+      end
 
       it 'updates the requested change' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -127,9 +128,9 @@ RSpec.describe ChangesController, type: :controller do
     pending 'destroys the requested change' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
       request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-      expect {
+      expect do
         delete :destroy, params: { id: change.id }
-      }.to change(Change, :count).by(-1)
+      end.to change(Change, :count).by(-1)
     end
   end
 end
