@@ -22,7 +22,7 @@ RSpec.describe ChangesController, type: :controller do
   describe 'GET #index' do
     let!(:change) { FactoryBot.create(:change, user: user) }
 
-    pending 'returns a success response' do
+    it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
       get :index
       expect(response).to be_successful
