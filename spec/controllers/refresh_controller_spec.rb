@@ -9,7 +9,7 @@ RSpec.describe RefreshController, type: :controller do
   describe 'POST #create' do
     let(:user) { FactoryBot.create(:user) }
 
-    context 'success' do
+    context 'when successful' do
       before do
         # set expiration time to 0 to create an already expired access token
         JWTSessions.access_exp_time = 0
@@ -29,7 +29,7 @@ RSpec.describe RefreshController, type: :controller do
       end
     end
 
-    context 'failure' do
+    context 'when failure' do
       before do
         payload = { user_id: user.id }
         session = JWTSessions::Session.new(payload: payload, refresh_by_access_allowed: true)
