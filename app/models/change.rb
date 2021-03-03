@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Change < ApplicationRecord
   belongs_to :user
 

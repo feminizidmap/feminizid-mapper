@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SignupController < ApplicationController
   def create
     user = User.new(user_params)

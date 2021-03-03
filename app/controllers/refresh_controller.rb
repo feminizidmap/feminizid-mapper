@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RefreshController < ApplicationController
   before_action :authorize_refresh_by_access_request!
 

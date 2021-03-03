@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangesController < ApplicationController
   before_action :authorize_access_request!
   before_action :set_change, only: %i[show update destroy]

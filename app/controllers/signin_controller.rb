@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SigninController < ApplicationController
   def create
     user = User.find_by!(email: params[:email])
