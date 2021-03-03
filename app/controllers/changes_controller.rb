@@ -31,7 +31,6 @@ class ChangesController < ApplicationController
     end
   end
 
-  # DELETE /changes/1
   def destroy
     @change.destroy
   end
