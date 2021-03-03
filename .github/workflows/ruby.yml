@@ -56,4 +56,4 @@ jobs:
         RAILS_ENV: test
         DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mapper_test?pool=5&timeout=5000"
       run: |
-        bundle exec rake rspec
+        bundle exec rspec
