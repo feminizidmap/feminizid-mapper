@@ -30,6 +30,10 @@ jobs:
           --health-retries 5
         ports:
           - 5432:5432
+      redis:
+        image: redis
+        ports: ['6379:6379']
+        options: --entrypoint redis-server
     strategy:
       matrix:
         ruby-version: ['3.0']
@@ -47,6 +51,7 @@ jobs:
     - name: Build App
       env:
         RAILS_ENV: test
+        REDIS_URL: "redis://localhost:6379/0"
         DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mapper_test?pool=5&timeout=5000"
       run: |
         bin/rails db:setup
@@ -54,6 +59,8 @@ jobs:
     - name: Run Tests
       env:
         RAILS_ENV: test
+        REDIS_URL: "redis://localhost:6379/0"
+        SESSION_SECRET: "thisisonlyfortesting"
         DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mapper_test?pool=5&timeout=5000"
       run: |
         bundle exec rspec
