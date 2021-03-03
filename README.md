@@ -1,9 +1,8 @@
-# README
+# Feminizid-Mapper
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Main database interface.
 
-Things you may want to cover:
+## Development setup
 
 * Ruby version
 
@@ -11,10 +10,16 @@ Things you may want to cover:
 
 * System dependencies
 
+    - Postgresql
+
+    - Redis
+
 * Configuration
 
-```bash
-DATABASE_URL="postgresql://dev:devdev@localhost:5432/mapper_development?pool=5&timeout=5000"
+Copy and adjust the env.sample and source it
+
+``` bash
+$ cp env.sample .env && source .env
 ```
 
 * Database creation
@@ -28,3 +33,11 @@ DATABASE_URL="postgresql://dev:devdev@localhost:5432/mapper_development?pool=5&t
 * Deployment instructions
 
 * ...
+
+
+## Funding
+
+Development on this project is made possible through public funding.
+
+[![BMBF logo](public/assets/bmbf-logo.svg)](https://www.bmbf.de/)
+[![Prototypefund](public/assets/logo-prototype.svg)](https://prototypefund.de/)
