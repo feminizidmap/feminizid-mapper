@@ -1,10 +1,9 @@
 class ChangesController < ApplicationController
   before_action :authorize_access_request!
-  before_action :set_change, only: [:show, :update, :destroy]
+  before_action :set_change, only: %i[show update destroy]
 
   def index
-    @changes = current_user.changes
-
+    @changes = Change.all
     render json: @changes
   end
 
