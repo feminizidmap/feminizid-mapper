@@ -35,9 +35,7 @@ $ cp env.sample .env && source .env
 * ...
 
 
-## Funding
-
-Development on this project is made possible through public funding.
+## Sponsorship
 
 [![BMBF logo](public/assets/bmbf-logo.svg)](https://www.bmbf.de/)
 [![Prototypefund](public/assets/logo-prototype.svg)](https://prototypefund.de/)
