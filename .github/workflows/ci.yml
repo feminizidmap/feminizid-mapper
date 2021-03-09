@@ -58,3 +58,32 @@ jobs:
         DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mapper_test?pool=5&timeout=5000"
       run: |
         bundle exec rspec
+  test_vue:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14]
+    steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v1.4.3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Checkout master branch
+        uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v2.1.0
+        with:
+          path: node_modules
+          key: ubuntu-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/package-lock.json')) }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          cd frontend
+          yarn install
+      - name: Run ESLint
+        run: |
+          cd frontend
+          yarn lint
+      - name: Run unit tests
+        run: |
+          yarn test:unit
