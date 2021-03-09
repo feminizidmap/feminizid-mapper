@@ -86,4 +86,5 @@ jobs:
           yarn lint
       - name: Run unit tests
         run: |
+          cd frontend
           yarn test:unit
