@@ -10,10 +10,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'dotenv-rails'
 gem 'fast_jsonapi'
-# Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'jbuilder', '~> 2.7'
-# gem 'jwt', '~> 2.2.2'
 gem 'jwt_sessions'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
