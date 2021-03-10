@@ -2,7 +2,7 @@
   "name": "frontend-heroku",
   "version": "0.1.0",
   "scripts": {
-    "postinstall": "npm install -g yarn && yarn --prefix frontend && yarn build --prefix frontend"
+    "postinstall": "npm install -g yarn && yarn --prefix frontend install && yarn --prefix frontend build"
   },
   "engines": {
     "node": ">=12.11.0"
