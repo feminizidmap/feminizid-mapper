@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
       "lint": "vue-cli-service lint",
-      "postinstall": "npm install -g yarn && yarn --prefix frontend  && yarn --prefix frontend build"
+      "heroku-postinstall": "npm install --prefix frontend && npm run build --prefix frontend"
   },
   "dependencies": {
     "axios": "^0.21.1",
