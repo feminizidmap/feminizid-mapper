@@ -1,7 +1,1 @@
-{
-  "name": "frontend-heroku",
-  "version": "0.1.0",
-  "scripts": {
-    "postinstall": "yarn install --prefix frontend"
-  }
-}
+frontend/package.json
