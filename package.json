@@ -3,5 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "postinstall": "yarn install --prefix frontend"
+  },
+  "engines": {
+    "node": ">=12.11.0"
   }
 }
