@@ -10,8 +10,7 @@ Rails.application.routes.draw do
 
   get '/me', controller: :users, action: :me
 
-  # namespace :api do
-  #   namespace :v1 do
-  #   end
-  # end
+  namespace :admin do
+    resources :users, only: [:index]
+  end
 end
