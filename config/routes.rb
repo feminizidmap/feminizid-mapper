@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :changes
 
+  get '/me', controller: :users, action: :me
+
   # namespace :api do
   #   namespace :v1 do
   #   end
