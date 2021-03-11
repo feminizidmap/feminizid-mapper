@@ -1,0 +1,17 @@
+.git*
+db/*.sqlite3
+db/*.sqlite3-journal
+log/*
+tmp/*
+Dockerfile
+README.rdoc
+node_modules
+yarn.lock
+yarn-error.log
+/config/database.yml.local
+/config/database.yml.travis
+/config/database.yml
+/postgres-vol
+.git
+env.sample
+.env

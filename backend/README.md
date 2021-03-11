@@ -1,6 +1,4 @@
-# Feminizid-Mapper
-
-Main database interface.
+# Mapper Backend
 
 ## Development setup
 
@@ -33,9 +31,3 @@ $ cp env.sample .env && source .env
 * Deployment instructions
 
 * ...
-
-
-## Sponsorship
-
-[![BMBF logo](public/assets/bmbf-logo.svg)](https://www.bmbf.de/)
-[![Prototypefund](public/assets/logo-prototype.svg)](https://prototypefund.de/)
