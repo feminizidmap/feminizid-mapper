@@ -13,7 +13,6 @@ RSpec.describe Admin::Users::ChangesController, type: :controller do
     it 'allows admin to receive changes list' do
       sign_in_as(admin)
       get :index, params: { user_id: user.id }
-      # pry
       expect(response).to be_successful
       expect(response_json.size).to eq 1
       expect(response_json.first['id']).to eq change.id

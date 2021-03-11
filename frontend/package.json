@@ -6,8 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
-      "lint": "vue-cli-service lint",
-      "heroku-postinstall": "npm install --prefix frontend && npm run build --prefix frontend"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.21.1",

@@ -1,0 +1,10 @@
+{
+  "root": "dist/",
+  "canonical_host": "${HOST}",
+  "clean_urls": true,
+  "headers": {
+    "/**": {
+      "Access-Control-Allow-Origin": "*"
+    }
+  }
+}

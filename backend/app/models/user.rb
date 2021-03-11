@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :changes_made, class_name: 'Change', dependent: :nullify
 
-  enum role: %i[user reviewer admin].freeze
+  enum role: { user: 0, reviewer: 1, admin: 2 }
 
   validates :email,
             format: { with: URI::MailTo::EMAIL_REGEXP },

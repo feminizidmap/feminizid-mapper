@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :change do
-    user { nil }
+    user { association :user }
     status { :created }
   end
 end
