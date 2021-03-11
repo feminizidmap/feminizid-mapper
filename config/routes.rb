@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/me', controller: :users, action: :me
 
   namespace :admin do
-    resources :users, only: [:index]
+    resources :users, only: [:index] do
+      resources :changes, only: [:index], controller: 'users/changes'
+    end
   end
 end

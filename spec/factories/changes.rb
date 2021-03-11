@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :change do
     user { nil }
-    status { :updated }
+    status { :created }
   end
 end
