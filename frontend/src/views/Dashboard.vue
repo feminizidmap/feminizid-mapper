@@ -1,25 +1,25 @@
 <template>
   <div class="dashboard">
+    <AppHeader></AppHeader>
     <h1>Dashboard</h1>
-    <Signout />
     <ChangesList />
   </div>
 </template>
 
 <script>
- import Signout from '@/components/Signout'
+ import AppHeader from '@/layout/AppHeader'
  import ChangesList from '@/components/changes/List'
 
  export default {
    name: 'Dashboard',
-   components: { ChangesList, Signout },
+   components: { ChangesList, AppHeader },
    data () {
      return {
 
      }
    },
    created () {
-     if (!localStorage.signedIn) {
+     if (!this.$store.state.signedIn) {
        this.$router.replace('/')
      }
    },

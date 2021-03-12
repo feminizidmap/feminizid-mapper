@@ -25,5 +25,13 @@ export const store = createStore({
             state.csrf = csrf
         }
     },
+    getters: {
+        isAdmin(state) {
+            return state.currentUser && state.currentUser.role === 'admin'
+        },
+        isManager(state) {
+            return state.currentUser && state.currentUser.role === 'reviewer'
+        }
+    },
     plugins: [createPersistedState()]
 })
