@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Mapper</a>
+      <router-link class="navbar-brand" to="/dashboard">Mapper</router-link>
       <button class="navbar-toggler"
               type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -14,7 +14,9 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" v-if="showAdminLink()">Admin</a>
+            <router-link class="nav-link"
+                         to="/admin/users"
+                         v-if="showAdminLink()">Admin</router-link>
           </li>
           <li class="nav-item sign-out">
             <Signout />
