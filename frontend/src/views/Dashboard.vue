@@ -1,8 +1,18 @@
 <template>
   <div class="dashboard">
     <AppHeader></AppHeader>
-    <h1>Dashboard</h1>
-    <ChangesList />
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <h1>Dashboard</h1>
+      </div>
+    </div>
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <div class="col-sm-4">
+          <ChangesList />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

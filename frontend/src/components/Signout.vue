@@ -1,7 +1,7 @@
 <template>
   <div class="signout">
     <div class="alert alert-danger" v-if="error">{{ error }}</div>
-    <button @click="signOut">Sign out</button>
+    <button @click="signOut" class="btn btn-link">Sign out</button>
   </div>
 </template>
 
