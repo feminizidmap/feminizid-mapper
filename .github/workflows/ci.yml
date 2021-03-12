@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  test_rails:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -29,8 +29,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-        ports:
-          - 5432:5432
+        ports: ['5432:5432']
       redis:
         image: redis
         ports: ['6379:6379']
@@ -41,8 +40,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install PostgreSQL client
-      run: |
-        sudo apt-get -yqq install libpq-dev
+      run: sudo apt-get -yqq install libpq-dev
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -50,14 +48,12 @@ jobs:
         bundler-cache: true
         working-directory: backend
     - name: Run Rubocop
-      run: |
-        bundle exec rubocop
+      run: bundle exec rubocop
     - name: Build App
-      run: |
-        bin/rails db:setup
+      run: bin/rails db:setup
     - name: Run Tests
-      run: |
-        bundle exec rspec
+      run: bundle exec rspec
+
   test_vue:
     runs-on: ubuntu-latest
     defaults:
@@ -80,11 +76,8 @@ jobs:
           key: ubuntu-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/package-lock.json')) }}
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          yarn install
+        run: yarn install
       - name: Run ESLint
-        run: |
-          yarn lint
+        run: yarn lint
       - name: Run unit tests
-        run: |
-          yarn test:unit
+        run: yarn test:unit
