@@ -42,7 +42,7 @@
      }
    },
    created () {
-     if (!localStorage.signedIn) {
+     if (!this.$store.state.signedIn) {
        this.$router.replace('/')
      } else {
        this.$http.secured.get('/changes')

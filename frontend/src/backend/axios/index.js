@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { store } from '../../store'
 
 const API_URL = process.env.VUE_APP_API_URL
 
@@ -23,7 +24,7 @@ securedAxiosInstance.interceptors.request.use(config => {
     if (method !== 'OPTIONS') {
         config.headers = {
             ...config.headers,
-            'X-CSRF-TOKEN': localStorage.csrf
+            'X-CSRF-TOKEN': store.state.csrf
         }
     }
     return config
@@ -36,31 +37,20 @@ securedAxiosInstance.interceptors.response.use(null, error => {
         return plainAxiosInstance.post('/refresh',
                                        {},
                                        { headers: {
-                                           'X-CSRF-TOKEN': localStorage.csrf } })
+                                           'X-CSRF-TOKEN': store.state.csrf } })
             .then(response => {
-                localStorage.csrf = response.data.csrf
-                localStorage.signedIn = true
+                store.commit('refresh', response.data.csrf)
 
                 let retryConfig = error.response.config
-                retryConfig.headers['X-CSRF-TOKEN'] = localStorage.csrf
+                retryConfig.headers['X-CSRF-TOKEN'] = store.state.csrf
                 return plainAxiosInstance.request(retryConfig)
             }).catch(error => {
-                delete localStorage.csrf
-                delete localStorage.signedIn
+                store.commit('unsetCurrentUser')
                 location.replace('/')
                 return Promise.reject(error)
             })
     } else {
         return Promise.reject(error)
-    }
-})
-
-
-
-export default axios.create({
-    baseURL: API_URL,
-    headers: {
-        'Content-Type': 'application/json'
     }
 })
 

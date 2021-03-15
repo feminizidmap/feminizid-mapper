@@ -1,7 +1,7 @@
 <template>
   <div class="signout">
     <div class="alert alert-danger" v-if="error">{{ error }}</div>
-    <button @click="signOut">Sign out</button>
+    <button @click="signOut" class="btn btn-link">Sign out</button>
   </div>
 </template>
 
@@ -20,8 +20,7 @@
      signOut () {
        this.$http.secured.delete('/signin')
            .then(() => {
-             delete localStorage.csrf
-             delete localStorage.signedIn
+             this.$store.commit('unsetCurrentUser')
              this.$router.replace('/')
            })
            .catch(error => this.setError(error, 'Cannot sign out'))

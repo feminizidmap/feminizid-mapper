@@ -1,38 +1,26 @@
-# Feminizid-Mapper
+# 🗃 Mapper
 
 Main database interface.
 
+See general documentation on [tech.feminizidmap.org/docs/mapper/](https://tech.feminizidmap.org/docs/mapper/) (wip).
+
 ## Development setup
 
-* Ruby version
+See respective directories for more information on a development setup
 
-3.0.0
+- [backend](/backend)
+- [frontend](/frontend)
 
-* System dependencies
 
-    - Postgresql
+## Production deployment
 
-    - Redis
+Create a copy of env.sample
 
-* Configuration
+`$ cp env.sample .env`
 
-Copy and adjust the env.sample and source it
+and change values accordingly. Then fire up docker-compose
 
-``` bash
-$ cp env.sample .env && source .env
-```
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+`$ docker-compose up -d`
 
 
 ## Sponsorship

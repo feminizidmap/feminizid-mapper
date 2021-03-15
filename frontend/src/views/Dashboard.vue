@@ -1,25 +1,35 @@
 <template>
   <div class="dashboard">
-    <h1>Dashboard</h1>
-    <Signout />
-    <ChangesList />
+    <AppHeader></AppHeader>
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <h1>Dashboard</h1>
+      </div>
+    </div>
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <div class="col-sm-4">
+          <ChangesList />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
- import Signout from '@/components/Signout'
+ import AppHeader from '@/layout/AppHeader'
  import ChangesList from '@/components/changes/List'
 
  export default {
    name: 'Dashboard',
-   components: { ChangesList, Signout },
+   components: { ChangesList, AppHeader },
    data () {
      return {
 
      }
    },
    created () {
-     if (!localStorage.signedIn) {
+     if (!this.$store.state.signedIn) {
        this.$router.replace('/')
      }
    },

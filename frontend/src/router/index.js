@@ -17,8 +17,19 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard.vue')
+    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
+  },
+  {
+    path: '/admin/users',
+    name: 'AdminUsersList',
+    component: () => import(/* webpackChunkName: "userslist" */ '@/views/admin/users/List.vue')
+  },
+  {
+    path: '/admin/users/:id/changes',
+    name: 'AdminUsersChangesList',
+    component: () => import(/* webpackChunkName: "userschangeslist" */ '@/views/admin/users/changes/List.vue')
   }
+
 ]
 
 const router = createRouter({

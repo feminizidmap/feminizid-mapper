@@ -1,4 +1,4 @@
-# frontend
+# Mapper Frontend
 
 ## Project setup
 ```
