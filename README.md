@@ -1,6 +1,6 @@
 # 🗃 Mapper
 
-Main database interface.
+Main database interface. ![ci workflow](https://github.com/feminizidmap/feminizid-mapper/actions/workflows/ci.yml/badge.svg?branch=main)
 
 See general documentation on [tech.feminizidmap.org/docs/mapper/](https://tech.feminizidmap.org/docs/mapper/) (wip).
 
