@@ -58,7 +58,7 @@ jobs:
       continue-on-error: true
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: backend/coverage/lcov.info
+        path-to-lcov: ./backend/coverage/lcov.info
 
   test_vue:
     runs-on: ubuntu-latest
