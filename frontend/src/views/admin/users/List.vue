@@ -19,7 +19,9 @@
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
           <td v-if="showChangesLink()">
-            <i class="fa fa-list-ul"></i>
+            <router-link :to="`/admin/users/${user.id}/changes`">
+              <i class="fa fa-list-ul"></i>
+            </router-link>
           </td>
         </tr>
       </tbody>
