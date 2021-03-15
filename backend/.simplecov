@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov-lcov'
 
 SimpleCov::Formatter::LcovFormatter.config do |c|
@@ -7,7 +9,7 @@ end
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
   [
     SimpleCov::Formatter::HTMLFormatter,
-    SimpleCov::Formatter::LcovFormatter,
+    SimpleCov::Formatter::LcovFormatter
   ]
 )
 SimpleCov.start('rails')
