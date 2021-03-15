@@ -25,5 +25,5 @@ and change values accordingly. Then fire up docker-compose
 
 ## Sponsorship
 
-[![BMBF logo](public/assets/bmbf-logo.svg)](https://www.bmbf.de/)
-[![Prototypefund](public/assets/logo-prototype.svg)](https://prototypefund.de/)
+[![BMBF logo](backend/public/assets/bmbf-logo.svg)](https://www.bmbf.de/)
+[![Prototypefund](backend/public/assets/logo-prototype.svg)](https://prototypefund.de/)
