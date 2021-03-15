@@ -6,9 +6,16 @@ Rails.application.routes.draw do
   post '/signin', controller: :signin, action: :create
   delete '/signin', controller: :signin, action: :destroy
 
-  resources :changes
+  resources :password_resets, only: [:create] do
+    collection do
+      get ':token', action: :edit, as: :edit
+      patch ':token', action: :update
+    end
+  end
 
   get '/me', controller: :users, action: :me
+
+  resources :changes
 
   namespace :admin do
     resources :users, only: [:index] do

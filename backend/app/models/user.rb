@@ -29,6 +29,6 @@ class User < ApplicationRecord
 
   def clear_password_token!
     self.reset_password_token = nil
-    self.reest_password_token_expires_at = nil
+    self.reset_password_token_expires_at = nil
   end
 end
