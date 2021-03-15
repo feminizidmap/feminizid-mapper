@@ -219,6 +219,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    simplecov-lcov (0.8.0)
     spring (2.1.1)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -266,6 +267,8 @@ DEPENDENCIES
   rspec-rails
   rubocop-rails
   rubocop-rspec
+  simplecov
+  simplecov-lcov
   spring
   tzinfo-data
 
