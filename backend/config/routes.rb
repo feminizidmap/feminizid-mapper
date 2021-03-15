@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :changes
 
   namespace :admin do
-    resources :users, only: [:index] do
+    resources :users, only: %i[index show update] do
       resources :changes, only: [:index], controller: 'users/changes'
     end
   end
