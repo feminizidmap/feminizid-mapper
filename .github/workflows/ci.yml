@@ -59,7 +59,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         base-path: backend
-        path-to-lcov: "./coverage/lcov.info"
+        path-to-lcov: "./backend/coverage/lcov.info"
 
   test_vue:
     runs-on: ubuntu-latest
