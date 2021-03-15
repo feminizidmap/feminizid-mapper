@@ -49,15 +49,15 @@ jobs:
         working-directory: backend
     - name: Run Rubocop
       run: bundle exec rubocop
+    - name: Build App
+      run: bin/rails db:setup
+    - name: Run Tests
+      run: bundle exec rspec
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         base-path: backend
-    - name: Build App
-      run: bin/rails db:setup
-    - name: Run Tests
-      run: bundle exec rspec
 
   test_vue:
     runs-on: ubuntu-latest
