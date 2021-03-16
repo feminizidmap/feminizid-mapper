@@ -11,7 +11,7 @@ RSpec.describe UsersController, type: :controller do
     it 'returns a success response' do
       get :me
       expect(response).to be_successful
-      expect(response_json).to eq user.as_json(only: %i[id email role])
+      expect(response_json).to eq user.as_json
     end
   end
 end

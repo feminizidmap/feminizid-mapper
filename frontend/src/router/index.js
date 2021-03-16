@@ -36,6 +36,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "userslist" */ '@/views/admin/users/List.vue')
   },
   {
+    path: '/admin/users/:id',
+    name: 'UserEdit',
+    component: () => import(/* webpackChunkName: "usersedit" */ '@/views/admin/users/Edit.vue')
+  },
+  {
     path: '/admin/users/:id/changes',
     name: 'AdminUsersChangesList',
     component: () => import(/* webpackChunkName: "userschangeslist" */ '@/views/admin/users/changes/List.vue')

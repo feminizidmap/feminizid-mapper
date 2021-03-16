@@ -34,15 +34,21 @@ securedAxiosInstance.interceptors.response.use(null, error => {
     if (error.response
         && error.response.config
         && error.response.status === 401) {
-        return plainAxiosInstance.post('/refresh',
-                                       {},
-                                       { headers: {
-                                           'X-CSRF-TOKEN': store.state.csrf } })
+        return plainAxiosInstance
+            .post('/refresh', {},
+                  { headers: { 'X-CSRF-TOKEN': store.state.csrf } })
             .then(response => {
-                store.commit('refresh', response.data.csrf)
-
+                plainAxiosInstance.get('/me')
+                    .then(meResponse => store.commit('setCurrentUser', {
+                        currentUser: meResponse.data,
+                        csrf: response.data.csrf }))
+                    .catch(error => {
+                        store.commit('unsetCurrentUser')
+                        location.replace('/')
+                        return Promise.reject(error)
+                    })
                 let retryConfig = error.response.config
-                retryConfig.headers['X-CSRF-TOKEN'] = store.state.csrf
+                retryConfig.headers['X-CSRF-TOKEN'] = response.state.csrf
                 return plainAxiosInstance.request(retryConfig)
             }).catch(error => {
                 store.commit('unsetCurrentUser')
