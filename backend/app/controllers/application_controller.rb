@@ -12,6 +12,8 @@ class ApplicationController < ActionController::API
 
   rescue_from ResetPasswordError, with: :not_authorized
 
+  before_action :set_locale
+
   private
 
   def current_user
@@ -36,5 +38,9 @@ class ApplicationController < ActionController::API
 
   def unprocessable_entity(exception)
     render json: { error: exception.record.errors.full_messages.join(' ') }, status: :unprocessable_entity
+  end
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
   end
 end
