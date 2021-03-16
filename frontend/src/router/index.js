@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Signin from '@/views/Signin'
 import Signup from '@/views/Signup'
-//import Dashboard from '@/views/Dashboard'
+import ForgotPassword from '@/views/ForgotPassword'
+import ResetPassword from '@/views/ResetPassword'
 
 const routes = [
   {
@@ -13,6 +14,16 @@ const routes = [
     path: '/signup',
     name: 'Signup',
     component: Signup
+  },
+  {
+    path: '/forgot_password',
+    name: 'ForgotPassword',
+    component: ForgotPassword
+  },
+  {
+    path: '/password_resets/:token',
+    name: 'ResetPassword',
+    component: ResetPassword
   },
   {
     path: '/dashboard',
@@ -29,7 +40,6 @@ const routes = [
     name: 'AdminUsersChangesList',
     component: () => import(/* webpackChunkName: "userschangeslist" */ '@/views/admin/users/changes/List.vue')
   }
-
 ]
 
 const router = createRouter({

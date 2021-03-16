@@ -14,6 +14,8 @@
         <button type="submit" class="btn btn-primary mb-3">Sign in</button>
         <div>
           <router-link to="/signup">Sign up</router-link>
+          <br />
+          <router-link to="/forgot_password">Forgot Password</router-link>
         </div>
       </form>
     </div>

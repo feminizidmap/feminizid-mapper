@@ -1,8 +1,8 @@
 <template>
   <div class="container-fluid mt-5">
+    <div class="alert alert-danger" v-if="error">{{ error }}</div>
     <div class="row justify-content-center">
       <form class="form-signup col-sm-3" @submit.prevent="signup">
-        <div class="alert alert-danger" v-if="error">{{ error }}</div>
         <div class="form-group mb-4">
           <label for="email" class="form-label">Email address</label>
           <input v-model="email" type="email" class="form-control" id="email" placeholder="email@example.com">
@@ -18,6 +18,8 @@
         <button type="submit" class="btn btn-primary mb-3">Sign up</button>
         <div>
           <router-link to="/">Sign in</router-link>
+          <br />
+          <router-link to="/forgot_password">Forgot Password</router-link>
         </div>
       </form>
     </div>
