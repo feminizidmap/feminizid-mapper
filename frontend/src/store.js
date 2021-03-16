@@ -31,6 +31,9 @@ export const store = createStore({
         },
         isManager(state) {
             return state.currentUser && state.currentUser.role === 'reviewer'
+        },
+        currentUserId(state) {
+            return state.currentUser && state.currentUser.id
         }
     },
     plugins: [createPersistedState()]

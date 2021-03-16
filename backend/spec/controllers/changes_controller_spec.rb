@@ -125,12 +125,12 @@ RSpec.describe ChangesController, type: :controller do
   describe 'DELETE #destroy' do
     let!(:change) { FactoryBot.create(:change, user: user) }
 
-    pending 'destroys the requested change' do
+    it 'destroys the requested change' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
       request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-      expect do
-        delete :destroy, params: { id: change.id }
-      end.to change(Change, :count).by(-1)
+      expect(Change.count).to be(1)
+      delete :destroy, params: { id: change.id }
+      expect(Change.count).to be(0)
     end
   end
 end
