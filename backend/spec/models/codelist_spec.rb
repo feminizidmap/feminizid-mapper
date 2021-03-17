@@ -58,4 +58,28 @@ RSpec.describe Codelist, type: :model do
     codelist.valid?
     expect(codelist.errors[:lang][0]).to include('does not exist')
   end
+
+  describe '.by_language' do
+    it 'includes codes with given language' do
+      codelist = described_class.create!(code: 'gender_identity', name: 'Cis Male', lang: 'en', description: '')
+      expect(described_class.by_language('en')).to include(codelist)
+    end
+
+    it 'excludes codes without given language' do
+      codelist = described_class.create!(code: 'gender_identity', name: 'Cis Male', lang: 'en', description: '')
+      expect(described_class.by_language('de')).not_to include(codelist)
+    end
+  end
+
+  describe '.by_code' do
+    it 'includes codes with given code' do
+      codelist = described_class.create!(code: 'gender_identity', name: 'Cis Male', lang: 'en', description: '')
+      expect(described_class.by_code('gender_identity')).to include(codelist)
+    end
+
+    it 'excludes codes without given code' do
+      codelist = described_class.create!(code: 'gender_identity', name: 'Cis Male', lang: 'en', description: '')
+      expect(described_class.by_code('sexual_orientation')).not_to include(codelist)
+    end
+  end
 end

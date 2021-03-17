@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get '/me', controller: :users, action: :me
 
     resources :changes
+    resources :codelists
 
     namespace :admin do
       resources :users, only: %i[index show update] do
