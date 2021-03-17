@@ -5,14 +5,14 @@
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <form class="form-signup col-sm-3" @submit.prevent="submit">
         <div class="form-group mb-4">
-          <label for="email" class="form-label">Email address</label>
+          <label for="email" class="form-label">{{ $t('forms.email') }}</label>
           <input v-model="email" type="email" class="form-control" id="email" placeholder="email@example.com">
         </div>
-        <button type="submit" class="btn btn-primary mb-3">Reset Password</button>
+        <button type="submit" class="btn btn-primary mb-3">{{ $t('forms.resetPassword') }}</button>
         <div>
-          <router-link to="/">Sign in</router-link>
+          <router-link to="/">{{ $t('forms.signIn') }}</router-link>
           <br />
-          <router-link to="/signup">Sign up</router-link>
+          <router-link to="/signup">{{ $t('forms.signUp') }}</router-link>
         </div>
       </form>
     </div>
@@ -36,7 +36,7 @@
            .catch(error => this.submitFailed(error))
      },
      submitSuccessful () {
-       this.notice = 'Email with password reset instructions had been sent.'
+       this.notice = this.$t('resetPassword.mailSent')
        this.error = ''
        this.email = ''
      },

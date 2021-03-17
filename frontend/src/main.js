@@ -5,12 +5,14 @@ import VueAxios from 'vue-axios'
 import { securedAxiosInstance, plainAxiosInstance } from './backend/axios'
 import router from './router'
 import { store } from './store'
+import { i18n } from './i18n'
 
 const app = createApp(App)
-app.use(router)
-app.use(store)
-app.use(VueAxios, {
-    secured: securedAxiosInstance,
-    plain: plainAxiosInstance
-})
+      .use(router)
+      .use(store)
+      .use(i18n)
+      .use(VueAxios, {
+          secured: securedAxiosInstance,
+          plain: plainAxiosInstance
+      })
 app.mount('#app')

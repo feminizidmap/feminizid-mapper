@@ -29,19 +29,19 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+de:
+  hello: "Hallo Welt"
 
   user_mailer:
     reset_password: |
       Hi %{user_name},
 
-      You have requested to reset your password.
-      Please follow this link:
+      du möchtest dein Passwort zurücksetzen.
+      Bitte folge diesem Link:
 
       %{link}
 
-      Reset password URL is valid within 24 hours.
+      Die URL zum Zurücksetzen verliert nach 24 Stunden ihre Gültigkeit.
 
-      Have a nice day!
+      Einen schönen Tag!
     foo: "bar"

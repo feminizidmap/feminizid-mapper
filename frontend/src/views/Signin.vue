@@ -4,18 +4,18 @@
       <form class="form-signin col-sm-3" @submit.prevent="signin">
         <div class="alert alert-danger" v-if="error">{{ error }}</div>
         <div class="form-group mb-4">
-          <label for="email" class="form-label">Email address</label>
+          <label for="email" class="form-label">{{ $t('forms.email') }}</label>
           <input v-model="email" type="email" class="form-control" id="email" placeholder="email@example.com">
         </div>
         <div class="form-group mb-4">
-          <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label">{{ $t('forms.password') }}</label>
           <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary mb-3">Sign in</button>
+        <button type="submit" class="btn btn-primary mb-3">{{ $t('forms.signIn') }}</button>
         <div>
-          <router-link to="/signup">Sign up</router-link>
+          <router-link to="/signup">{{ $t('forms.signUp') }}</router-link>
           <br />
-          <router-link to="/forgot_password">Forgot Password</router-link>
+          <router-link to="/forgot_password">{{ $t('forms.forgotPassword') }}</router-link>
         </div>
       </form>
     </div>
