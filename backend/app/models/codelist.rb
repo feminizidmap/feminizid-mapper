@@ -12,6 +12,8 @@ class Codelist < ApplicationRecord
   scope :by_language, ->(language) { where(lang: language) }
   scope :by_code, ->(code) { where(code: code) }
 
+  private
+
   def language_must_be_known
     errors.add(:lang, 'does not exist') unless LanguageList::LanguageInfo.find(lang)
   end
