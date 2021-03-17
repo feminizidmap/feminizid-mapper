@@ -4,22 +4,22 @@
     <div class="row justify-content-center">
       <form class="form-signup col-sm-3" @submit.prevent="signup">
         <div class="form-group mb-4">
-          <label for="email" class="form-label">Email address</label>
+          <label for="email" class="form-label">{{ $t('forms.email') }}</label>
           <input v-model="email" type="email" class="form-control" id="email" placeholder="email@example.com">
         </div>
         <div class="form-group mb-4">
-          <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label">{{ $t('forms.password') }}</label>
           <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
         </div>
         <div class="form-group mb-4">
-          <label for="password" class="form-label">Password Confirmation</label>
+          <label for="password" class="form-label">{{ $t('forms.passwordConfirmation') }}</label>
           <input v-model="password_confirmation" type="password" class="form-control" id="password_confirmation" placeholder="Password Confirmation">
         </div>
-        <button type="submit" class="btn btn-primary mb-3">Sign up</button>
+        <button type="submit" class="btn btn-primary mb-3">{{ $t('forms.signUp') }}</button>
         <div>
-          <router-link to="/">Sign in</router-link>
+          <router-link to="/">{{ $t('forms.signIn') }}</router-link>
           <br />
-          <router-link to="/forgot_password">Forgot Password</router-link>
+          <router-link to="/forgot_password">{{ $t('forms.forgotPassword') }}</router-link>
         </div>
       </form>
     </div>

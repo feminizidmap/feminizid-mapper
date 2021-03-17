@@ -39,6 +39,6 @@ module Mapper
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.i18n.available_locales = [:en, :de]
+    config.i18n.available_locales = %i[en de]
   end
 end

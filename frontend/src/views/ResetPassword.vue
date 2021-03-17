@@ -5,16 +5,16 @@
     <div class="row justify-content-center">
       <form class="form-app form-reset-password col-sm-3" @submit.prevent="reset">
         <div class="form-group mb-4">
-          <label for="password" class="form-label">New Password</label>
+          <label for="password" class="form-label">{{ $t('forms.newPassword') }}</label>
           <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
         </div>
         <div class="form-group mb-4">
-          <label for="password_confirmation" class="form-label">Password Confirmation</label>
+          <label for="password_confirmation" class="form-label">{{ $t('forms.passwordConfirmation') }}</label>
           <input v-model="password_confirmation" type="password" class="form-control" id="password_confirmation" placeholder="Password Confirmation">
         </div>
-        <button type="submit" class="btn btn-primary mb-3">Reset password</button>
+        <button type="submit" class="btn btn-primary mb-3">{{ $t('forms.resetPassword') }}</button>
         <div>
-          <router-link to="/">Sign in</router-link>
+          <router-link to="/">{{ $t('forms.signIn') }}</router-link>
         </div>
       </form>
     </div>
@@ -42,7 +42,7 @@
            .catch(error => this.resetFailed(error))
      },
      resetSuccessful() {
-       this.notice = 'Your password has been reset successfully! Please sign in with your new password.'
+       this.notice = this.$t('resetPassword.resetSuccessful')
        this.error = ''
        this.password = ''
        this.password_confirmation = ''
