@@ -1,4 +1,4 @@
-class AddOptions < ActiveRecord::Migration[6.1]
+class CreateCodelists < ActiveRecord::Migration[6.1]
   def change
     create_table :codelists do |t|
       t.string :code, null: false
