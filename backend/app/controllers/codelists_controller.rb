@@ -4,7 +4,8 @@ class CodelistsController < ApplicationController
   before_action :authorize_access_request!
   before_action :set_codelist, only: %i[show update destroy]
 
-  ROLES = %w[admin].freeze
+  VIEW_ROLES = %w[user reviewer admin].freeze
+  EDIT_ROLES = %w[admin].freeze
 
   def index
     codelists = Codelist.all
@@ -18,7 +19,7 @@ class CodelistsController < ApplicationController
   def create
     codelist = Codelist.new(codelist_params)
     if codelist.save
-      render json: codelist, status: :created
+      render json: codelist, status: :created, location: codelists_url(codelist.id)
     else
       render json: codelist.errors, status: :unprocessable_entity
     end
@@ -38,12 +39,18 @@ class CodelistsController < ApplicationController
 
   def token_claims
     {
-      aud: ROLES,
+      aud: allowed_aud,
       verify_aud: true
     }
   end
 
   private
+
+  def allowed_aud
+    return VIEW_ROLES if action_name == 'index' || action_name == 'show'
+
+    EDIT_ROLES
+  end
 
   def set_codelist
     @codelist = Codelist.find(params[:id])

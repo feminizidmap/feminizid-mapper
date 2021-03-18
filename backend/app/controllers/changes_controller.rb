@@ -17,7 +17,7 @@ class ChangesController < ApplicationController
     @change = current_user.changes_made.build(change_params)
 
     if @change.save
-      render json: @change, status: :created
+      render json: @change, status: :created, location: changes_url(@change.id)
     else
       render json: @change.errors, status: :unprocessable_entity
     end
