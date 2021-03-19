@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  scope '(:locale)', locale: /en|de/ do
+  scope '(:locale)', locale: /#{Rails.application.config.available_locales.join('|')}/ do
     post '/signup', controller: :signup, action: :create
     post '/refresh', controller: :refresh, action: :create
     post '/signin', controller: :signin, action: :create
