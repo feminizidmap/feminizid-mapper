@@ -51,8 +51,6 @@
        }
        this.$http.plain.get('/me')
            .then(meResponse => {
-             console.log(meResponse)
-             console.log(response)
              this.$store.commit('setCurrentUser', { currentUser: meResponse.data,
                                                     csrf: response.data.csrf })
              this.error = ''

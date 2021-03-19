@@ -13,6 +13,14 @@
 
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Settings
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><router-link class="dropdown-item" to="/settings/codelists">Codelists</router-link></li>
+            </ul>
+          </li>
           <li class="nav-item">
             <router-link class="nav-link"
                          to="/admin/users"
