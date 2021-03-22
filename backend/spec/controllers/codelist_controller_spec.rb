@@ -2,46 +2,41 @@
 
 require 'rails_helper'
 
-RSpec.describe CodelistItemsController, type: :controller do
+RSpec.describe CodelistController, type: :controller do
   let(:admin) { FactoryBot.create(:user, role: :admin) }
   let(:user) { FactoryBot.create(:user) }
-  let(:codelist) { FactoryBot.create(:codelist) }
+  let!(:codelist) { FactoryBot.create(:codelist) }
 
   let(:valid_attributes) do
-    { codelist: codelist,
-      identifier: 2,
-      name: 'Cis Female',
+    { identifier: 2,
+      name: 'Sexual orientation',
       lang: 'en',
       description: '' }
   end
 
   let(:invalid_attributes) do
-    { codelist: codelist,
-      identifier: 2,
+    { identifier: 2,
+      name: 'Sexual orientation',
       lang: 'eng',
       description: '' }
   end
 
   describe 'GET #index' do
-    let!(:codelist_item) { FactoryBot.create(:codelist_item, codelist: codelist) }
-
     it 'allows users to receive codelists' do
       sign_in_as(user)
       get :index
       expect(response).to be_successful
       expect(response_json.size).to eq 1
-      expect(response_json.first['id']).to eq codelist_item.id
+      expect(response_json.first['id']).to eq codelist.id
     end
   end
 
   describe 'GET #show' do
-    let!(:codelist_item) { FactoryBot.create(:codelist_item, codelist: codelist) }
-
     it 'allows user to receive a single codelist' do
       sign_in_as(user)
-      get :show, params: { id: codelist_item.id }
+      get :show, params: { id: codelist.id }
       expect(response).to be_successful
-      expect(response_json['id']).to eq codelist_item.id
+      expect(response_json['id']).to eq codelist.id
     end
   end
 
@@ -52,7 +47,7 @@ RSpec.describe CodelistItemsController, type: :controller do
           sign_in_as(admin)
           expect do
             post :create, params: { codelist: valid_attributes }
-          end.to change(CodelistItem, :count).by(1)
+          end.to change(Codelist, :count).by(1)
         end
 
         it 'renders a JSON response with the new codelist' do
@@ -61,7 +56,7 @@ RSpec.describe CodelistItemsController, type: :controller do
           expect(response).to have_http_status(:created)
           expect(response.content_type).to include('application/json')
           expect(response_json['name']).to eq valid_attributes[:name]
-          expect(response.location).to eq codelist_items_url(CodelistItem.last)
+          expect(response.location).to eq codelists_url(Codelist.last)
         end
       end
 
@@ -86,7 +81,7 @@ RSpec.describe CodelistItemsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:codelist_item) { FactoryBot.create(:codelist_item, codelist: codelist) }
+    let!(:codelist) { FactoryBot.create(:codelist) }
 
     context 'with admin role' do
       context 'with valid params' do
@@ -96,14 +91,14 @@ RSpec.describe CodelistItemsController, type: :controller do
 
         it 'updates the requested codelist' do
           sign_in_as(admin)
-          put :update, params: { id: codelist_item.id, codelist: new_attributes }
-          codelist_item.reload
-          expect(codelist_item.name).to eq new_attributes[:name].to_s
+          put :update, params: { id: codelist.id, codelist: new_attributes }
+          codelist.reload
+          expect(codelist.name).to eq new_attributes[:name].to_s
         end
 
         it 'renders a JSON response with the codelist' do
           sign_in_as(admin)
-          put :update, params: { id: codelist_item.id, codelist: new_attributes }
+          put :update, params: { id: codelist.id, codelist: new_attributes }
           expect(response).to have_http_status(:ok)
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
@@ -112,7 +107,7 @@ RSpec.describe CodelistItemsController, type: :controller do
       context 'with invalid params' do
         it 'renders a JSON response with errors for the change' do
           sign_in_as(admin)
-          put :update, params: { id: codelist_item.id, codelist: invalid_attributes }
+          put :update, params: { id: codelist.id, codelist: invalid_attributes }
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
@@ -127,7 +122,7 @@ RSpec.describe CodelistItemsController, type: :controller do
 
         it 'does not allow update' do
           sign_in_as(user)
-          post :update, params: { id: codelist_item.id, codelist: new_attributes }
+          post :update, params: { id: codelist.id, codelist: new_attributes }
           expect(response).to have_http_status(:forbidden)
         end
       end
@@ -135,14 +130,14 @@ RSpec.describe CodelistItemsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:codelist_item) { FactoryBot.create(:codelist_item, codelist: codelist) }
+    let!(:codelist) { FactoryBot.create(:codelist) }
 
     context 'with admin role' do
       it 'destroys the requested codelist' do
         sign_in_as(admin)
         expect do
-          delete :destroy, params: { id: codelist_item.id }
-        end.to change(CodelistItem, :count).by(-1)
+          delete :destroy, params: { id: codelist.id }
+        end.to change(Codelist, :count).by(-1)
         expect(response).to have_http_status(:no_content)
       end
     end
@@ -150,7 +145,7 @@ RSpec.describe CodelistItemsController, type: :controller do
     context 'with user role' do
       it 'does not destroy codelist' do
         sign_in_as(user)
-        delete :destroy, params: { id: codelist_item.id }
+        delete :destroy, params: { id: codelist.id }
         expect(response).to have_http_status(:forbidden)
       end
     end

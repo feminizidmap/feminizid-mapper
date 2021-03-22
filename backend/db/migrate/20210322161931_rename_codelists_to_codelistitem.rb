@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RenameCodelistsToCodelistitem < ActiveRecord::Migration[6.1]
   def up
     rename_table :codelists, :codelist_items

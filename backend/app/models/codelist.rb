@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class CodelistItem < ApplicationRecord
+class Codelist < ApplicationRecord
   include ActiveModel::Serializers::JSON
 
-  belongs_to :codelist
+  has_many :codelist_items, dependent: :destroy
 
   validates :identifier, presence: true
   validates :name, presence: true
