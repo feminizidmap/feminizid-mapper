@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
     resources :changes
     resources :system_settings
-    resources :codelists
+    resources :codelist_items
 
     namespace :admin do
       resources :users, only: %i[index show update] do

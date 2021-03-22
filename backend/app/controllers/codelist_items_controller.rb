@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CodelistsController < ApplicationController
+class CodelistItemsController < ApplicationController
   before_action :authorize_access_request!
   before_action :set_codelist, only: %i[show update destroy]
 
@@ -8,7 +8,7 @@ class CodelistsController < ApplicationController
   EDIT_ROLES = %w[admin].freeze
 
   def index
-    codelists = Codelist.all
+    codelists = CodelistItem.all
     render json: codelists
   end
 
@@ -17,9 +17,9 @@ class CodelistsController < ApplicationController
   end
 
   def create
-    codelist = Codelist.new(codelist_params)
+    codelist = CodelistItem.new(codelist_params)
     if codelist.save
-      render json: codelist, status: :created, location: codelists_url(codelist.id)
+      render json: codelist, status: :created, location: codelist_items_url(codelist.id)
     else
       render json: codelist.errors, status: :unprocessable_entity
     end
@@ -53,7 +53,7 @@ class CodelistsController < ApplicationController
   end
 
   def set_codelist
-    @codelist = Codelist.find(params[:id])
+    @codelist = CodelistItem.find(params[:id])
   end
 
   def codelist_params

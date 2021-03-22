@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Codelist < ApplicationRecord
+class CodelistItem < ApplicationRecord
   include ActiveModel::Serializers::JSON
 
   validates :code, presence: true

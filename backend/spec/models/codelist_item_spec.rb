@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Codelist, type: :model do
+RSpec.describe CodelistItem, type: :model do
   it 'is valid with code, name and language' do
     codelist = described_class.new(
       code: 'gender_identity',
