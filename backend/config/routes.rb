@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get '/me', controller: :users, action: :me
 
     resources :changes
+    resources :system_settings
     resources :codelists
 
     namespace :admin do
