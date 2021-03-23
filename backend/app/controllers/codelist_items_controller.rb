@@ -3,13 +3,14 @@
 class CodelistItemsController < ApplicationController
   before_action :authorize_access_request!
   before_action :set_codelist_item, only: %i[show update destroy]
+  before_action :set_codelist, only: %i[create]
 
   VIEW_ROLES = %w[user reviewer admin].freeze
   EDIT_ROLES = %w[admin].freeze
 
   def index
-    codelists = CodelistItem.all
-    render json: codelists
+    codelist_items = CodelistItem.all
+    render json: codelist_items
   end
 
   def show
@@ -17,11 +18,12 @@ class CodelistItemsController < ApplicationController
   end
 
   def create
-    codelist = CodelistItem.new(codelist_item_params)
-    if codelist.save
-      render json: codelist, status: :created, location: codelist_items_url(codelist.id)
+    codelist_item = @codelist.codelist_items.new
+    codelist_item.update(codelist_item_params)
+    if codelist_item.save
+      render json: codelist_item, status: :created, location: codelist_items_url(codelist_item.id)
     else
-      render json: codelist.errors, status: :unprocessable_entity
+      render json: codelist_item.errors, status: :unprocessable_entity
     end
   end
 
@@ -56,9 +58,13 @@ class CodelistItemsController < ApplicationController
     @codelist_item = CodelistItem.find(params[:id])
   end
 
+  def set_codelist
+    p = params.require(:codelist_item).permit(:codelist)
+    @codelist = Codelist.find(p[:codelist].to_i)
+  end
+
   def codelist_item_params
     params.require(:codelist_item).permit(:identifier,
-                                          :codelist,
                                           :name,
                                           :lang,
                                           :description)

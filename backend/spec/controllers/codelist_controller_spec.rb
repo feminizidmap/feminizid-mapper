@@ -56,7 +56,7 @@ RSpec.describe CodelistController, type: :controller do
           expect(response).to have_http_status(:created)
           expect(response.content_type).to include('application/json')
           expect(response_json['name']).to eq valid_attributes[:name]
-          expect(response.location).to eq codelists_url(Codelist.last)
+          expect(response.location).to eq codelist_url(Codelist.last)
         end
       end
 

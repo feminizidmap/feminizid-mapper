@@ -19,7 +19,7 @@ class CodelistController < ApplicationController
   def create
     codelist = Codelist.new(codelist_params)
     if codelist.save
-      render json: codelist, status: :created, location: codelists_url(codelist.id)
+      render json: codelist, status: :created, location: codelist_url(codelist.id)
     else
       render json: codelist.errors, status: :unprocessable_entity
     end

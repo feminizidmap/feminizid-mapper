@@ -51,13 +51,13 @@ RSpec.describe CodelistItemsController, type: :controller do
         it 'creates a new Codelist' do
           sign_in_as(admin)
           expect do
-            post :create, params: { codelist: valid_attributes }
+            post :create, params: { codelist_item: valid_attributes }
           end.to change(CodelistItem, :count).by(1)
         end
 
         it 'renders a JSON response with the new codelist' do
           sign_in_as(admin)
-          post :create, params: { codelist: valid_attributes }
+          post :create, params: { codelist_item: valid_attributes }
           expect(response).to have_http_status(:created)
           expect(response.content_type).to include('application/json')
           expect(response_json['name']).to eq valid_attributes[:name]
@@ -68,7 +68,7 @@ RSpec.describe CodelistItemsController, type: :controller do
       context 'with invalid params' do
         it 'renders a JSON response with errors for the new codelist' do
           sign_in_as(admin)
-          post :create, params: { codelist: invalid_attributes }
+          post :create, params: { codelist_item: invalid_attributes }
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -78,7 +78,7 @@ RSpec.describe CodelistItemsController, type: :controller do
       context 'with valid params' do
         it 'does not allow creation of new codelist' do
           sign_in_as(user)
-          put :create, params: { codelist: valid_attributes }
+          put :create, params: { codelist_item: valid_attributes }
           expect(response).to have_http_status(:forbidden)
         end
       end
@@ -96,14 +96,14 @@ RSpec.describe CodelistItemsController, type: :controller do
 
         it 'updates the requested codelist' do
           sign_in_as(admin)
-          put :update, params: { id: codelist_item.id, codelist: new_attributes }
+          put :update, params: { id: codelist_item.id, codelist_item: new_attributes }
           codelist_item.reload
           expect(codelist_item.name).to eq new_attributes[:name].to_s
         end
 
         it 'renders a JSON response with the codelist' do
           sign_in_as(admin)
-          put :update, params: { id: codelist_item.id, codelist: new_attributes }
+          put :update, params: { id: codelist_item.id, codelist_item: new_attributes }
           expect(response).to have_http_status(:ok)
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
@@ -112,7 +112,7 @@ RSpec.describe CodelistItemsController, type: :controller do
       context 'with invalid params' do
         it 'renders a JSON response with errors for the change' do
           sign_in_as(admin)
-          put :update, params: { id: codelist_item.id, codelist: invalid_attributes }
+          put :update, params: { id: codelist_item.id, codelist_item: invalid_attributes }
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.content_type).to eq('application/json; charset=utf-8')
         end
@@ -127,7 +127,7 @@ RSpec.describe CodelistItemsController, type: :controller do
 
         it 'does not allow update' do
           sign_in_as(user)
-          post :update, params: { id: codelist_item.id, codelist: new_attributes }
+          post :update, params: { id: codelist_item.id, codelist_item: new_attributes }
           expect(response).to have_http_status(:forbidden)
         end
       end
