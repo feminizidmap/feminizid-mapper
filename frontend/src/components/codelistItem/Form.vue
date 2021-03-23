@@ -1,10 +1,9 @@
 <template>
   <div>
     <div class="alert alert-danger" v-if="error">{{ error }}</div>
-    <button type="button" class="btn btn-primary mb-4" @click="toggleForm">Add new codelist</button>
+    <button type="button" class="btn btn-primary mb-4" @click="toggleForm">Add new code</button>
     <template v-if="showForm">
-      <h4>New Codelist</h4>
-      <form @submit.prevent="sendCodelist" class="border p-3 m-3">
+      <form @submit.prevent="sendCodeItem" class="border p-3 m-3">
         <div class="form-group mb-4">
           <label><span class="form-label">Identifier</span>
             <input class="form-control"
@@ -44,6 +43,7 @@
 <script>
  export default {
    name: 'Form',
+   props: ['codelist'],
    data() {
      return {
        error: '',
@@ -57,22 +57,25 @@
    created() {
    },
    methods: {
-     async sendCodelist() {
+     async sendCodeItem() {
        try {
-         const body = { identifier: this.identifier.trim(),
-                      name: this.name.trim(),
-                      description: this.description.trim(),
-                      lang: this.lang.trim()
+         const body = {
+           codelist: this.codelist.id,
+           identifier: this.identifier.trim(),
+           name: this.name.trim(),
+           description: this.description.trim(),
+           lang: this.lang.trim()
          }
-         const response = await this.$http.secured.post('/codelist', { codelist: body })
-         this.$store.commit('addToCodelist', response.data)
+         const response = await this.$http.secured.post('/codelist_items', { codelist_item: body })
+         this.$store.commit('addToCodelistItems', response.data)
          this.identifier = ''
          this.name = ''
          this.description = ''
          this.lang = ''
+         this.toggleForm()
        } catch(e) {
          console.log(e)
-         this.setError(e, 'Cannot create coelist')
+         this.setError(e, 'Cannot create code item')
        }
      },
      setError(error, text) {

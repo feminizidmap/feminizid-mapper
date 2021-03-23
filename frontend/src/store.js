@@ -7,7 +7,9 @@ export const store = createStore({
             currentUser: {},
             signedIn: false,
             csrf: null,
-            codelists: []
+            codelists: [],
+            codelistItems: [],
+            systemSettings: []
         }
     },
     mutations: {
@@ -28,15 +30,30 @@ export const store = createStore({
         setCodelists(state, list) {
             state.codelists = list
         },
-        removeCodelistItem(state, item) {
+        removeSingleCodelist(state, item) {
             state.codelists.splice(state.codelists.indexOf(item), 1)
         },
         addToCodelist(state, item) {
             state.codelists.push(item)
         },
-        updateCodelistItem(state, item) {
+        updateSingleCodelist(state, item) {
             state.codelists = [
                 ...state.codelists.filter(element => element.id !== item.id),
+                item
+            ]
+        },
+        setCodelistItems(state, list) {
+            state.codelistItems = list
+        },
+        removeSingleCodelistItem(state, item) {
+            state.codelistItems.splice(state.codelistItems.indexOf(item), 1)
+        },
+        addToCodelistItems(state, item) {
+            state.codelistItems.push(item)
+        },
+        updateSingleCodelistItem(state, item) {
+            state.codelistItems = [
+                ...state.codelistItems.filter(element => element.id !== item.id),
                 item
             ]
         }
@@ -53,6 +70,9 @@ export const store = createStore({
         },
         isCodelistsEmpty(state) {
             return state.codelists.length === 0
+        },
+        isSignedIn(state) {
+            return state.signedIn
         }
     },
     plugins: [createPersistedState()]

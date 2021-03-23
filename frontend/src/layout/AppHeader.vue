@@ -1,7 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
     <div class="container-fluid">
       <router-link class="navbar-brand" to="/dashboard">Mapper</router-link>
+
       <button class="navbar-toggler"
               type="button" data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
@@ -11,7 +12,7 @@
         <span class="fa fa-bars"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="navbarNav" v-if="showNavItems()">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,11 +43,14 @@
    name: 'AppHeader',
    components: { Signout },
    methods: {
-     setError (error, text) {
+     setError(error, text) {
        this.error = (error.response && error.response.data && error.response.data.error) || text
      },
-     showAdminLink () {
+     showAdminLink() {
        return this.$store.getters.isAdmin || this.$store.getters.isReviewer
+     },
+     showNavItems() {
+       return this.$store.getters.isSignedIn
      }
    }
  }
