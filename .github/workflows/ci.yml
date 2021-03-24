@@ -13,7 +13,7 @@ jobs:
       RAILS_ENV: test
       REDIS_URL: "redis://localhost:6379/0"
       SESSION_SECRET: "thisisonlyfortesting"
-      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/mapper_test?pool=5&timeout=5000"
+      DATABASE_TEST_URL: "postgresql://postgres:postgres@localhost:5432/mapper_test?pool=5&timeout=5000"
       FRONTEND_URL: "http://localhost:8080"
     defaults:
       run:

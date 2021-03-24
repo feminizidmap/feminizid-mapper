@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_15_163603) do
+ActiveRecord::Schema.define(version: 2021_03_22_171413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,34 @@ ActiveRecord::Schema.define(version: 2021_03_15_163603) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_changes_on_user_id"
+  end
+
+  create_table "codelist_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.string "lang", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "identifier"
+    t.bigint "codelist_id"
+    t.index ["codelist_id"], name: "index_codelist_items_on_codelist_id"
+  end
+
+  create_table "codelists", force: :cascade do |t|
+    t.integer "identifier", null: false
+    t.string "name", null: false
+    t.string "description", default: "", null: false
+    t.string "lang", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "system_settings", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "value", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["key"], name: "index_system_settings_on_key"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,4 +64,5 @@ ActiveRecord::Schema.define(version: 2021_03_15_163603) do
   end
 
   add_foreign_key "changes", "users"
+  add_foreign_key "codelist_items", "codelists"
 end

@@ -1,7 +1,8 @@
 {
-  "name": "frontend",
+  "name": "feminizid-mapper",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/feminizidmap/feminizid-mapper",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -11,6 +12,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
     "vue": "^3.0.0",
     "vue-axios": "^3.2.4",
     "vue-i18n": "^9.0.0",

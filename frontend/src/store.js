@@ -6,7 +6,10 @@ export const store = createStore({
         return {
             currentUser: {},
             signedIn: false,
-            csrf: null
+            csrf: null,
+            codelists: [],
+            codelistItems: [],
+            systemSettings: []
         }
     },
     mutations: {
@@ -23,6 +26,36 @@ export const store = createStore({
         refresh(state, csrf) {
             state.signedIn = true
             state.csrf = csrf
+        },
+        setCodelists(state, list) {
+            state.codelists = list
+        },
+        removeSingleCodelist(state, item) {
+            state.codelists.splice(state.codelists.indexOf(item), 1)
+        },
+        addToCodelist(state, item) {
+            state.codelists.push(item)
+        },
+        updateSingleCodelist(state, item) {
+            state.codelists = [
+                ...state.codelists.filter(element => element.id !== item.id),
+                item
+            ]
+        },
+        setCodelistItems(state, list) {
+            state.codelistItems = list
+        },
+        removeSingleCodelistItem(state, item) {
+            state.codelistItems.splice(state.codelistItems.indexOf(item), 1)
+        },
+        addToCodelistItems(state, item) {
+            state.codelistItems.push(item)
+        },
+        updateSingleCodelistItem(state, item) {
+            state.codelistItems = [
+                ...state.codelistItems.filter(element => element.id !== item.id),
+                item
+            ]
         }
     },
     getters: {
@@ -34,6 +67,12 @@ export const store = createStore({
         },
         currentUserId(state) {
             return state.currentUser && state.currentUser.id
+        },
+        isCodelistsEmpty(state) {
+            return state.codelists.length === 0
+        },
+        isSignedIn(state) {
+            return state.signedIn
         }
     },
     plugins: [createPersistedState()]

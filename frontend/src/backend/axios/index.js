@@ -57,6 +57,7 @@ securedAxiosInstance.interceptors.response.use(null, error => {
       })
   } else if (error.response
              && error.response.status === 403) {
+    console.log('forbidden')
     store.commit('unsetCurrentUser')
     location.replace('/')
     return Promise.reject(error)
