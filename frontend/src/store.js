@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 export const store = createStore({
     state() {
         return {
+            alerts: [],
             currentUser: {},
             signedIn: false,
             csrf: null,
@@ -56,6 +57,12 @@ export const store = createStore({
                 ...state.codelistItems.filter(element => element.id !== item.id),
                 item
             ]
+        },
+        addAlert(state, item) {
+            state.alerts.push(item)
+        },
+        removeAlert(state, item) {
+            state.alerts.splice(state.alerts.indexOf(item), 1)
         }
     },
     getters: {
@@ -73,6 +80,9 @@ export const store = createStore({
         },
         isSignedIn(state) {
             return state.signedIn
+        },
+        allAlerts(state) {
+            return state.alerts
         }
     },
     plugins: [createPersistedState()]
