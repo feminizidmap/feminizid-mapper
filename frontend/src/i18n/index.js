@@ -11,7 +11,10 @@ const messages = {
       signUp: "Sign up",
       forgotPassword: "Forgot password",
       resetPassword: "Reset password",
-      changeLang: "Change language"
+      changeLang: "Change language",
+      save: "Save",
+      edit: "Edit",
+      delete: "Delete"
     },
     dashboard: {
       title: "Dashboard"
@@ -26,7 +29,14 @@ const messages = {
       codelist: "Option lists",
       settings: "Settings",
       userManagement: "User management",
-      admin: "Admin"
+      admin: "Admin",
+    },
+    models: {
+      codelist: {
+        name: "Option list name",
+        description: "Option list description",
+        noSuch: "No such list",
+      }
     },
     prompts: {
       signin: "Please sign in",
@@ -35,11 +45,14 @@ const messages = {
       resetpassword: "Choose a new password"
     },
     notice: {
-      singedOut: "Signed out, see you!"
+      singedOut: "Signed out, see you!",
+      deleteCodelist: "Successfully deleted option list",
     },
     errors: {
       general: "Something went wrong",
-      cannotSignout: "Cannot sign out"
+      cannotSignout: "Cannot sign out",
+      cannotDeleteCodelist: "Cannot delete option list",
+      cannotUpdateCodelist: "Cannot update option list"
     }
   },
   de: {
@@ -52,7 +65,10 @@ const messages = {
       signUp: "Registrieren",
       forgotPassword: "Passwort vergessen",
       resetPassword: "Passwort zurücksetzen",
-      changeLang: "Sprache wechseln"
+      changeLang: "Sprache wechseln",
+      save: "Speichern",
+      edit: "Bearbeiten",
+      delete: "Löschen"
     },
     dashboard: {
       title: "Dashboard"
@@ -69,6 +85,13 @@ const messages = {
       userManagement: "Usermanagement",
       admin: "Admin"
     },
+    models: {
+      codelist: {
+        name: "Name der Optionsliste",
+        description: "Beschreibung der Optionsliste",
+        noSuch: "Keine solche Liste"
+      }
+    },
     prompts: {
       signin: "Bitte melde dich an",
       signup: "Bitte registriere dich",
@@ -76,11 +99,14 @@ const messages = {
       resetpassword: "Wähle ein neues Password"
     },
     notice: {
-      singedOut: "Abgemeldet, bis bald!"
+      singedOut: "Abgemeldet, bis bald!",
+      deleteCodelist: "Optionsliste erfolgreich gelöscht",
     },
     errors: {
       general: "Etwas is schief gelaufen",
-      cannotSignout: "Abmelden nicht möglich"
+      cannotSignout: "Abmelden nicht möglich",
+      cannotDeleteCodelist: "Optionsliste konnte nicht gelöscht werden",
+      cannotUpdateCodelist: "Optionsliste konnte nicht bearbeitet werden"
     }
   }
 }

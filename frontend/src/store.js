@@ -78,6 +78,10 @@ export const store = createStore({
         isCodelistsEmpty(state) {
             return state.codelists.length === 0
         },
+        getCodelistById: (state) => (id) => {
+            const item = state.codelists.filter(x => x.id === id)
+            return item.length > 0 ? item[0] : null
+        },
         isSignedIn(state) {
             return state.signedIn
         },

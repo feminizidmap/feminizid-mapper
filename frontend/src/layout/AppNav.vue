@@ -21,7 +21,7 @@
               {{ $t('layout.cases') }}</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/settings/codelists">
+            <router-link class="nav-link" to="/codelists">
               <i class="fas fa-list"></i>
               {{ $t('layout.codelist') }}</router-link></li>
 
