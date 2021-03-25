@@ -14,7 +14,9 @@ const messages = {
       changeLang: "Change language",
       save: "Save",
       edit: "Edit",
-      delete: "Delete"
+      delete: "Delete",
+      create: "Create",
+      cancel: "Cancel"
     },
     dashboard: {
       title: "Dashboard"
@@ -30,29 +32,41 @@ const messages = {
       settings: "Settings",
       userManagement: "User management",
       admin: "Admin",
+      overview: "Overview"
     },
     models: {
       codelist: {
         name: "Option list name",
         description: "Option list description",
         noSuch: "No such list",
+      },
+      codelistItem: {
+        identifier: "Code",
+        name: "Option name",
+        description: "Option description",
+        lang: "Language of option",
+        noSuch: "No options",
       }
     },
     prompts: {
       signin: "Please sign in",
       signup: "Please sign up",
       forgotpassword: "Forgot your password?",
-      resetpassword: "Choose a new password"
+      resetpassword: "Choose a new password",
+      newOption: "Add a new option to this list"
     },
     notice: {
       singedOut: "Signed out, see you!",
       deleteCodelist: "Successfully deleted option list",
+      deleteCodelistItem: "Successfully deleted option",
     },
     errors: {
       general: "Something went wrong",
       cannotSignout: "Cannot sign out",
       cannotDeleteCodelist: "Cannot delete option list",
-      cannotUpdateCodelist: "Cannot update option list"
+      cannotUpdateCodelist: "Cannot update option list",
+      cannotDeleteCodelistItem: "Cannot delete option",
+      cannotUpdateCodelistItem: "Cannot update option",
     }
   },
   de: {
@@ -68,7 +82,9 @@ const messages = {
       changeLang: "Sprache wechseln",
       save: "Speichern",
       edit: "Bearbeiten",
-      delete: "Löschen"
+      delete: "Löschen",
+      create: "Hinzufügen",
+      cancel: "Abbrechen"
     },
     dashboard: {
       title: "Dashboard"
@@ -83,30 +99,42 @@ const messages = {
       codelist: "Optionslisten",
       settings: "Einstellungen",
       userManagement: "Usermanagement",
-      admin: "Admin"
+      admin: "Admin",
+      overview: "Übersicht"
     },
     models: {
       codelist: {
         name: "Name der Optionsliste",
         description: "Beschreibung der Optionsliste",
         noSuch: "Keine solche Liste"
+      },
+      codelistItem: {
+        identifier: "Code",
+        name: "Optionsname",
+        description: "Optionsbeschreibung",
+        lang: "Sprache der Option",
+        noSuch: "Keine Optionen",
       }
     },
     prompts: {
       signin: "Bitte melde dich an",
       signup: "Bitte registriere dich",
       forgotpassword: "Password vergessen?",
-      resetpassword: "Wähle ein neues Password"
+      resetpassword: "Wähle ein neues Password",
+      newOption: "Füge eine neue Option zu dieser Liste hinzu"
     },
     notice: {
       singedOut: "Abgemeldet, bis bald!",
       deleteCodelist: "Optionsliste erfolgreich gelöscht",
+      deleteCodelistItem: "Option erfolgreich gelöscht",
     },
     errors: {
       general: "Etwas is schief gelaufen",
       cannotSignout: "Abmelden nicht möglich",
       cannotDeleteCodelist: "Optionsliste konnte nicht gelöscht werden",
-      cannotUpdateCodelist: "Optionsliste konnte nicht bearbeitet werden"
+      cannotUpdateCodelist: "Optionsliste konnte nicht bearbeitet werden",
+      cannotDeleteCodelistItem: "Option konnte nicht gelöscht werden",
+      cannotUpdateCodelistItem: "Option konnte nicht bearbeitet werden"
     }
   }
 }
