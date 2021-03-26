@@ -15,8 +15,9 @@ const messages = {
       save: "Save",
       edit: "Edit",
       delete: "Delete",
-      create: "Create",
-      cancel: "Cancel"
+      create: "Add",
+      cancel: "Cancel",
+      close: "Close"
     },
     dashboard: {
       title: "Dashboard"
@@ -32,12 +33,14 @@ const messages = {
       settings: "Settings",
       userManagement: "User management",
       admin: "Admin",
-      overview: "Overview"
+      overview: "Overview",
+      incomplete: "Incomplete"
     },
     models: {
       codelist: {
         name: "Option list name",
         description: "Option list description",
+        lang: "Language of option list",
         noSuch: "No such list",
       },
       codelistItem: {
@@ -53,7 +56,8 @@ const messages = {
       signup: "Please sign up",
       forgotpassword: "Forgot your password?",
       resetpassword: "Choose a new password",
-      newOption: "Add a new option to this list"
+      newOption: "Add a new option to this list",
+      newCodelist: "Add a new option list"
     },
     notice: {
       singedOut: "Signed out, see you!",
@@ -63,6 +67,7 @@ const messages = {
     errors: {
       general: "Something went wrong",
       cannotSignout: "Cannot sign out",
+      cannotCreateCodelist: "Cannot create option list",
       cannotDeleteCodelist: "Cannot delete option list",
       cannotUpdateCodelist: "Cannot update option list",
       cannotDeleteCodelistItem: "Cannot delete option",
@@ -84,7 +89,8 @@ const messages = {
       edit: "Bearbeiten",
       delete: "Löschen",
       create: "Hinzufügen",
-      cancel: "Abbrechen"
+      cancel: "Abbrechen",
+      close: "Schließen"
     },
     dashboard: {
       title: "Dashboard"
@@ -100,12 +106,14 @@ const messages = {
       settings: "Einstellungen",
       userManagement: "Usermanagement",
       admin: "Admin",
-      overview: "Übersicht"
+      overview: "Übersicht",
+      incomplete: "Unvollständig"
     },
     models: {
       codelist: {
         name: "Name der Optionsliste",
         description: "Beschreibung der Optionsliste",
+        lang: "Sprache der Optionsliste",
         noSuch: "Keine solche Liste"
       },
       codelistItem: {
@@ -121,7 +129,8 @@ const messages = {
       signup: "Bitte registriere dich",
       forgotpassword: "Password vergessen?",
       resetpassword: "Wähle ein neues Password",
-      newOption: "Füge eine neue Option zu dieser Liste hinzu"
+      newOption: "Füge eine neue Option zu dieser Liste hinzu",
+      newCodelist: "Füge eine neue Optionsliste hinzu"
     },
     notice: {
       singedOut: "Abgemeldet, bis bald!",

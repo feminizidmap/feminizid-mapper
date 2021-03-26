@@ -1,6 +1,8 @@
 <template>
   <div class="codelists-list container-fluid">
     <CodelistSingle :codelistId="currentId"></CodelistSingle>
+
+
     <CodelistItemList :codelistId="currentId"></CodelistItemList>
     <CodelistItemForm v-if="showIfAdmin()" :codelistId="currentId"></CodelistItemForm>
   </div>

@@ -82,6 +82,14 @@ export const store = createStore({
             const item = state.codelists.filter(x => x.id === id)
             return item.length > 0 ? item[0] : null
         },
+        getCodelistsByIdent: (state) => (ident) => {
+            return state.codelists.filter(x => x.identifier === ident)
+        },
+        getCodelistsByIdentAndLang: (state) => (ident, lang) => {
+            return state.codelists
+                .filter(x => x.identifier == ident)
+                .filter(x => x.lang == lang)
+        },
         getCodelistItemsByListId: (state) => (id) => {
             return state.codelistItems.filter(x => x.codelist_id === id)
         },

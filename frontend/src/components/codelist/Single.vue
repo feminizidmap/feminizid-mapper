@@ -1,6 +1,6 @@
 <template>
   <div class="codelist-single">
-    <header v-if="codelist" class="row mb-3">
+    <header v-if="codelist" class="mb-3">
       <template v-if="isEditingCodelist">
         <form  @submit.prevent="updateCodelist()" class="row">
           <div class="col">
@@ -15,26 +15,34 @@
                       class="lead form-control"></textarea>
           </div>
           <div class="col col-sm-2 text-end">
-            <button type="submit" class="btn btn-outline-primary">
+            <button type="submit" class="btn btn-outline-primary me-2">
               <i class="fa fa-save"></i>
               <span class="visually-hidden">{{ $t('forms.save') }}</span></button>
+            <button type="button" class="btn btn-outline-secondary" @click="unEdit()">
+              <i class="fa fa-ban"></i>
+              <span class="visually-hidden">{{ $t('forms.cancel') }}</span></button>
           </div>
         </form>
       </template>
 
       <template v-else>
-        <div class="col">
-          <h2 class="display-5">{{ codelist.name }}</h2>
-          <p class="lead">{{ codelist.description }}</p>
-        </div>
-        <div class="col col-sm-2 text-end">
-          <button @click="editCodelist()" class="btn btn-outline-primary me-3">
-            <i class="fa fa-edit"></i>
-            <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
-          <button @click="removeCodelist()" class="btn btn-outline-danger">
-            <i class="fa fa-trash-alt"></i>
-            <span class="visually-hidden">{{ $t('forms.delete') }}</span>
-          </button>
+        <div class="row">
+          <div class="col col-1">
+            <span class="badge bg-secondary">{{ codelist.lang }}</span>
+          </div>
+          <div class="col">
+            <p class="h4">{{ codelist.name }}</p>
+            <p>{{ codelist.description }}</p>
+          </div>
+          <div class="col col-sm-2 text-end">
+            <button @click="editCodelist()" class="btn btn-outline-primary me-3">
+              <i class="fa fa-edit"></i>
+              <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
+            <button @click="removeCodelist()" class="btn btn-outline-danger">
+              <i class="fa fa-trash-alt"></i>
+              <span class="visually-hidden">{{ $t('forms.delete') }}</span>
+            </button>
+          </div>
         </div>
       </template>
     </header>
@@ -56,6 +64,9 @@
      editCodelist() {
        this.isEditingCodelist = true
      },
+     unEdit() {
+       this.isEditingCodelist = false
+     },
      updateCodelist() {
        this.$http.secured.put(`/codelist/${this.codelist.id}`,
                               { codelist: this.codelist })
@@ -66,12 +77,11 @@
            .catch(error => this.setError(error, this.$t('error.cannotUpdateCodelist')))
      },
      removeCodelist() {
-       this.$http.secured.delete(`/codelist/${this.codelist.id}`)
+       this.$http.secured.delete(`/codelist/${this.codelistId}`)
            .then(() => {
-             this.isEditingCodelist = true
-             this.$store.commit('removeSingleCodelist', this.codelist.id)
+             this.isEditingCodelist = false
+             this.$store.commit('removeSingleCodelist', this.codelist)
              this.$store.commit('addAlert', { type: 'notice', message: this.$t('notice.deleteCodelist') })
-             this.$router.replace('/codelists')
            })
            .catch(error => this.setError(error, this.$t('error.cannotDeleteCodelist')))
      },
