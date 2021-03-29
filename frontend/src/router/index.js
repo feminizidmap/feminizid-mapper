@@ -3,6 +3,8 @@ import Signin from '@/views/Signin'
 import Signup from '@/views/Signup'
 import ForgotPassword from '@/views/ForgotPassword'
 import ResetPassword from '@/views/ResetPassword'
+import CodelistList from '@/views/codelist/List'
+import CodelistSingle from '@/views/codelist/Single'
 
 const routes = [
   {
@@ -31,9 +33,21 @@ const routes = [
     component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
   },
   {
-    path: '/settings/codelists',
+    path: '/codelists/',
     name: 'Codelists',
-    component: () => import(/* webpackChunkName: "codelists" */ '@/views/admin/codelists/List.vue')
+    component: () => import(/* webpackChunkName: "codelists" */ '@/views/Codelist.vue'),
+    children: [
+      {
+        path: '',
+        name: 'CodelistList',
+        component: CodelistList
+      },
+      {
+        path: ':codelistkey',
+        name: 'CodelistSingle',
+        component: CodelistSingle
+      }
+    ]
   },
   {
     path: '/admin/users',

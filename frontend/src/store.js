@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 export const store = createStore({
     state() {
         return {
+            alerts: [],
             currentUser: {},
             signedIn: false,
             csrf: null,
@@ -56,6 +57,12 @@ export const store = createStore({
                 ...state.codelistItems.filter(element => element.id !== item.id),
                 item
             ]
+        },
+        addAlert(state, item) {
+            state.alerts.push(item)
+        },
+        removeAlert(state, item) {
+            state.alerts.splice(state.alerts.indexOf(item), 1)
         }
     },
     getters: {
@@ -71,8 +78,38 @@ export const store = createStore({
         isCodelistsEmpty(state) {
             return state.codelists.length === 0
         },
+        getCodelistById: (state) => (id) => {
+            const item = state.codelists.filter(x => x.id === id)
+            return item.length > 0 ? item[0] : null
+        },
+        getCodelistsByIdent: (state) => (ident) => {
+            return state.codelists.filter(x => x.identifier === ident)
+        },
+        getCodelistsByIdentAndLang: (state) => (ident, lang) => {
+            return state.codelists
+                .filter(x => x.identifier == ident)
+                .filter(x => x.lang == lang)
+        },
+        getCodelistItemsByListId: (state) => (id) => {
+            return state.codelistItems.filter(x => x.codelist_id === id)
+        },
+        getCodelistItemsByIdentAndLang: (state) => (ident, lang) => {
+            return state.codelistItems
+                .filter(x => x.identifier == ident)
+                .filter(x => x.lang == lang)
+        },
+        getCodelistItemsByIdent: (state) => (ident) => {
+            return state.codelistItems.filter(x => x.identifier === ident)
+        },
+        getCodelistItemById: (state) => (id) => {
+            const item = state.codelistItems.filter(x => x.id === id)
+            return item.length > 0 ? item[0] : null
+        },
         isSignedIn(state) {
             return state.signedIn
+        },
+        allAlerts(state) {
+            return state.alerts
         }
     },
     plugins: [createPersistedState()]

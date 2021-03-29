@@ -1,21 +1,21 @@
 <template>
   <div class="container-fluid mt-5">
-    <div class="alert alert-danger" v-if="error">{{ error }}</div>
     <div class="row justify-content-center">
-      <form class="form-signup col-sm-3" @submit.prevent="signup">
-        <div class="form-group mb-4">
-          <label for="email" class="form-label">{{ $t('forms.email') }}</label>
+      <form class="form-signup col-sm-3 text-center" @submit.prevent="signup">
+        <h2 class="mb-4">{{ $t('prompts.signup') }}</h2>
+        <div class="form-floating mb-1">
           <input v-model="email" type="email" class="form-control" id="email" placeholder="email@example.com">
+          <label for="email" class="form-label">{{ $t('forms.email') }}</label>
         </div>
-        <div class="form-group mb-4">
-          <label for="password" class="form-label">{{ $t('forms.password') }}</label>
+        <div class="form-floating mb-1">
           <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
+          <label for="password" class="form-label">{{ $t('forms.password') }}</label>
         </div>
-        <div class="form-group mb-4">
-          <label for="password" class="form-label">{{ $t('forms.passwordConfirmation') }}</label>
+        <div class="form-floating mb-4">
           <input v-model="password_confirmation" type="password" class="form-control" id="password_confirmation" placeholder="Password Confirmation">
+          <label for="password" class="form-label">{{ $t('forms.passwordConfirmation') }}</label>
         </div>
-        <button type="submit" class="btn btn-primary mb-3">{{ $t('forms.signUp') }}</button>
+        <button type="submit" class="btn btn-lg btn-primary w-100 mb-4">{{ $t('forms.signUp') }}</button>
         <div>
           <router-link to="/">{{ $t('forms.signIn') }}</router-link>
           <br />
@@ -33,8 +33,7 @@
      return {
        email: '',
        password: '',
-       password_confirmation: '',
-       error: ''
+       password_confirmation: ''
      }
    },
    created () {
@@ -66,7 +65,8 @@
            .catch(error => this.signupFailed(error))
      },
      signupFailed (error) {
-       this.error = (error.response && error.response.data && error.response.data.error) || 'Something went wrong'
+       const e = (error.response && error.response.data && error.response.data.error) || this.$t('errors.general')
+       this.$store.commit('addAlert', { type: 'error', message: e})
        this.$store.commit('unsetCurrentUser')
      },
      checkSignedIn () {

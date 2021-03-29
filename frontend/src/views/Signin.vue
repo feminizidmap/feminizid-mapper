@@ -1,17 +1,18 @@
 <template>
   <div class="container-fluid mt-5">
     <div class="row justify-content-center">
-      <form class="form-signin col-sm-3" @submit.prevent="signin">
-        <div class="alert alert-danger" v-if="error">{{ error }}</div>
-        <div class="form-group mb-4">
-          <label for="email" class="form-label">{{ $t('forms.email') }}</label>
+      <form class="col-sm-3 text-center" @submit.prevent="signin">
+        <h2 class="mb-4">{{ $t('prompts.signin') }}</h2>
+        <div class="form-floating mb-1">
           <input v-model="email" type="email" class="form-control" id="email" placeholder="email@example.com">
+          <label for="email" class="form-label">{{ $t('forms.email') }}</label>
         </div>
-        <div class="form-group mb-4">
-          <label for="password" class="form-label">{{ $t('forms.password') }}</label>
+        <div class="form-floating mb-4">
           <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
+          <label for="password" class="form-label">{{ $t('forms.password') }}</label>
+
         </div>
-        <button type="submit" class="btn btn-primary mb-3">{{ $t('forms.signIn') }}</button>
+        <button type="submit" class="btn btn-lg btn-primary w-100 mb-4">{{ $t('forms.signIn') }}</button>
         <div>
           <router-link to="/signup">{{ $t('forms.signUp') }}</router-link>
           <br />
@@ -28,8 +29,7 @@
    data () {
      return {
        email: '',
-       password: '',
-       error: ''
+       password: ''
      }
    },
    created () {
@@ -59,7 +59,8 @@
            .catch(error => this.signinFailed(error))
      },
      signinFailed (error) {
-       this.error = (error.response && error.response.data && error.response.data.error) || ''
+       const e = (error.response && error.response.data && error.response.data.error) || ''
+       this.$store.commit('addAlert', { type: 'error', message: e})
        this.$store.commit('unsetCurrentUser')
      },
      checkSignedIn () {

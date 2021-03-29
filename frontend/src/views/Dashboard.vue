@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard">
-    <AppHeader></AppHeader>
     <div class="container-fluid mt-4">
       <div class="row">
         <h1>{{ $t('dashboard.title') }}</h1>
@@ -17,12 +16,11 @@
 </template>
 
 <script>
- import AppHeader from '@/layout/AppHeader'
  import ChangesList from '@/components/changes/List'
 
  export default {
    name: 'Dashboard',
-   components: { ChangesList, AppHeader },
+   components: { ChangesList },
    data () {
      return {
 

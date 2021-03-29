@@ -8,6 +8,8 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Layout/LineLength:
+  Enabled: false
 Metrics/AbcSize:
   Enabled: false
 Metrics/MethodLength:

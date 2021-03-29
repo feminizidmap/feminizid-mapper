@@ -1,18 +1,17 @@
 <template>
   <div class="container-fluid mt-5">
-    <div class="alert alert-info" v-if="notice">{{ notice }}</div>
-    <div class="alert alert-danger" v-if="error">{{ error }}</div>
     <div class="row justify-content-center">
-      <form class="form-app form-reset-password col-sm-3" @submit.prevent="reset">
-        <div class="form-group mb-4">
-          <label for="password" class="form-label">{{ $t('forms.newPassword') }}</label>
+      <form class="text-center col-sm-3" @submit.prevent="reset">
+        <h2 class="mb-4">{{ $t('prompts.resetpassword') }}</h2>
+        <div class="form-floating mb-1">
           <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
+          <label for="password" class="form-label">{{ $t('forms.newPassword') }}</label>
         </div>
-        <div class="form-group mb-4">
-          <label for="password_confirmation" class="form-label">{{ $t('forms.passwordConfirmation') }}</label>
+        <div class="form-floating mb-4">
           <input v-model="password_confirmation" type="password" class="form-control" id="password_confirmation" placeholder="Password Confirmation">
+          <label for="password_confirmation" class="form-label">{{ $t('forms.passwordConfirmation') }}</label>
         </div>
-        <button type="submit" class="btn btn-primary mb-3">{{ $t('forms.resetPassword') }}</button>
+        <button type="submit" class="btn btn-lg btn-primary w-100 mb-4">{{ $t('forms.resetPassword') }}</button>
         <div>
           <router-link to="/">{{ $t('forms.signIn') }}</router-link>
         </div>
@@ -27,9 +26,7 @@
    data() {
      return {
        password: '',
-       password_confirmation: '',
-       error: '',
-       notice: ''
+       password_confirmation: ''
      }
    },
    created() {
@@ -42,14 +39,14 @@
            .catch(error => this.resetFailed(error))
      },
      resetSuccessful() {
-       this.notice = this.$t('resetPassword.resetSuccessful')
-       this.error = ''
+       this.$store.commit('addAlert', { type: 'notice', message: this.$t('resetPassword.resetSuccessful')})
        this.password = ''
        this.password_confirmation = ''
+       this.$router.replace('/')
      },
      resetFailed(error) {
-       this.error = (error.response && error.response.data && error.response.data.error) || 'Something went wrong'
-       this.notice = ''
+       const e = (error.response && error.response.data && error.response.data.error) || this.$t('errors.general')
+       this.$store.commit('addAlert', { type: 'error', message: e})
      },
      checkPasswordToken() {
        this.$http.plain.get(`/password_resets/${this.$route.params.token}`)
