@@ -18,7 +18,6 @@
                   v-model="$i18n.locale">
             <option value="en">English</option>
             <option value="de">Deutsch</option>
-            <option value="es">Espanyol</option>
           </select>
         </div>
       </div>
