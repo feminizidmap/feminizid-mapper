@@ -14,7 +14,7 @@
                       id="codelist-description"
                       class="lead form-control"></textarea>
           </div>
-          <div class="col col-sm-2 text-end">
+          <div class="col col-sm-2 text-end" v-if="showIfAdmin()">
             <button type="submit" class="btn btn-outline-primary me-2">
               <i class="fa fa-save"></i>
               <span class="visually-hidden">{{ $t('forms.save') }}</span></button>
@@ -34,7 +34,7 @@
             <p class="h5">{{ codelist.name }}</p>
             <p>{{ codelist.description }}</p>
           </div>
-          <div class="col col-sm-2 text-end">
+          <div class="col col-sm-2 text-end" v-if="showIfAdmin()">
             <button @click="editCodelist()" class="btn btn-outline-primary me-3">
               <i class="fa fa-edit"></i>
               <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
@@ -88,6 +88,9 @@
      setError(error, text) {
        const e = (error.response && error.response.data && error.response.data.error) || text
        this.$store.commit('addAlert', { type: 'error', message: e})
+     },
+     showIfAdmin() {
+       return this.$store.getters.isAdmin
      }
    },
    computed: {

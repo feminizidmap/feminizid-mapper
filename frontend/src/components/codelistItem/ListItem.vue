@@ -19,7 +19,7 @@
                     id="codelistitem-description"
                     v-model="item.description"></textarea>
         </div>
-        <div class="col col-2 text-end">
+        <div class="col col-2 text-end" v-if="showIfAdmin()">
           <button type="submit" class="btn btn-outline-primary me-2">
             <i class="fa fa-save"></i>
             <span class="visually-hidden">{{ $t('forms.save') }}</span></button>
@@ -37,7 +37,7 @@
           <p class="h5">{{ item.name }}</p>
           <p>{{ item.description }}</p>
         </div>
-        <div class="col col-2 text-end">
+        <div class="col col-2 text-end" v-if="showIfAdmin()">
           <button @click="editItem()" class="btn btn-outline-primary me-2">
             <i class="fa fa-edit"></i>
             <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
