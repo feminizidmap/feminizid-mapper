@@ -31,7 +31,7 @@
             <span class="badge bg-secondary">{{ codelist.lang }}</span>
           </div>
           <div class="col">
-            <p class="h4">{{ codelist.name }}</p>
+            <p class="h5">{{ codelist.name }}</p>
             <p>{{ codelist.description }}</p>
           </div>
           <div class="col col-sm-2 text-end">

@@ -65,13 +65,6 @@
  export default {
    name: 'UsersList',
    components: { Form, Single },
-   watch: {
-     '$store.state.codelists': {
-       handler(newish, old) {
-         console.log(newish, old)
-       }
-     }
-   },
    methods: {
      setError (error, text) {
        const e = (error.response && error.response.data && error.response.data.error) || text

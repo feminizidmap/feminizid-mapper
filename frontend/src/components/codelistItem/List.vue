@@ -1,99 +1,84 @@
 <template>
-  <section>
-    <ul class="list-group list-group-flushed mb-5" v-if="items.length">
-      <li v-for="item in items"
-          class="list-group-item"
-          :key="item.id"
-          :code="item">
-        <template v-if="item.id == editedItem.id">
-          <form @submit.prevent="updateItem()" class="row align-center  align-items-center">
-            <p class="col col-1"><span class="badge rounded-pill bg-secondary">{{ item.identifier }}</span></p>
-            <div class="col">
-              <label for="codelistitem-name"
-                     class="visually-hidden">{{ $t('models.codelistItem.name') }}</label>
-              <input type="text"
-                     class="form-control"
-                     id="codelistitem-name"
-                     v-model="editedItem.name">
-            </div>
-            <div class="col">
-              <label for="codelistitem-description"
-                     class="visually-hidden">{{ $t('models.codelistItem.description') }}</label>
-              <textarea type="text"
-                        class="form-control"
-                        id="codelistitem-description"
-                        v-model="editedItem.description"></textarea>
-            </div>
-            <p class="col col-1">{{ item.lang }}</p>
-            <div class="col col-2 text-end">
-              <button class="btn btn-outline-primary">
-                <i class="fa fa-save"></i>
-                <span class="visually-hidden">{{ $t('forms.save') }}</span></button>
-            </div>
-          </form>
-        </template>
+  <section class="row">
+    <div class="accordion accordion-flush mb-5" id="accordionCodelistItems" v-if="items.length">
+      <div class="accordion-item"
+           v-for="item in items"
+           :key="item.id">
+        <h2 class="accordion-header" :id="headerId(item)">
+          <button class="accordion-button collapsed" type="button"
+                  data-bs-toggle="collapse"
+                  :data-bs-target="'#' + collapseId(item)" aria-expanded="false"
+                  :aria-controls="collapseId(item)">
+            <span class="badge bg-secondary me-2">{{ item.identifier }}</span>
+            <span v-if="nameByIdentAndLang(item.identifier, $i18n.locale).length">
+              {{ nameByIdentAndLang(item.identifier, $i18n.locale)[0].name }}</span>
+            <span v-else>_</span>
+          </button></h2>
 
-        <template v-else>
-          <div class="row align-center align-items-center">
-            <div class="col col-1"><span class="badge rounded-pill bg-secondary">{{ item.identifier }}</span></div>
-            <div class="col">{{ item.name }}</div>
-            <div class="col">{{ item.description }}</div>
-            <div class="col col-1">{{ item.lang }}</div>
-            <div class="col col-2 text-end">
-              <button @click="editItem(item)" class="btn btn-outline-primary me-2">
-                <i class="fa fa-edit"></i>
-                <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
-              <button @click="removeItem(item)" class="btn btn-outline-danger">
-                <i class="fa fa-trash-alt"></i>
-                <span class="visually-hidden">{{ $t('forms.delete') }}</span>
-              </button>
+        <div :id="collapseId(item)"
+               class="accordion-collapse collapse"
+               :aria-labelledby="headerId(item)"
+               data-bs-parent="#accordionCodelistItems">
+          <div class="accordion-body">
+            <ListItem
+              v-for="l in listByIdent(item.identifier)"
+              :key="l.id"
+              :itemId="l.id"></ListItem>
+
+            <div class="row" v-if="listByIdent(item.identifier).length < $i18n.availableLocales.length">
+              <div class="col col-1"></div>
+              <div class="col">
+                <p>{{ $t('layout.incomplete') }}</p>
+              </div>
+              <div class="col col-2">
+                <Form v-if="showIfAdmin()"
+                      :codelistId="codelistId"
+                      :identifier="item.identifier">
+                  <i class="fas fa-plus"></i> {{ $t('forms.create') }}</Form>
+              </div>
             </div>
           </div>
-        </template>
-      </li>
-    </ul>
+        </div>
+
+      </div>
+    </div>
     <p v-else>{{ $t('models.codelistItem.noSuch') }}</p>
   </section>
 </template>
 <script>
  import { sortBy } from 'lodash'
+ import Form from '@/components/codelistItem/Form'
+ import ListItem from '@/components/codelistItem/ListItem'
 
  export default {
    name: 'CodelistItemList',
    props: ['codelistId'],
+   components: {
+     ListItem,
+     Form
+   },
    data () {
      return {
        editedItem: {}
      }
    },
    methods: {
+     headerId(item) {
+       return `accordeon-heading-${item.id}`
+     },
+     collapseId(item) {
+       return `accordeon-collapse-${item.id}`
+     },
+     nameByIdentAndLang(ident, lang) {
+       return this.items
+                  .filter(x => x.identifier == ident)
+                  .filter(x => x.lang == lang)
+     },
+     listByIdent(ident) {
+       return this.items.filter(x => x.identifier == ident)
+     },
      showIfAdmin() {
        return this.$store.getters.isAdmin
-     },
-     editItem(item) {
-       this.editedItem = item
-     },
-     updateItem() {
-       const interrim = this.editedItem
-       this.editedItem = {}
-       this.$http.secured.put(`/codelist_items/${interrim.id}`,
-                              { codelist_item: interrim })
-           .then((back) => {
-             this.$store.commit('updateSingleCodelistItem', back.data)
-           })
-           .catch(error => this.setError(error, this.$t('error.cannotUpdateCodelistItem')))
-     },
-     removeItem(item) {
-       this.$http.secured.delete(`/codelist_items/${item.id}`)
-           .then(() => {
-             this.$store.commit('addAlert', { type: 'notice', message: this.$t('notice.deleteCodelistItem') })
-             this.$store.commit('removeSingleCodelistItem', item)
-           })
-           .catch(error => this.setError(error, this.$t('error.cannotDeleteCodelistItem')))
-     },
-     setError(error, text) {
-       const e = (error.response && error.response.data && error.response.data.error) || text
-       this.$store.commit('addAlert', { type: 'error', message: e})
      }
    },
    computed: {

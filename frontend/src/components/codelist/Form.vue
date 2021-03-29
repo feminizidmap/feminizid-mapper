@@ -1,7 +1,7 @@
 <template>
   <div class="codelist-form">
     <button type="button"
-            class="btn btn-primary mb-4"
+            class="btn btn-primary"
             data-bs-toggle="modal" :data-bs-target="'#' + modalId">
       <slot></slot></button>
 
