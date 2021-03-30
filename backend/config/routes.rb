@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :system_settings
   resources :codelist
   resources :codelist_items
+  resources :case, controller: :fcase
 
   namespace :admin do
     resources :users, only: %i[index show update] do
