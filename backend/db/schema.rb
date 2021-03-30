@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_22_171413) do
+ActiveRecord::Schema.define(version: 2021_03_30_111532) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "changes", force: :cascade do |t|
@@ -41,6 +42,14 @@ ActiveRecord::Schema.define(version: 2021_03_22_171413) do
     t.string "lang", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "fcases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "ident", null: false
+    t.string "sources"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ident"], name: "index_fcases_on_ident"
   end
 
   create_table "system_settings", force: :cascade do |t|
