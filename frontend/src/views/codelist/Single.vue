@@ -39,7 +39,7 @@
    },
    computed: {
      currentId() {
-       return parseInt(this.$route.params.codelistkey, 10)
+       return this.$route.params.codelistkey
      },
      codelist() {
        return this.$store.getters.getCodelistById(this.currentId)

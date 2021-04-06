@@ -59,7 +59,8 @@ export const store = createStore({
             ]
         },
         addAlert(state, item) {
-            state.alerts.push(item)
+            //state.alerts.push(item)
+            state.alerts = [item]
         },
         removeAlert(state, item) {
             state.alerts.splice(state.alerts.indexOf(item), 1)

@@ -10,11 +10,12 @@ RSpec.describe CodelistItem, type: :model do
     expect(t.macro).to eq(:belongs_to)
   end
 
-  it 'is valid with codelist, identifier, name and language' do
+  it 'is valid with codelist, identifier, name, description and language' do
     codelist_item = described_class.new(
       codelist: codelist,
       identifier: 2,
       name: 'Cis Male',
+      description: '',
       lang: 'en'
     )
     expect(codelist_item).to be_valid
@@ -24,6 +25,7 @@ RSpec.describe CodelistItem, type: :model do
     codelist_item = described_class.new(
       identifier: 2,
       name: 'Cis Male',
+      description: '',
       lang: 'en'
     )
     codelist_item.valid?
@@ -34,6 +36,7 @@ RSpec.describe CodelistItem, type: :model do
     codelist_item = described_class.new(
       codelist: codelist,
       name: 'Cis Male',
+      description: '',
       lang: 'en'
     )
     codelist_item.valid?
@@ -44,10 +47,22 @@ RSpec.describe CodelistItem, type: :model do
     codelist_item = described_class.new(
       codelist: codelist,
       identifier: 2,
+      description: '',
       lang: 'en'
     )
     codelist_item.valid?
     expect(codelist_item.errors[:name]).to include("can't be blank")
+  end
+
+  it 'is invalid without description' do
+    codelist_item = described_class.new(
+      codelist: codelist,
+      name: 'foo',
+      identifier: 2,
+      lang: 'en'
+    )
+    codelist_item.valid?
+    expect(codelist_item.errors[:description]).to include("can't be nil")
   end
 
   it 'is invalid without language' do
@@ -64,6 +79,7 @@ RSpec.describe CodelistItem, type: :model do
     codelist_item = described_class.new(
       codelist: codelist,
       identifier: 2,
+      description: '',
       name: 'Cis Male',
       lang: 'eng'
     )
@@ -76,6 +92,7 @@ RSpec.describe CodelistItem, type: :model do
       codelist: codelist,
       identifier: 2,
       name: 'Cis Male',
+      description: '',
       lang: 'xx'
     )
     codelist_item.valid?
