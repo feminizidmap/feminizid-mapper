@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Codelist < ApplicationRecord
+  self.implicit_order_column = :created_at
+
   include ActiveModel::Serializers::JSON
 
   has_many :codelist_items, dependent: :destroy
