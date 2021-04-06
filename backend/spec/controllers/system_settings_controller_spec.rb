@@ -71,7 +71,7 @@ RSpec.describe SystemSettingsController, type: :controller do
           expect(response).to have_http_status(:created)
           expect(response.content_type).to include('application/json')
           expect(response_json['key']).to eq valid_attributes[:key]
-          expect(response.location).to eq system_settings_url(SystemSetting.last)
+          expect(response.location).to eq system_setting_url(SystemSetting.last)
         end
       end
 

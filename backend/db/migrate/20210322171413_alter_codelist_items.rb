@@ -2,8 +2,10 @@
 
 class AlterCodelistItems < ActiveRecord::Migration[6.1]
   def change
-    add_column :codelist_items, :identifier, :integer, not_null: true
-    add_reference :codelist_items, :codelist, foreign_key: true, not_null: true
+    change_table :codelist_items, bulk: true do |t|
+      t.integer :identifier, not_null: true
+      t.uuid :codelist_id, foreign_key: true, not_null: true
+    end
     remove_column :codelist_items, :code, :string
   end
 end

@@ -8,7 +8,7 @@ namespace :codelists do
       Rake::Task['codelists:feminizidmap:add_civil_status'].execute
       Rake::Task['codelists:feminizidmap:add_educational_background'].execute
       Rake::Task['codelists:feminizidmap:add_citizenship_type'].execute
-      Rake::Task['codelists:feminizidmap:add_citizenship'].execute
+      # Rake::Task['codelists:feminizidmap:add_citizenship'].execute
       Rake::Task['codelists:feminizidmap:add_legal_status'].execute
       Rake::Task['codelists:feminizidmap:add_location_type'].execute
       Rake::Task['codelists:feminizidmap:add_violent_actions'].execute
@@ -29,7 +29,6 @@ namespace :codelists do
                              lang: 'de',
                              description: '')
       list.save
-
       options = [{ identifier: 1, name: 'Beziehungsdrama', description: '' },
                  { identifier: 2, name: 'Familiendrama', description: '' },
                  { identifier: 3, name: 'Mordlust', description: '' },
@@ -41,7 +40,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -69,7 +68,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -99,7 +98,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -122,28 +121,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
-                         lang: list.lang).save
-      end
-    end
-
-    desc 'Add other cititzenship'
-    task add_citizenship: :environment do
-      list = Codelist.create(identifier: '5',
-                             name: 'Ausländische Staatsbürgerschaft',
-                             lang: 'de',
-                             description: '')
-      list.save
-
-      options = [{ identifier: 1, name: 'entfällt', description: '' },
-                 { identifier: 2, name: 'n/a', description: '' },
-                 { identifier: 3, name: 'Land', description: '' }]
-
-      options.each do |o|
-        CodelistItem.new(identifier: o[:identifier],
-                         name: o[:name],
-                         description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -166,7 +144,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -191,7 +169,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -246,7 +224,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -283,7 +261,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -315,7 +293,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -337,7 +315,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -379,7 +357,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -413,7 +391,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -449,7 +427,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -486,7 +464,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
@@ -510,7 +488,7 @@ namespace :codelists do
         CodelistItem.new(identifier: o[:identifier],
                          name: o[:name],
                          description: o[:description],
-                         codelist: list,
+                         codelist_id: list.id,
                          lang: list.lang).save
       end
     end
