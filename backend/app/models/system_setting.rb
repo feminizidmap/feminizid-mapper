@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SystemSetting < ApplicationRecord
-  self.implicit_order_column = 'created_at'
+  self.implicit_order_column = :created_at
 
   include ActiveModel::Serializers::JSON
   serialize :value
