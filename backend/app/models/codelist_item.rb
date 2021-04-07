@@ -14,6 +14,7 @@ class CodelistItem < ApplicationRecord
 
   scope :by_language, ->(language) { where(lang: language) }
   scope :by_identifier, ->(ident) { where(identifier: ident) }
+  scope :by_name, ->(name) { where(name: name) }
 
   private
 
