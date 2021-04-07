@@ -135,4 +135,22 @@ RSpec.describe CodelistItem, type: :model do
       expect(described_class.by_identifier(1)).not_to include(codelist_item)
     end
   end
+
+  describe '.by_name' do
+    it 'includes codes with given name' do
+      codelist_item = described_class.create!(codelist: codelist,
+                                              identifier: 2,
+                                              name: 'Test',
+                                              lang: 'en', description: '')
+      expect(described_class.by_name('Test')).to include(codelist_item)
+    end
+
+    it 'excludes codes without given name' do
+      codelist_item = described_class.create!(codelist: codelist,
+                                              identifier: 2,
+                                              name: 'Cis Male',
+                                              lang: 'en', description: '')
+      expect(described_class.by_name('Test')).not_to include(codelist_item)
+    end
+  end
 end
