@@ -67,6 +67,7 @@ RSpec.describe YesNo, type: :model do
       yn = described_class.create!(answer: :no)
       expect(described_class.is(:no)).to include(yn)
     end
+
     it 'excludes everything without parameter' do
       yn = described_class.create!(answer: :unknown)
       expect(described_class.is(:no)).not_to include(yn)
