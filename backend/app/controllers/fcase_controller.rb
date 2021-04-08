@@ -8,7 +8,7 @@ class FcaseController < ApplicationController
 
   def index
     @fcases = Fcase.all
-    render json: @fcases
+    render json: @fcases, include: 'victims'
   end
 
   def show
@@ -17,6 +17,7 @@ class FcaseController < ApplicationController
 
   def create
     @fcase = Fcase.new(fcase_params)
+    # @fcase.victim.new
 
     if @fcase.save
       render json: @fcase, status: :created, location: case_url(@fcase.id)

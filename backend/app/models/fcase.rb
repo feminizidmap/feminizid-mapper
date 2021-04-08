@@ -3,7 +3,7 @@
 class Fcase < ApplicationRecord
   self.implicit_order_column = 'created_at'
 
-  include ActiveModel::Serializers::JSON
+  has_many :victims, dependent: :destroy
 
   serialize :sources
 
