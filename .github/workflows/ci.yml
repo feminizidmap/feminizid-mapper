@@ -36,7 +36,7 @@ jobs:
         options: --entrypoint redis-server
     strategy:
       matrix:
-        ruby-version: ['3.0.0']
+        ruby-version: ['3.0.1']
     steps:
     - uses: actions/checkout@v2
     - name: Install PostgreSQL client
