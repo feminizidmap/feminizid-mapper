@@ -3,8 +3,6 @@
 class Victim < ApplicationRecord
   self.implicit_order_column = 'created_at'
 
-  include ActiveModel::Serializers::JSON
-
   belongs_to :drunk, class_name: 'YesNo', optional: true
   belongs_to :drug_influence, class_name: 'YesNo', optional: true
   belongs_to :previous_reports_of_violence, class_name: 'YesNo', optional: true
