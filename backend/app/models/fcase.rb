@@ -8,4 +8,6 @@ class Fcase < ApplicationRecord
   serialize :sources
 
   validates :ident, presence: true
+
+  has_many :victims, dependent: :destroy
 end

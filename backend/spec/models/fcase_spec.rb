@@ -15,4 +15,9 @@ RSpec.describe Fcase, type: :model do
     fcase.valid?
     expect(fcase.errors[:ident]).to include("can't be blank")
   end
+
+  it 'has many victims' do
+    c = described_class.reflect_on_association(:victims)
+    expect(c.macro).to eq(:has_many)
+  end
 end

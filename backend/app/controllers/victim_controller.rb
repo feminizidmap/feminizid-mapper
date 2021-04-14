@@ -61,6 +61,7 @@ class VictimController < ApplicationController
                                    :legal_status_id,
                                    :drunk_id,
                                    :drug_influence_id,
-                                   :previous_reports_of_violence_id)
+                                   :previous_reports_of_violence_id,
+                                   :fcase_id)
   end
 end

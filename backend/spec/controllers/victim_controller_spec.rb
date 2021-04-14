@@ -4,10 +4,12 @@ require 'rails_helper'
 
 RSpec.describe VictimController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
-  let!(:victim) { FactoryBot.create(:victim) }
+  let(:fcase) { FactoryBot.create(:fcase) }
+  let!(:victim) { FactoryBot.create(:victim, fcase: fcase) }
 
   let(:valid_attributes) do
-    { age: 28 }
+    { age: 28,
+      fcase_id: fcase.id }
   end
 
   describe 'GET #index' do
@@ -50,7 +52,7 @@ RSpec.describe VictimController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:victim) { FactoryBot.create(:victim) }
+    let!(:victim) { FactoryBot.create(:victim, fcase: fcase) }
 
     context 'with valid params' do
       let(:new_attributes) do
@@ -74,7 +76,7 @@ RSpec.describe VictimController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:victim) { FactoryBot.create(:victim) }
+    let!(:victim) { FactoryBot.create(:victim, fcase: fcase) }
 
     it 'destroys the requested victim' do
       sign_in_as(user)
