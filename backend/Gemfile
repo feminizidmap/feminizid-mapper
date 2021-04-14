@@ -5,7 +5,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.1'
 
-gem "active_model_serializers", "~> 0.10.10"
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'coveralls_reborn', require: false
@@ -14,6 +13,7 @@ gem 'dotenv-rails'
 # gem 'image_processing', '~> 1.2'
 gem 'i18n'
 gem 'jbuilder', '~> 2.7'
+gem 'jsonapi-serializer'
 gem 'jwt_sessions'
 gem 'language_list'
 gem 'pg', '~> 1.1'

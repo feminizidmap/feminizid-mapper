@@ -16,7 +16,7 @@ RSpec.describe VictimController, type: :controller do
       get :index
       expect(response).to be_successful
       expect(response_json.size).to eq 1
-      expect(response_json.first['id']).to eq victim.id
+      expect(response_json['data'].first['id']).to eq victim.id
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.describe VictimController, type: :controller do
       sign_in_as(user)
       get :show, params: { id: victim.id }
       expect(response).to be_successful
-      expect(response_json['id']).to eq victim.id
+      expect(response_json['data']['id']).to eq victim.id
     end
   end
 

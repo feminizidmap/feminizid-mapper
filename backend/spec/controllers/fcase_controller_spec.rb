@@ -20,7 +20,7 @@ RSpec.describe FcaseController, type: :controller do
       get :index
       expect(response).to be_successful
       expect(response_json.size).to eq 1
-      expect(response_json.first['id']).to eq fcase.id
+      expect(response_json['data'].first['id']).to eq fcase.id
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe FcaseController, type: :controller do
       sign_in_as(user)
       get :show, params: { id: fcase.id }
       expect(response).to be_successful
-      expect(response_json['id']).to eq fcase.id
+      expect(response_json['data']['id']).to eq fcase.id
     end
   end
 

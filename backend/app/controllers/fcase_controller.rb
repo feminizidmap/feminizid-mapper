@@ -8,11 +8,11 @@ class FcaseController < ApplicationController
 
   def index
     @fcases = Fcase.all
-    render json: @fcases
+    render json: FcaseSerializer.new(@fcases)
   end
 
   def show
-    render json: @fcase
+    render json: FcaseSerializer.new(@fcase)
   end
 
   def create

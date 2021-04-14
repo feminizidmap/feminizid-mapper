@@ -8,11 +8,11 @@ class VictimController < ApplicationController
 
   def index
     victims = Victim.all
-    render json: victims
+    render json: VictimSerializer.new(victims)
   end
 
   def show
-    render json: @victim
+    render json: VictimSerializer.new(@victim)
   end
 
   def create

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe SystemSettingsController, type: :controller do
   let(:admin) { FactoryBot.create(:user, role: :admin) }
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user, role: :user) }
   let!(:system_setting) { FactoryBot.create(:system_setting) }
 
   let(:valid_attributes) do

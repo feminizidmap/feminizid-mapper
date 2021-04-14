@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-class VictimSerializer < ActiveModel::Serializer
-  attributes  :id,
-              :age,
-              :full_name
+class VictimSerializer
+  include JSONAPI::Serializer
+  attributes :age
 
-  def full_name
-    "#{object.firstname} #{object.lastname}".strip
+  attribute :full_name do |object|
+    "#{object.firstname} #{object.lastname}"
   end
 end
