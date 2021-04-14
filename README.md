@@ -1,27 +1,8 @@
-# 🗃 Mapper
+# 🗃 Mapper ![ci workflow](https://github.com/feminizidmap/feminizid-mapper/actions/workflows/ci.yml/badge.svg?branch=main)
 
-Main database interface. ![ci workflow](https://github.com/feminizidmap/feminizid-mapper/actions/workflows/ci.yml/badge.svg?branch=main)
+Main database interface for the femi(ni)zidmap project.
 
-See general documentation on [tech.feminizidmap.org/docs/mapper/](https://tech.feminizidmap.org/docs/mapper/) (wip).
-
-## Development setup
-
-See respective directories for more information on a development setup
-
-- [backend](/backend)
-- [frontend](/frontend)
-
-
-## Production deployment
-
-Create a copy of env.sample
-
-`$ cp env.sample .env`
-
-and change values accordingly. Then fire up docker-compose
-
-`$ docker-compose up -d`
-
+Find all documentation on [tech.feminizidmap.org/docs/mapper/](https://tech.feminizidmap.org/docs/mapper/).
 
 ## Sponsorship
 
