@@ -3,4 +3,6 @@
 class FcaseSerializer
   include JSONAPI::Serializer
   attributes :ident
+
+  has_many :victims
 end
