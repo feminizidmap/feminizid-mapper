@@ -2,7 +2,7 @@
 
 class CreateSystemSettings < ActiveRecord::Migration[6.1]
   def change
-    create_table :system_settings do |t|
+    create_table :system_settings, id: :uuid do |t|
       t.string :key, null: false
       t.string :value, null: false
       t.timestamps

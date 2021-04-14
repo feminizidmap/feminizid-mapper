@@ -18,7 +18,7 @@ class SystemSettingsController < ApplicationController
   def create
     system_setting = SystemSetting.new(system_setting_params)
     if system_setting.save
-      render json: system_setting, status: :created, location: system_settings_url(system_setting.id)
+      render json: system_setting, status: :created, location: system_setting_url(system_setting.id)
     else
       render json: system_setting.errors, status: :unprocessable_entity
     end

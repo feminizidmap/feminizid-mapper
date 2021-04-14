@@ -60,7 +60,7 @@ class CodelistItemsController < ApplicationController
 
   def set_codelist
     p = params.require(:codelist_item).permit(:codelist)
-    @codelist = Codelist.find(p[:codelist].to_i)
+    @codelist = Codelist.find(p[:codelist])
   end
 
   def codelist_item_params
