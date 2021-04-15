@@ -5,4 +5,5 @@ class FcaseSerializer
   attributes :ident
 
   has_many :victims
+  has_many :perpetrators
 end

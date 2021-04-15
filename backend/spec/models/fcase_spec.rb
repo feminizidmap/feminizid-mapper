@@ -20,4 +20,9 @@ RSpec.describe Fcase, type: :model do
     c = described_class.reflect_on_association(:victims)
     expect(c.macro).to eq(:has_many)
   end
+
+  it 'has many perpetrators' do
+    c = described_class.reflect_on_association(:perpetrators)
+    expect(c.macro).to eq(:has_many)
+  end
 end

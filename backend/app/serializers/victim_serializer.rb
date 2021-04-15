@@ -5,8 +5,9 @@ class VictimSerializer
   attributes :age
 
   belongs_to :fcase
+  has_many :perpetrators
 
   attribute :full_name do |object|
-    "#{object.firstname} #{object.lastname}"
+    "#{object.firstname} #{object.lastname}".strip
   end
 end

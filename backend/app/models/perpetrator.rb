@@ -4,6 +4,7 @@ class Perpetrator < ApplicationRecord
   self.implicit_order_column = 'created_at'
 
   belongs_to :fcase
+  has_many :victims, through: :fcase
 
   belongs_to :alcohol_influence, class_name: 'YesNo', optional: true
   belongs_to :drug_influence, class_name: 'YesNo', optional: true
