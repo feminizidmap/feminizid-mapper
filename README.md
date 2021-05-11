@@ -1,4 +1,4 @@
-# 🗃 Mapper ![ci workflow](https://github.com/feminizidmap/feminizid-mapper/actions/workflows/ci.yml/badge.svg?branch=main)
+# 🗃 Mapper ![ci workflow](https://github.com/feminizidmap/feminizid-mapper/actions/workflows/ci.yml/badge.svg?branch=main) [![Coverage Status](https://coveralls.io/repos/github/feminizidmap/feminizid-mapper/badge.svg?branch=main)](https://coveralls.io/github/feminizidmap/feminizid-mapper?branch=main)
 
 Main database interface for the femi(ni)zidmap project.
 
