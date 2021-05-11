@@ -11,4 +11,5 @@ class Fcase < ApplicationRecord
 
   has_many :victims, dependent: :destroy
   has_many :perpetrators, dependent: :destroy
+  has_one :crime, dependent: :destroy
 end
