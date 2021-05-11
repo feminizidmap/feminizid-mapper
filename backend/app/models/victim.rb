@@ -5,6 +5,7 @@ class Victim < ApplicationRecord
 
   belongs_to :fcase
   has_many :perpetrators, through: :fcase
+  has_one :crime, through: :fcase
 
   belongs_to :drunk, class_name: 'YesNo', optional: true
   belongs_to :drug_influence, class_name: 'YesNo', optional: true
