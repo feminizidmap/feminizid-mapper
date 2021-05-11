@@ -19,7 +19,7 @@ class CrimeController < ApplicationController
     @crime = Crime.new(crime_params)
 
     if @crime.save
-      render json: @crime, status: :created, location: case_url(@crime.id)
+      render json: @crime, status: :created, location: crime_url(@crime.id)
     else
       render json: @crime.errors, status: :unprocessable_entity
     end
