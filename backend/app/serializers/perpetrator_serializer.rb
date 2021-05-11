@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class VictimSerializer
+class PerpetratorSerializer
   include JSONAPI::Serializer
-  attributes :age
+  attributes :age, :citizenship
 
   belongs_to :fcase
-  has_many :perpetrators
+  has_many :victims
 
   attribute :full_name do |object|
     "#{object.firstname} #{object.lastname}".strip

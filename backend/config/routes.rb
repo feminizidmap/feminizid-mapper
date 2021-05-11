@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :codelist_items
   resources :case, controller: :fcase
   resources :victim
+  resources :perpetrator
+  resources :crime
 
   namespace :admin do
     resources :users, only: %i[index show update] do

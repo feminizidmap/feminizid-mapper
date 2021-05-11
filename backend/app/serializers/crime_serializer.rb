@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-class FcaseSerializer
+class CrimeSerializer
   include JSONAPI::Serializer
-  attributes :ident
+  attributes :address
 
+  belongs_to :fcase
   has_many :victims
   has_many :perpetrators
 end

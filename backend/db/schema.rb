@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_181459) do
+ActiveRecord::Schema.define(version: 2021_04_15_122702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -42,12 +42,45 @@ ActiveRecord::Schema.define(version: 2021_04_14_181459) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "crimes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "location_id"
+    t.string "address"
+    t.uuid "cause_of_death_id"
+    t.uuid "acts_of_violence_id"
+    t.uuid "weapons_id"
+    t.uuid "ftype_id"
+    t.uuid "motif_id"
+    t.uuid "fcase_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "fcases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "ident", null: false
     t.string "sources"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ident"], name: "index_fcases_on_ident"
+  end
+
+  create_table "perpetrators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "firstname", default: "", null: false
+    t.string "lastname", default: "", null: false
+    t.integer "age"
+    t.uuid "gender_id"
+    t.uuid "civil_status_id"
+    t.uuid "educational_background_id"
+    t.uuid "citizenship_type_id"
+    t.string "citizenship"
+    t.uuid "legal_status_id"
+    t.uuid "alcohol_influence_id"
+    t.uuid "drug_influence_id"
+    t.uuid "previous_psychological_condition_id"
+    t.uuid "previous_criminal_record_id"
+    t.uuid "suicide_afterwards_id"
+    t.uuid "fcase_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "system_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -10,4 +10,6 @@ class Fcase < ApplicationRecord
   validates :ident, presence: true
 
   has_many :victims, dependent: :destroy
+  has_many :perpetrators, dependent: :destroy
+  has_one :crime, dependent: :destroy
 end
