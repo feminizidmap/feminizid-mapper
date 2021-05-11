@@ -17,6 +17,9 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   Enabled: false
 
+Rails/EnvironmentVariableAccess:
+  AllowReads: true
+
 RSpec/ExampleLength:
   Enabled: false
 RSpec/MultipleExpectations:
