@@ -3,6 +3,7 @@
 Main database interface for the femi(ni)zidmap project.
 
 Find all documentation on [tech.feminizidmap.org/docs/mapper/](https://tech.feminizidmap.org/docs/mapper/).
+Backend API documentation can be found [here](https://mapper-api.feminizidmap.org/).
 
 ## Sponsorship
 
