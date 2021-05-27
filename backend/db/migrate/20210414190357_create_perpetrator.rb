@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Perpetrator < ActiveRecord::Migration[6.1]
+class CreatePerpetrator < ActiveRecord::Migration[6.1]
   def change
     create_table :perpetrators, id: :uuid do |t|
       t.string :firstname, null: false, default: ''
