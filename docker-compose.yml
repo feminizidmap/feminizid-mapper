@@ -51,6 +51,7 @@ services:
     environment:
       RAILS_ENV: production
       SESSION_SECRET: "${SESSION_SECRET}"
+      SECRET_KEY_BASE: "${SECRET_KEY_BASE}"
       DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?pool=5&timeout=5000"
       REDIS_URL: "redis://redis:6379/0"
       MAILER_FROM: "noreply@feminizidmap.org"
