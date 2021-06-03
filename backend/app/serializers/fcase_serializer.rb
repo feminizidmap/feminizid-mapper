@@ -2,7 +2,7 @@
 
 class FcaseSerializer
   include JSONAPI::Serializer
-  attributes :ident
+  attributes :ident, :created_at, :updated_at
 
   has_many :victims
   has_many :perpetrators
