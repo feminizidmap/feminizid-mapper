@@ -1,0 +1,1 @@
+/home/lislis/git/feminizidmap/mapper/frontend/src/components/cases/List.vue
