@@ -1,6 +1,11 @@
 <template>
 <div class="codelists container-fluid">
   <div class="row my-2">
+    @todo search
+
+  </div>
+  <hr>
+  <div class="row my-2">
     <CasesList :cases="filteredCases">
       <CasesItemComplex v-for="fcase in filteredCases"
                        :key="fcase.id"

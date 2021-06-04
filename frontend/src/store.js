@@ -94,8 +94,9 @@ export const store = createStore({
       return state.currentUser && state.currentUser.id
     },
     getCaseById: (state) => (id) => {
-      const item = state.cases.filter(x => x.id === id)
-      return item.length > 0 ? item[0] : null
+      //const item = state.cases.filter(x => x.id === id)
+      //return item.length > 0 ? item[0] : null
+      return state.cases.find(fcase => fcase.id == id)
     },
     isCodelistsEmpty(state) {
       return state.codelists.length === 0
