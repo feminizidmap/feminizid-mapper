@@ -9,10 +9,12 @@
     <div class="row">
       <div class="col-sm-4">
         <div class="d-flex justify-content-between">
-          <h2 class="">Cases</h2>
-          <button type="button" class="btn btn-primary">New Case</button>
+          <h2 class="">{{ $t('layout.caselist') }}</h2>
+          <button type="button" class="btn btn-primary">Neuer Fall</button>
         </div>
-        <CasesList />
+        <CasesListSimple :cases="$store.state.cases" />
+        <hr>
+        <router-link to="/cases" class="btn btn-outline-primary">Alle {{ $t('layout.cases') }}</router-link>
       </div>
       <div class="col-sm-4">
         <ChangesList />
@@ -23,24 +25,37 @@
 </template>
 
 <script>
-import CasesList from '@/components/cases/List'
+import CasesListSimple from '@/components/cases/ListSimple'
 import ChangesList from '@/components/changes/List'
 
 export default {
-    name: 'Dashboard',
-    components: { CasesList, ChangesList },
-    data () {
-        return {
+  name: 'Dashboard',
+  components: { CasesListSimple, ChangesList },
+  data () {
+    return {
 
-        }
-    },
-    created () {
-        if (!this.$store.state.signedIn) {
-            this.$router.replace('/')
-        }
-    },
-    methods: {
     }
+  },
+  created () {
+    if (!this.$store.state.signedIn) {
+      this.$router.replace('/')
+    } else {
+      this.populateCases()
+    }
+  },
+  methods: {
+    populateCases() {
+      this.$http.secured.get('/case')
+        .then(response => {
+          this.$store.commit('setCases', response.data.data)
+        })
+        .catch(error => { this.setError(error, 'Something went wrong') })
+    },
+    setError (error, text) {
+      const e = (error.response && error.response.data && error.response.data.error) || text
+      this.$store.commit('addAlert', { type: 'error', message: e})
+    }
+  }
 }
 </script>
 
