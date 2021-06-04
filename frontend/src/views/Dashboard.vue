@@ -12,7 +12,11 @@
           <h2 class="">{{ $t('layout.caselist') }}</h2>
           <button type="button" class="btn btn-primary">Neuer Fall</button>
         </div>
-        <CasesListSimple :cases="$store.state.cases" />
+        <CasesList :cases="cases">
+          <CasesItemSimple v-for="fcase in cases"
+                           :key="fcase.id"
+                           :item="fcase" />
+        </CasesList>
         <hr>
         <router-link to="/cases" class="btn btn-outline-primary">Alle {{ $t('layout.cases') }}</router-link>
       </div>
@@ -25,12 +29,13 @@
 </template>
 
 <script>
-import CasesListSimple from '@/components/cases/ListSimple'
+  import CasesList from '@/components/cases/List'
+  import CasesItemSimple from '@/components/cases/ItemSimple'
 import ChangesList from '@/components/changes/List'
 
 export default {
   name: 'Dashboard',
-  components: { CasesListSimple, ChangesList },
+  components: { CasesList, CasesItemSimple, ChangesList },
   data () {
     return {
 
@@ -54,6 +59,11 @@ export default {
     setError (error, text) {
       const e = (error.response && error.response.data && error.response.data.error) || text
       this.$store.commit('addAlert', { type: 'error', message: e})
+    }
+  },
+  computed: {
+    cases() {
+      return this.$store.state.cases
     }
   }
 }
