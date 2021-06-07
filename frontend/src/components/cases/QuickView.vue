@@ -4,7 +4,7 @@
     <i class="fa fa-caret-down" v-if="isOpen"></i>
     <i class="fa fa-caret-right" v-else></i>
     {{ fcase.attributes.ident }}</h3>
-  <div v-if="isOpen"
+  <div v-if="isOpen && fcase.relationships"
        class="d-flex">
     <div v-for="(r,i) in fcase.relationships" :key="i">
       <h4 class="h5">{{r.data[0].type}}</h4>

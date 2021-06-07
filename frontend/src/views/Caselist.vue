@@ -1,7 +1,10 @@
 <template>
 <div class="codelists container-fluid">
-  <div class="row my-2">
-    <h1 class="display-4">{{ $t('layout.caselist') }}</h1>
+  <div class="my-2 d-flex justify-content-between align-content-center">
+    <h1>{{ $t('layout.caselist') }}</h1>
+    <div>
+      <router-link to="/cases/new" class="btn btn-primary">Neuer Fall</router-link>
+    </div>
   </div>
   <div class="row">
     <p>@todo write something about this view</p>

@@ -7,6 +7,7 @@ import CodelistList from '@/views/codelist/List'
 import CodelistSingle from '@/views/codelist/Single'
 import CaseList from '@/views/cases/List'
 import CaseSingle from '@/views/cases/Single'
+import CaseForm from '@/views/cases/Form'
 
 const routes = [
   {
@@ -43,6 +44,11 @@ const routes = [
         path: '',
         name: 'CaseList',
         component: CaseList
+      },
+      {
+        path: 'new',
+        name: 'CaseNew',
+        component: CaseForm
       },
       {
         path: ':caseid',
