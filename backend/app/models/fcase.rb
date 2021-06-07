@@ -5,7 +5,7 @@ class Fcase < ApplicationRecord
 
   include ActiveModel::Serializers::JSON
 
-  serialize :sources
+  serialize :sources, JSON
 
   validates :ident, presence: true
 
