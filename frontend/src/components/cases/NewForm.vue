@@ -1,11 +1,7 @@
 <template>
 <div class="codelists container-fluid">
   <div class="row my-2">
-
-  </div>
-  <div class="row my-2">
-    <h2 v-if="isNew">Neuen Fall hinzufügen</h2>
-    <h2 v-else>Edit {{ fcase.attributes.ident }}</h2>
+    <h2>Neuen Fall hinzufügen</h2>
   </div>
   <div class="row my-2">
     <div>
@@ -32,20 +28,14 @@ export default {
   props: ['fcase'],
   data() {
     return {
-      //isNew: false
     }
   },
   created() {
-    //this.isNew = this.fcase ? false : true;
-
   },
   computed: {
     identifier() {
       let d = new Date();
       return `${d.getFullYear()}-${d.getMonth()}-${ 0 }-${ 0 }`
-    },
-    isNew() {
-      return this.fcase ? false : true;
     }
   },
   methods: {

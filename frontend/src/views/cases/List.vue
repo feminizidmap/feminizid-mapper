@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import CasesItemComplex from '@/components/cases/ItemComplex'
+import CasesItemComplex from '@/components/cases/ItemComplex'
 import CasesList from '@/components/cases/List'
 
 export default {

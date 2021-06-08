@@ -15,7 +15,7 @@
     <ul class="col col-12" v-if="deserializedSources">
       <li v-for="source in deserializedSources" :key="source.id" class="list-group-item">
         <a :href="source.url" target="_blank">
-        <i class="fas fa-external-link-square-alt"></i>
+          <i class="fas fa-external-link-square-alt"></i>
           {{source.url}}
         </a>
 
@@ -37,8 +37,7 @@
 </template>
 
 <script>
-  //import Single from '@/components/cases/Single'
-  import CDate from '@/components/cases/Date'
+import CDate from '@/components/cases/Date'
 
 export default {
   name: 'CaseSingle',
@@ -50,11 +49,9 @@ export default {
   },
   created() {
     this.fcase = this.$store.getters.getCaseById(this.$route.params.caseid)
-    //this.fcase = this.$route.params.caseid
   },
   computed: {
     deserializedSources() {
-      //debugger // eslint-disable-line no-debugger
       if (this.fcase && this.fcase !== '') {
         return JSON.parse(this.fcase.attributes.sources)
       } else {

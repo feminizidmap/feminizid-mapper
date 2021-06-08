@@ -18,9 +18,9 @@
                   :to="{name: 'CaseSingle', params: { caseid: item.id}}">
       <i class="fa fa-eye"></i>
       <span class="visually-hidden">{{ $t('forms.see') }}</span></router-link>
-    <button  class="btn btn-outline-primary me-2">
+    <router-link :to="{name: 'CaseEdit', params: {caseid: item.id}}"  class="btn btn-outline-primary me-2">
       <i class="fa fa-edit"></i>
-      <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
+      <span class="visually-hidden">{{ $t('forms.edit') }}</span></router-link>
     <button v-if="showIfAdmin()"
             class="btn btn-outline-danger"
             @click.prevent="rmCase">

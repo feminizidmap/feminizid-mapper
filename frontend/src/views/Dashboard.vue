@@ -10,7 +10,7 @@
       <div class="col-sm-4">
         <div class="d-flex justify-content-between">
           <h2 class="">{{ $t('layout.caselist') }}</h2>
-          <button type="button" class="btn btn-primary">Neuer Fall</button>
+          <router-link to="/cases/new" class="btn btn-primary">Neuer Fall</router-link>
         </div>
         <CasesList :cases="cases">
           <CasesItemSimple v-for="fcase in cases"

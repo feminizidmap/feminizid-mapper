@@ -13,10 +13,7 @@
   </div>
 </div>
 </template>
-
 <script>
-//import { sortBy } from 'lodash'
-
 export default {
   name: 'CaseList',
   created () {
@@ -30,7 +27,6 @@ export default {
     populateCases() {
       this.$http.secured.get('/case')
         .then(response => {
-          console.log(response.data.data)
           this.$store.commit('setCases', response.data.data)
         })
         .catch(error => { this.setError(error, 'Something went wrong') })

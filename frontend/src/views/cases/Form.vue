@@ -5,30 +5,39 @@
   </div>
   <hr>
   <div class="row my-2">
-    <CaseForm />
+    <EditForm v-if="fcase" :fcase="fcase" />
+    <NewForm v-else />
   </div>
-
 </div>
 </template>
-
 <script>
-  import CaseForm from '@/components/cases/Form'
-
+import NewForm from '@/components/cases/NewForm'
+import EditForm from '@/components/cases/EditForm'
 
 export default {
   name: 'CaseSingle',
-  components: { CaseForm },
+  components: { NewForm, EditForm },
   data() {
     return {
-      //fcase: null
+      fcase: null
     }
   },
   created() {
-    //this.fcase = this.$store.getters.getCaseById(this.$route.params.caseid)
-    //this.fcase = this.$route.params.caseid
+    this.setFcase()
   },
-  computed: {
-
+  methods: {
+    setFcase() {
+      if (this.$route.name === 'CaseEdit') {
+        this.fcase = this.$store.getters.getCaseById(this.$route.params.caseid)
+      } else {
+        this.fcase = null
+      }
+    }
+  },
+  watch: {
+    '$route.path'() {
+      this.setFcase()
+    }
   }
 }
 </script>

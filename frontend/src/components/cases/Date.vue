@@ -1,5 +1,5 @@
 <template>
-<div class="text-secondary">
+<div class="text-secondary" v-if="item.attributes">
   <span>Erstellt am {{dateFormat(item.attributes.created_at)}} von {{}}.</span><br>
   <span>Zuletzt upgedatet am {{dateFormat(item.attributes.updated_at)}} von {{}}.</span>
 </div>

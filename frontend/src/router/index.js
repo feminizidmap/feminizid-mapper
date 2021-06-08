@@ -51,6 +51,11 @@ const routes = [
         component: CaseForm
       },
       {
+        path: 'edit/:caseid',
+        name: 'CaseEdit',
+        component: CaseForm
+      },
+      {
         path: ':caseid',
         name: 'CaseSingle',
         component: CaseSingle

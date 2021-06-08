@@ -31,7 +31,6 @@ export const store = createStore({
     },
     setCases(state, list) {
       state.cases = list
-      console.log(list, state.cases)
     },
     addToCases(state, item) {
       state.cases.push(item)

@@ -4,8 +4,7 @@
 
   </div>
   <div class="row my-2">
-    <h2 v-if="isNew">Neuen Fall hinzufügen</h2>
-    <h2 v-else>Edit {{ fcase.attributes.ident }}</h2>
+    <h2>Bearbeiten:  {{ fcase.attributes.ident }}</h2>
   </div>
   <div class="row my-2">
     <div>
@@ -17,7 +16,10 @@
   </div>
   <div class="row my-4">
     <h3>Quellen</h3>
-    <SourcesField :ident="identifier" />
+
+
+
+    <SourcesField :ident="identifier" :existingSources="parsedSources" />
   </div>
 </div>
 </template>
@@ -43,6 +45,9 @@ export default {
     identifier() {
       let d = new Date();
       return `${d.getFullYear()}-${d.getMonth()}-${ 0 }-${ 0 }`
+    },
+    parsedSources() {
+      return JSON.parse(this.fcase.attributes.sources)
     },
     isNew() {
       return this.fcase ? false : true;
