@@ -5,6 +5,9 @@ import ForgotPassword from '@/views/ForgotPassword'
 import ResetPassword from '@/views/ResetPassword'
 import CodelistList from '@/views/codelist/List'
 import CodelistSingle from '@/views/codelist/Single'
+import CaseList from '@/views/cases/List'
+import CaseSingle from '@/views/cases/Single'
+import CaseForm from '@/views/cases/Form'
 
 const routes = [
   {
@@ -31,6 +34,33 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
+  },
+  {
+    path: '/cases/',
+    name: 'Cases',
+    component: () => import(/* webpackChunkName: "codelists" */ '@/views/Caselist.vue'),
+    children: [
+      {
+        path: '',
+        name: 'CaseList',
+        component: CaseList
+      },
+      {
+        path: 'new',
+        name: 'CaseNew',
+        component: CaseForm
+      },
+      {
+        path: 'edit/:caseid',
+        name: 'CaseEdit',
+        component: CaseForm
+      },
+      {
+        path: ':caseid',
+        name: 'CaseSingle',
+        component: CaseSingle
+      }
+    ]
   },
   {
     path: '/codelists/',

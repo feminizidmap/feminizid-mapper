@@ -32,6 +32,7 @@ const messages = {
       codelist: "Option lists",
       settings: "Settings",
       userManagement: "User management",
+      caselist: "Cases",
       admin: "Admin",
       overview: "Overview",
       incomplete: "Incomplete"
@@ -105,6 +106,7 @@ const messages = {
       codelist: "Optionslisten",
       settings: "Einstellungen",
       userManagement: "Usermanagement",
+      caselist: "Fälle",
       admin: "Admin",
       overview: "Übersicht",
       incomplete: "Unvollständig"

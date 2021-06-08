@@ -16,7 +16,7 @@
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <router-link class="nav-link"
-                         to="/dashboard">
+                         to="/cases">
               <i class="fas fa-database"></i>
               {{ $t('layout.cases') }}</router-link>
           </li>

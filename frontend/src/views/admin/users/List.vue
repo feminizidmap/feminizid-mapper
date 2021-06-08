@@ -1,6 +1,5 @@
 <template>
   <div class="users">
-    <AppHeader></AppHeader>
     <div class="alert alert-danger" v-if="error">{{ error }}</div>
     <h3>Users</h3>
 
@@ -37,11 +36,9 @@
 </template>
 
 <script>
- import AppHeader from '@/layout/AppHeader'
-
  export default {
    name: 'UsersList',
-   components: { AppHeader },
+   components: {},
    data () {
      return {
        error: '',
