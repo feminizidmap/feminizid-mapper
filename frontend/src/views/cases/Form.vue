@@ -1,43 +1,53 @@
 <template>
 <div class="codelists container-fluid">
   <div class="row">
-    <router-link to="/cases">Zurück</router-link>
+    <router-link to="/cases">Übersicht</router-link>
   </div>
   <hr>
   <div class="row my-2">
-    <EditForm v-if="fcase" :fcase="fcase" />
-    <NewForm v-else />
+    <div class="col col-2">
+            @todo maybe put tentative identifier here?
+      <nav>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <router-link :to="{ name: 'CaseNewMeta' }" class="nav-link active" aria-current="page">Quellen</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'CaseNewCrime' }" class="nav-link active" aria-current="page">Tat</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'CaseNewVictim' }" class="nav-link active" aria-current="page">Opfer</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'CaseNewPerpetrator' }" class="nav-link active" aria-current="page">Täter</router-link>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+    <div class="col col-7">
+      <router-view></router-view>
+    </div>
+    <div class="col col-3">
+      @todo maybe put changes history here?
+    </div>
   </div>
 </div>
 </template>
 <script>
-import NewForm from '@/components/cases/NewForm'
-import EditForm from '@/components/cases/EditForm'
+
 
 export default {
-  name: 'CaseSingle',
-  components: { NewForm, EditForm },
+  name: 'CaseForm',
   data() {
     return {
-      fcase: null
+
     }
   },
   created() {
-    this.setFcase()
+
   },
   methods: {
-    setFcase() {
-      if (this.$route.name === 'CaseEdit') {
-        this.fcase = this.$store.getters.getCaseById(this.$route.params.caseid)
-      } else {
-        this.fcase = null
-      }
-    }
-  },
-  watch: {
-    '$route.path'() {
-      this.setFcase()
-    }
   }
 }
 </script>

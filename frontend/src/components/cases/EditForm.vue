@@ -1,9 +1,6 @@
 <template>
 <div class="codelists container-fluid">
   <div class="row my-2">
-
-  </div>
-  <div class="row my-2">
     <h2>Bearbeiten:  {{ fcase.attributes.ident }}</h2>
   </div>
   <div class="row my-2">
