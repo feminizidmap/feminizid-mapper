@@ -6,7 +6,10 @@
   <hr>
   <div class="row my-2">
     <div class="col col-2">
-            @todo maybe put tentative identifier here?
+      <div>
+        <span class="">{{}}</span>
+        <span>@todo explain what the identifier is/ does</span>
+      </div>
       <nav>
         <ul class="nav flex-column">
           <li class="nav-item">

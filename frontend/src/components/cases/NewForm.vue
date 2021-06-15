@@ -4,12 +4,7 @@
     <h2>Neuen Fall hinzufügen</h2>
   </div>
   <div class="row my-2">
-    <div>
-      <strong>Identifier:</strong>
-      <span class="d-inline form-control form-control-lg user-select-all">{{ identifier }}</span>
-      <br>
-      <span>@todo explain what the identifier is/ does</span>
-    </div>
+
   </div>
   <div class="row my-4">
     <h3>Quellen</h3>

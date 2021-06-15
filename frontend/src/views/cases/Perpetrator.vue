@@ -1,6 +1,6 @@
 <template>
 <div>
-  <CaseFormWrapper title="Infos zur Tat"
+  <CaseFormWrapper title="Infos zur Täter"
                    name="crimeForm"
                    :allowedLists="allowedCodelists">
     <label for="address" class="form-label">Adresse</label>
@@ -13,11 +13,11 @@
 import CaseFormWrapper from '@/components/cases/CaseFormWrapper'
 
 export default {
-  name: 'CaseCrime',
+  name: 'CasePerp',
   components: { CaseFormWrapper },
   data() {
     return {
-      allowedCodelists: [8, 9]
+      allowedCodelists: [2, 3, 4, 6, 11, 12, 13, 14]
     }
   }
 }

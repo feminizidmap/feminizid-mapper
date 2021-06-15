@@ -1,7 +1,7 @@
 <template>
 <div>
-  <CaseFormWrapper title="Infos zur Tat"
-                   name="crimeForm"
+  <CaseFormWrapper title="Infos zum Opfer"
+                   name="victimForm"
                    :allowedLists="allowedCodelists">
     <label for="address" class="form-label">Adresse</label>
     <input type="url" class="form-control" id="address" placeholder="Str Hausnummer">
@@ -10,14 +10,14 @@
 </div>
 </template>
 <script>
-import CaseFormWrapper from '@/components/cases/CaseFormWrapper'
+  import CaseFormWrapper from '@/components/cases/CaseFormWrapper'
 
 export default {
-  name: 'CaseCrime',
+  name: 'CaseVictim',
   components: { CaseFormWrapper },
   data() {
     return {
-      allowedCodelists: [8, 9]
+      allowedCodelists: [2, 3, 4, 11]
     }
   }
 }

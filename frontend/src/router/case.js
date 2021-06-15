@@ -1,8 +1,11 @@
 import CaseList from '@/views/cases/List'
 import CaseSingle from '@/views/cases/Single'
-import CaseForm from '@/views/cases/Form'
+import CaseNewForm from '@/views/cases/NewForm'
+import CaseWizard from '@/views/cases/Wizard'
 import CaseMeta from '@/views/cases/Meta'
 import CaseCrime from '@/views/cases/Crime'
+import CaseVictim from '@/views/cases/Victim'
+import CasePerp from '@/views/cases/Perpetrator'
 
 export default {
   path: '/cases/',
@@ -17,10 +20,15 @@ export default {
     {
       path: 'new',
       name: 'CaseNew',
-      component: CaseForm,
+      component: CaseNewForm,
       children: [
         {
           path: '',
+          name: 'CaseNewWizard',
+          component: CaseWizard
+        },
+        {
+          path: 'meta',
           name: 'CaseNewMeta',
           component: CaseMeta
         },
@@ -30,29 +38,29 @@ export default {
           component: CaseCrime
         },
         {
-          path: 'crime',
+          path: 'victim',
           name: 'CaseNewVictim',
-          component: CaseCrime
+          component: CaseVictim
         },
         {
-          path: 'crime',
+          path: 'perpetrator',
           name: 'CaseNewPerpetrator',
-          component: CaseCrime
+          component: CasePerp
         }
       ]
     },
-    {
-      path: 'edit/:caseid',
-      name: 'CaseEdit',
-      component: CaseForm,
-      children: [
-        {
-          path: '',
-          name: 'CaseEditMeta',
-          component: CaseMeta
-        }
-      ]
-    },
+    // {
+    //   path: 'edit/:caseid',
+    //   name: 'CaseEdit',
+    //   component: CaseForm,
+    //   children: [
+    //     {
+    //       path: '',
+    //       name: 'CaseEditMeta',
+    //       component: CaseMeta
+    //     }
+    //   ]
+    // },
     {
       path: ':caseid',
       name: 'CaseSingle',

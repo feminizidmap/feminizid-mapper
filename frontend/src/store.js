@@ -11,7 +11,9 @@ export const store = createStore({
       codelists: [],
       codelistItems: [],
       systemSettings: [],
-      cases: []
+      cases: [],
+      newCase: {},
+      newCaseHistory: []
     }
   },
   mutations: {
@@ -80,6 +82,21 @@ export const store = createStore({
     },
     removeAlert(state, item) {
       state.alerts.splice(state.alerts.indexOf(item), 1)
+    },
+    pushNewCaseHistory(state, item) {
+      state.newCaseHistory.push(item)
+    },
+    clearNewCaseHistory(state) {
+      state.newCaseHistory = []
+    },
+    setNewCase(state, item) {
+      state.newCase = item
+    },
+    setNewCaseProperty(state, prop, value) {
+      state.newCasep[prop] = value
+    },
+    clearNewCase(state) {
+      state.newCase = {}
     }
   },
   getters: {
@@ -132,6 +149,9 @@ export const store = createStore({
     },
     allAlerts(state) {
       return state.alerts
+    },
+    isNewCaseEmpty(state) {
+      return Object.entries(state.newCase).length === 0
     }
   },
   plugins: [createPersistedState()]
