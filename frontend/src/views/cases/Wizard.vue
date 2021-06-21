@@ -31,8 +31,6 @@ export default {
     }
   },
   created() {
-
-    // check if there is a new Case in store, then prompt if that case should be dismissed or saved
     //debugger //  eslint-disable-line
   },
   methods: {

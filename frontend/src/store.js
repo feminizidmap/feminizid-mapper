@@ -92,8 +92,8 @@ export const store = createStore({
     setNewCase(state, item) {
       state.newCase = item
     },
-    setNewCaseProperty(state, prop, value) {
-      state.newCasep[prop] = value
+    setNewCaseProperty(state, propValue) {
+      state.newCase[propValue.prop] = propValue.value
     },
     clearNewCase(state) {
       state.newCase = {}

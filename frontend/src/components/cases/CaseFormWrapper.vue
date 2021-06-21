@@ -6,7 +6,8 @@
     <slot></slot>
 
     <Accordion :lists="codelists"
-               :accName="name"></Accordion>
+               :accName="name"
+               @inputChange="handleInputChange"></Accordion>
   </form>
 </section>
 </template>
@@ -16,11 +17,16 @@ export default {
   name: "CaseFormWrapper",
   props: { title: String,
            name: String,
-           allowedLists: Array },
+           allowedLists: Array,
+           modelName: String },
   components: { Accordion },
   methods: {
-    sendForm() {
-      console.log(`${this.name} form was send`)
+    handleInputChange(list, item) {
+      let d = new Date()
+      let propValue = { prop: `${this.modelName}_${list.identifier}`,
+                        value: item.id }
+      this.$store.commit('setNewCaseProperty', propValue)
+      this.$store.commit('pushNewCaseHistory', { message: `Changed ${item.name} as ${list.name} to ${this.modelName}`, date: d, type: 'info'})
     }
   },
   computed: {

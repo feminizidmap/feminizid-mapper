@@ -13,7 +13,7 @@
         <p>{{ list.description}}</p>
         <div class="form-check" v-for="item in codelistItems(list.id)"
              :key="item.id">
-          <input class="form-check-input" type="radio" value="" :name="list.id" :id="item.id">
+          <input class="form-check-input" type="radio" value="" :name="list.id" :id="item.id" @change="registerInputChange(list, item)">
           <label class="form-check-label" :for="item.id">
             {{item.name}}
           </label>
@@ -41,6 +41,9 @@ export default {
     },
     collapseId(id) {
       return `collapse-${id}`
+    },
+    registerInputChange(list, item) {
+      this.$emit('inputChange', list, item)
     }
   }
 }

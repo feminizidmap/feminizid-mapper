@@ -35,6 +35,7 @@
 
     </div>
     <div class="col col-7">
+      {{ $store.state.newCase }}
       <router-view></router-view>
     </div>
     <div class="col col-3">
@@ -42,7 +43,7 @@
         <h4>Neuer Fall Schritte</h4>
         <ol>
           <li v-for="(item, i) in $store.state.newCaseHistory" :key="i">
-            <span :class="`badge bg-${item.type}`">{{item.type}}</span> {{item.message}} <span class="text-secondary">{{item.date.toLocaleTimeString('de-DE') }}</span>
+            <span :class="`badge bg-${item.type}`">{{item.type}}</span> {{item.message}} <span class="text-secondary">{{ formattedDate(item.date) }}</span>
           </li>
         </ol>
       </aside>
@@ -64,6 +65,10 @@ export default {
 
   },
   methods: {
+    formattedDate(datestr) {
+      let d = new Date(datestr)
+      return d.toLocaleTimeString('de-DE')
+    }
   }
 }
 </script>
