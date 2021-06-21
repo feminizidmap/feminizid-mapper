@@ -2,6 +2,7 @@ import CaseList from '@/views/cases/List'
 import CaseSingle from '@/views/cases/Single'
 import CaseNewForm from '@/views/cases/NewForm'
 import CaseWizard from '@/views/cases/Wizard'
+import CaseFinish from '@/views/cases/Finish'
 import CaseMeta from '@/views/cases/Meta'
 import CaseCrime from '@/views/cases/Crime'
 import CaseVictim from '@/views/cases/Victim'
@@ -26,6 +27,11 @@ export default {
           path: '',
           name: 'CaseNewWizard',
           component: CaseWizard
+        },
+        {
+          path: 'finish',
+          name: 'CaseNewFinish',
+          component: CaseFinish
         },
         {
           path: 'meta',

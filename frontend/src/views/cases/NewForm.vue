@@ -32,7 +32,11 @@
       <nav>
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <router-link :to="{ name: 'CaseNewMeta' }" class="nav-link">Quellen</router-link>
+            <router-link :to="{ name: 'CaseNewWizard' }" class="nav-link">Wizard</router-link>
+          </li>
+          <li><hr></li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'CaseNewMeta' }" class="nav-link">Meta</router-link>
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'CaseNewCrime' }" class="nav-link">Tat</router-link>
@@ -42,6 +46,10 @@
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'CaseNewPerpetrator' }" class="nav-link">Täter</router-link>
+          </li>
+          <li><hr></li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'CaseNewFinish' }" class="nav-link">Zusammenfassung</router-link>
           </li>
         </ul>
       </nav>

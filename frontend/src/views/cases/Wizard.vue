@@ -2,10 +2,16 @@
 <div>
   <div v-if="hasNewCase" class="text-center border border-4  p-4">
     <p>Du bearbeitest Fall <strong>{{ $store.state.newCase.ident}}</strong>.</p>
-    <p>Du kannst weiterbearbeiten oder einen neuen Fall eintragen.</p>
 
-    <button>An diesem Fall weiterarbeiten</button>
-    <button class="btn btn-outline-primary"
+    <p><router-link :to="{ name: 'CaseNewMeta' }" class="btn btn-primary">
+        Trage Infos zum Fall ein
+        <i class="fas fa-arrow-circle-right"></i></router-link>
+    </p>
+
+    <hr class="border border-top border-2 border-secondary">
+    <router-link :to="{ name: 'CaseNewFinish' }" class="btn btn-outline-primary mx">Diesen Fall speichern und abschließen</router-link>
+
+    <button class="btn btn-outline-primary mx-4"
             @click.prevent="clearNewCase">Neuen Fall starten</button>
   </div>
   <div v-else class="text-center border border-4  p-4">
