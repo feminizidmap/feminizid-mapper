@@ -4,16 +4,7 @@
 
   </div>
   <div class="row my-2">
-    <h2 v-if="isNew">Neuen Fall hinzufügen</h2>
-    <h2 v-else>Edit {{ fcase.attributes.ident }}</h2>
-  </div>
-  <div class="row my-2">
-    <div>
-      <strong>Identifier:</strong>
-      <span class="d-inline form-control form-control-lg user-select-all">{{ identifier }}</span>
-      <br>
-      <span>@todo explain what the identifier is/ does</span>
-    </div>
+    <h3>Metainformation</h3>
   </div>
   <div class="row my-4">
     <h3>Quellen</h3>
