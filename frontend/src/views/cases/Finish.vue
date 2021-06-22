@@ -11,7 +11,7 @@
       <span class="visually-hidden">Loading...</span>
     </button>
     <button v-else class="btn btn-primary"
-            @click.prevent="createNewCase">Fall speichern</button>
+            @click.prevent="saveNewCase">Fall speichern</button>
   </div>
 </div>
 </template>
@@ -25,6 +25,21 @@ export default {
     }
   },
   methods: {
+    saveNewCase() {
+      this.isLoading = true
+      console.log("Saving new case")
+      let nC = this.$store.state.newCase
+
+      this.$http.secured.patch(`/case/${nC.id}`, {
+        fcase: {
+          ident: nC.ident,
+          sources: nC.sources
+        }
+      }).then(response => {
+        this.$store.commit('updateSingleCase', response.data)
+        this.isLoading = false
+      }).catch(error => { this.$store.commit('addAlert', { message: `Error bill robinson ${error}`, type: 'error'})})
+    }
   },
   computed: {
     hasNewCase() {

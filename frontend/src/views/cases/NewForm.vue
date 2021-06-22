@@ -18,15 +18,7 @@
 
         <div>
           @todo status
-
-
-          <button v-if="isLoading" class="btn btn-primary" type="button" disabled>
-            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-            Speichern...
-          </button>
-          <button v-else type="button"
-                  class="btn btn-primary"
-                  @click.prevent="saveNewCase">Speichern</button>
+          {{ $store.state.newCaseHistory.length }}
         </div>
       </div>
       <nav>
@@ -88,23 +80,7 @@ export default {
       let d = new Date(datestr)
       return d.toLocaleTimeString('de-DE')
     },
-    saveNewCase() {
-      this.isLoading = true
-      console.log("Saving new case")
-      let nC = this.$store.state.newCase
 
-      // split nC into case, victim, perp and crime
-
-      this.$http.secured.patch(`/case/${nC}`, {
-        fcase: {
-          ident: nC.ident,
-          sources: nC.sources
-        }
-      }).then(response => {
-        this.$store.commit('updateSingleCase', response.data)
-        this.isLoading = false
-      }).catch(error => { this.$store.commit('addAlert', { message: `Error bill robinson ${error}`, type: 'error'})})
-    }
   }
 }
 </script>
