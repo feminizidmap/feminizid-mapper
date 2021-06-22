@@ -1,13 +1,13 @@
 <template>
   <div class="codelists container-fluid">
     <div class="row my-2">
-      <h1 class="display-4">{{ $t('layout.codelist') }}</h1>
+      <h2 class="display-6">{{ $t('layout.codelist') }}</h2>
     </div>
     <div class="row">
       <div class="col-3">
         <nav class="list-group mb-4">
           <router-link class="list-group-item"
-                       to="/codelists"
+                       :to="{name: 'AdminCodelistList'}"
                        :class="{'active': !$route.params.codelistkey}"
                        :aria-current="$route.params.codelistkey">
             {{ $t('layout.overview') }}</router-link>

@@ -11,7 +11,7 @@ import CasePerp from '@/views/cases/Perpetrator'
 export default {
   path: '/cases/',
   name: 'Cases',
-  component: () => import(/* webpackChunkName: "codelists" */ '@/views/Caselist.vue'),
+  component: () => import(/* webpackChunkName: "cases" */ '@/views/Caselist.vue'),
   children: [
     {
       path: '',
