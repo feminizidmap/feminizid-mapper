@@ -13,7 +13,8 @@ export const store = createStore({
       systemSettings: [],
       cases: [],
       newCase: {},
-      newCaseHistory: []
+      newCaseHistory: [],
+      schema: {}
     }
   },
   mutations: {
@@ -97,6 +98,9 @@ export const store = createStore({
     },
     clearNewCase(state) {
       state.newCase = {}
+    },
+    setSchema(state, value) {
+      state.schema = value
     }
   },
   getters: {

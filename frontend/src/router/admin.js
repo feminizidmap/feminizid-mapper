@@ -7,6 +7,8 @@ import CodelistIndex from '@/views/admin/codelist/Index'
 import CodelistList from '@/views/admin/codelist/List'
 import CodelistSingle from '@/views/admin/codelist/Single'
 
+import AdminSchema from '@/views/admin/schema/Index'
+
 
 export default {
   path: '/admin/',
@@ -50,5 +52,10 @@ export default {
         }
       ]
     },
+    {
+      path: 'schema',
+      name: 'AdminSchema',
+      component: AdminSchema
+    }
   ]
 }

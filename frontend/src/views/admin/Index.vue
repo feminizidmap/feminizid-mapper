@@ -15,6 +15,10 @@
             <router-link :to="{ name: 'AdminUsersList' }" class="nav-link">{{ $t('admin.users.list') }}</router-link>
           </li>
           <li class="nav-item">
+            <router-link :to="{ name: 'AdminSchema' }"
+                         class="nav-link">{{ $t('layout.schema') }}</router-link>
+          </li>
+          <li class="nav-item">
             <router-link :to="{ name: 'AdminCodelistList' }"
                          class="nav-link">{{ $t('layout.codelist') }}</router-link>
           </li>

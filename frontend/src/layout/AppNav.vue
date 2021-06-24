@@ -30,6 +30,8 @@
                                :to="{name: 'AdminSystem'}">{{ $t('admin.system') }}</router-link></li>
               <li><router-link :to="{ name: 'AdminUsersList' }" class="dropdown-item">{{ $t('admin.users.list') }}</router-link>
               </li>
+              <li><router-link :to="{ name: 'AdminSchema' }" class="dropdown-item">{{ $t('layout.schema') }}</router-link>
+              </li>
               <li><router-link :to="{ name: 'AdminCodelist' }" class="dropdown-item">{{ $t('layout.codelist') }}</router-link>
               </li>
             </ul>
