@@ -9,6 +9,10 @@
     <div>
       <h3 class="h2">Record</h3>
       <p>Record is a single datum, one entry in your database. Everything starts here.</p>
+      <div v-if="$store.state.schema !== {}">
+        <button type="button" class="btn btn-primary"
+                @click="persistSchema">SAVE</button>
+    </div>
     </div>
     <div class="mt-4">
       <h4>Entities</h4>
@@ -71,6 +75,21 @@ export default {
       const eIndex = schema.entities.indexOf(entity)
       schema.entities.splice(eIndex, 1)
       this.$store.commit('setSchema', schema)
+    },
+    persistSchema() {
+      // console.log(JSON.stringify(this.$store.state.schema.entities))
+
+      this.$http.secured.post('/system_settings',
+                              { system_setting:
+                                { 'key': 'schema',
+                                  value: JSON.stringify(this.$store.state.schema.entities)}})
+        .then(() => {
+          this.$store.commit('addAlert', { message: "New Schema set", type: 'info' })
+        })
+        .catch(error => {
+          this.$store.commit('addAlert', { message: error, type: 'danger' })
+          this.isLoading = false
+        })
     }
   }
 }
