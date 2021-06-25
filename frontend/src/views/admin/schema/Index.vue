@@ -14,15 +14,19 @@
       <h4>Entities</h4>
       <p>Entities group logical information together. Usually the entities are Victim, Perpetrator, Crime but you can have more if you want</p>
       <div>
-        <button type="btn"
-                class="btn btn-primary"
-                @click.prevent="addEntityField">Hinzufügen</button>
+        <NewEntityItem @newEntity="saveNewEntity"></NewEntityItem>
+        <ul v-if="$store.state.schema.entities"
+          class="mt-4 ms-3 border-start border-4">
 
-        <NewEntityItem></NewEntityItem>
-        <ul class="mt-4 ms-3 border-start border-4">
-
-          <li class="mt-4">
-            <EntityItem></EntityItem>
+          <li class="mt-4"
+              v-for="(entity, i) in $store.state.schema.entities"
+              :key="i">
+            <EntityItem :entity="entity"
+                        @newField="saveNewField"
+                        @newAttribute="saveNewField"
+                        @rmField="saveRmField"
+                        @rmEntity="saveRmEntity"
+                        ></EntityItem>
           </li>
         </ul>
       </div>
@@ -31,11 +35,43 @@
 </div>
 </template>
 <script>
-  import EntityItem from '@/components/schema/EntityItem'
-  import NewEntityItem from '@/components/schema/NewEntityItem'
+import EntityItem from '@/components/schema/EntityItem'
+import NewEntityItem from '@/components/schema/NewEntityItem'
 
 export default {
   name: 'Schema',
-  components: { EntityItem, NewEntityItem }
+  components: { EntityItem, NewEntityItem },
+  methods: {
+    saveNewEntity(nE) {
+      let schema = this.$store.state.schema;
+      if (!schema.entities) {
+        schema.entities = []
+      }
+      if (!nE.attributes) {
+        nE.attributes = []
+      }
+      schema.entities.push(nE)
+      this.$store.commit('setSchema', schema)
+    },
+    saveNewField(all) {
+      let schema = this.$store.state.schema
+      let index = schema.entities.indexOf(all.e)
+      schema.entities[index].attributes.push(all.field)
+      this.$store.commit('setSchema', schema)
+    },
+    saveRmField(item) {
+      let schema = this.$store.state.schema
+      const eIndex = schema.entities.indexOf(item.e)
+      const aIndex = schema.entities[eIndex].attributes.indexOf(item.a)
+      schema.entities[eIndex].attributes.splice(aIndex, 1)
+      this.$store.commit('setSchema', schema)
+    },
+    saveRmEntity(entity) {
+      let schema = this.$store.state.schema
+      const eIndex = schema.entities.indexOf(entity)
+      schema.entities.splice(eIndex, 1)
+      this.$store.commit('setSchema', schema)
+    }
+  }
 }
 </script>
