@@ -19,11 +19,11 @@
       <p>Entities group logical information together. Usually the entities are Victim, Perpetrator, Crime but you can have more if you want</p>
       <div>
         <NewEntityItem @newEntity="saveNewEntity"></NewEntityItem>
-        <ul v-if="$store.state.schema.entities"
+        <ul v-if="$store.state.schema.length > 0"
           class="mt-4 ms-3 border-start border-4">
 
           <li class="mt-4"
-              v-for="(entity, i) in $store.state.schema.entities"
+              v-for="(entity, i) in $store.state.schema"
               :key="i">
             <EntityItem :entity="entity"
                         @newField="saveNewField"
@@ -48,41 +48,36 @@ export default {
   methods: {
     saveNewEntity(nE) {
       let schema = this.$store.state.schema;
-      if (!schema.entities) {
-        schema.entities = []
-      }
       if (!nE.attributes) {
         nE.attributes = []
       }
-      schema.entities.push(nE)
+      schema.push(nE)
       this.$store.commit('setSchema', schema)
     },
     saveNewField(all) {
       let schema = this.$store.state.schema
-      let index = schema.entities.indexOf(all.e)
-      schema.entities[index].attributes.push(all.field)
+      let index = schema.indexOf(all.e)
+      schema[index].attributes.push(all.field)
       this.$store.commit('setSchema', schema)
     },
     saveRmField(item) {
       let schema = this.$store.state.schema
-      const eIndex = schema.entities.indexOf(item.e)
-      const aIndex = schema.entities[eIndex].attributes.indexOf(item.a)
-      schema.entities[eIndex].attributes.splice(aIndex, 1)
+      const eIndex = schema.indexOf(item.e)
+      const aIndex = schema[eIndex].attributes.indexOf(item.a)
+      schema[eIndex].attributes.splice(aIndex, 1)
       this.$store.commit('setSchema', schema)
     },
     saveRmEntity(entity) {
       let schema = this.$store.state.schema
-      const eIndex = schema.entities.indexOf(entity)
-      schema.entities.splice(eIndex, 1)
+      const eIndex = schema.indexOf(entity)
+      schema.splice(eIndex, 1)
       this.$store.commit('setSchema', schema)
     },
     persistSchema() {
-      // console.log(JSON.stringify(this.$store.state.schema.entities))
-
       this.$http.secured.post('/system_settings',
                               { system_setting:
                                 { 'key': 'schema',
-                                  value: JSON.stringify(this.$store.state.schema.entities)}})
+                                  value: JSON.stringify(this.$store.state.schema)}})
         .then(() => {
           this.$store.commit('addAlert', { message: "New Schema set", type: 'info' })
         })

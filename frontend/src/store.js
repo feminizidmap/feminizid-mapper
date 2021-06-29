@@ -14,7 +14,7 @@ export const store = createStore({
       cases: [],
       newCase: {},
       newCaseHistory: [],
-      schema: {}
+      schema: []
     }
   },
   mutations: {
