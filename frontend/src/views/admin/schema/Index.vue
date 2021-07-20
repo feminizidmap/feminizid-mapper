@@ -74,7 +74,7 @@ export default {
       this.$store.commit('setSchema', schema)
     },
     persistSchema() {
-      this.$http.secured.post('/system_settings',
+      this.$http.secured.patch(`/system_settings/bb799735-d85d-42dc-a5a7-7adff46b80b4`,
                               { system_setting:
                                 { 'key': 'schema',
                                   value: JSON.stringify(this.$store.state.schema)}})

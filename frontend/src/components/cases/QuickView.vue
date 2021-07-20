@@ -1,6 +1,6 @@
 <template>
 <div class="case-quickview">
-  <h3 class="h4" @click.prevent="toggleOpen" v-if="fcase.attributes">
+  <h3 class="h4 fw-bold" @click.prevent="toggleOpen" v-if="fcase.attributes">
     <i class="fa fa-caret-down" v-if="isOpen"></i>
     <i class="fa fa-caret-right" v-else></i>
     {{ fcase.attributes.ident }}</h3>

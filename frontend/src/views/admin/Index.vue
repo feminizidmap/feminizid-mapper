@@ -1,6 +1,6 @@
 <template>
 <div class="admin container-fluid">
-  <div class="my-2 row">
+  <div class="row">
     <h1>{{ $t('layout.adminArea') }}</h1>
     <hr>
   </div>

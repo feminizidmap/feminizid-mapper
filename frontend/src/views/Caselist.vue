@@ -1,14 +1,7 @@
 <template>
 <div class="codelists container-fluid">
-  <div class="my-2 d-flex justify-content-between align-content-center">
-    <h1>{{ $t('layout.caselist') }}</h1>
-    <div>
-      <router-link to="/cases/new" class="btn btn-primary">Neuer Fall</router-link>
-    </div>
-  </div>
+
   <div class="row">
-    <p>@todo write something about this view</p>
-    <hr>
     <router-view></router-view>
   </div>
 </div>

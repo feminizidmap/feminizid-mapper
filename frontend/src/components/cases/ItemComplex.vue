@@ -1,8 +1,7 @@
 <template>
-<li class="list-group-item d-flex justify-content-between">
+<li class="list-group-item d-flex justify-content-between border-3 mb-2 case-item-complex">
   <div class="">
     <QuickView :fcase="item" />
-    <hr>
     <CDate :item="item" />
   </div>
   <div>
@@ -86,3 +85,8 @@ export default {
   }
 }
 </script>
+<style>
+  .case-item-complex:hover {
+  background-color: lightgrey;
+  }
+</style>

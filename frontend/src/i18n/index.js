@@ -31,6 +31,7 @@ const messages = {
       cases: "Cases",
       codelist: "Codelists",
       settings: "Settings",
+      schema: "Data schema",
       userManagement: "User management",
       caselist: "Cases",
       adminArea: "Admin area",
@@ -114,6 +115,7 @@ const messages = {
       userManagement: "Usermanagement",
       caselist: "Fälle",
       admin: "Admin",
+      schema: "Datenschema",
       overview: "Übersicht",
       incomplete: "Unvollständig"
     },
