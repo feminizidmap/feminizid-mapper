@@ -19,6 +19,8 @@ Metrics/BlockLength:
 
 Rails/EnvironmentVariableAccess:
   AllowReads: true
+Rails/ReversibleMigration:
+  Enabled: false
 
 RSpec/ExampleLength:
   Enabled: false
