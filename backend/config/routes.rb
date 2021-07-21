@@ -18,12 +18,18 @@ Rails.application.routes.draw do
 
   resources :changes
   resources :system_settings
-  resources :codelist
-  resources :codelist_items
-  resources :case, controller: :fcase
-  resources :victim
-  resources :perpetrator
-  resources :crime
+  resources :records do
+    resources :sources
+  end
+
+  resources :entities do
+    resources :attributes
+    resources :fields
+  end
+
+  resources :categories do
+    resources :category_items
+  end
 
   namespace :admin do
     resources :users, only: %i[index show update] do
