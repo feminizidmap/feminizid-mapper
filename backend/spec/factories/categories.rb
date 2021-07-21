@@ -2,5 +2,7 @@
 
 FactoryBot.define do
   factory :category do
+    name { 'Foo' }
+    slug { 'foo' }
   end
 end

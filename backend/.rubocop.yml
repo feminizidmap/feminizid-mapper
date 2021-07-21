@@ -19,6 +19,8 @@ Metrics/BlockLength:
 
 Rails/EnvironmentVariableAccess:
   AllowReads: true
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
 Rails/ReversibleMigration:
   Enabled: false
 

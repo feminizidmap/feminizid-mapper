@@ -2,5 +2,7 @@
 
 FactoryBot.define do
   factory :source do
+    record { association :record }
+    url { Faker::Internet.url }
   end
 end

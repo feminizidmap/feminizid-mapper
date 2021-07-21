@@ -2,5 +2,9 @@
 
 FactoryBot.define do
   factory :field do
+    entity { association :entity }
+    name { 'Address' }
+    key { 'address' }
+    value { 'Goethestr. 24' }
   end
 end
