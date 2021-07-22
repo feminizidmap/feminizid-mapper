@@ -42,6 +42,8 @@ class ChangesController < ApplicationController
   end
 
   def change_params
-    params.require(:change).permit(:status)
+    params.require(:change).permit(:status,
+                                   :user_id,
+                                   :record_id)
   end
 end
