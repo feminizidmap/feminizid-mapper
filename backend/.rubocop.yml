@@ -37,3 +37,4 @@ RSpec/InstanceVariable:
   Exclude:
     - 'spec/controllers/changes_controller_spec.rb'
     - 'spec/controllers/refresh_controller_spec.rb'
+    - 'spec/controllers/categories_controller_spec.rb'

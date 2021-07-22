@@ -14,7 +14,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new
+    @category = Category.new(category_params)
 
     if @category.save
       render json: @category, status: :created, location: categories_url(@category.id)
