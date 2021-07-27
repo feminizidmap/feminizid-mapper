@@ -27,9 +27,8 @@ Rails.application.routes.draw do
     resources :fields
   end
 
-  resources :categories do
-    resources :category_items
-  end
+  resources :categories
+  resources :category_items
 
   namespace :admin do
     resources :users, only: %i[index show update] do

@@ -12,9 +12,8 @@ class AddNewEntitySystem < ActiveRecord::Migration[6.1]
       t.string :name, null: false, default: ''
       t.string :slug, null: false, unique: true
       t.string :description, null: false, default: ''
+      t.references :record, type: :uuid
       t.timestamps
     end
-
-    add_reference :entities, :record
   end
 end

@@ -8,9 +8,8 @@ class CreateFields < ActiveRecord::Migration[6.1]
       t.string :key, null: false, default: ''
       t.string :value, null: false, default: ''
       t.string :feature
+      t.references :entity, type: :uuid
       t.timestamps
     end
-
-    add_reference :fields, :entity
   end
 end

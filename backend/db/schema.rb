@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 2021_07_20_131239) do
   enable_extension "plpgsql"
 
   create_table "attributes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "entity_id"
+    t.uuid "category_id"
+    t.uuid "category_item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "entity_id"
-    t.bigint "category_id"
-    t.bigint "category_item_id"
     t.index ["category_id"], name: "index_attributes_on_category_id"
     t.index ["category_item_id"], name: "index_attributes_on_category_item_id"
     t.index ["entity_id"], name: "index_attributes_on_entity_id"
@@ -39,9 +39,9 @@ ActiveRecord::Schema.define(version: 2021_07_20_131239) do
     t.string "name", default: "", null: false
     t.string "description", default: "", null: false
     t.string "slug", default: "", null: false
+    t.uuid "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "category_id"
     t.index ["category_id"], name: "index_category_items_on_category_id"
   end
 
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_07_20_131239) do
     t.integer "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "record_id"
+    t.uuid "record_id"
     t.index ["record_id"], name: "index_changes_on_record_id"
   end
 
@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(version: 2021_07_20_131239) do
     t.string "name", default: "", null: false
     t.string "slug", null: false
     t.string "description", default: "", null: false
+    t.uuid "record_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "record_id"
     t.index ["record_id"], name: "index_entities_on_record_id"
   end
 
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(version: 2021_07_20_131239) do
     t.string "key", default: "", null: false
     t.string "value", default: "", null: false
     t.string "feature"
+    t.uuid "entity_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "entity_id"
     t.index ["entity_id"], name: "index_fields_on_entity_id"
   end
 
@@ -85,9 +85,9 @@ ActiveRecord::Schema.define(version: 2021_07_20_131239) do
 
   create_table "sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "url", default: "", null: false
+    t.uuid "record_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "record_id"
     t.index ["record_id"], name: "index_sources_on_record_id"
   end
 

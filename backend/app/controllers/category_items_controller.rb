@@ -14,7 +14,7 @@ class CategoryItemsController < ApplicationController
   end
 
   def create
-    @category_item = CategoryItem.new
+    @category_item = CategoryItem.new(category_item_params)
 
     if @category_item.save
       render json: @category_item, status: :created, location: category_items_url(@category_item.id)
@@ -45,6 +45,7 @@ class CategoryItemsController < ApplicationController
     params.require(:category_item).permit(:name,
                                           :slug,
                                           :description,
-                                          :category_id)
+                                          :category_id,
+                                          :category)
   end
 end
