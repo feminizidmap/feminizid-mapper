@@ -14,7 +14,7 @@ class RecordsController < ApplicationController
   end
 
   def create
-    @record = Record.new
+    @record = Record.new(record_params)
 
     if @record.save
       render json: @record, status: :created, location: records_url(@record.id)
@@ -42,6 +42,6 @@ class RecordsController < ApplicationController
   end
 
   def record_params
-    params.require(:record).permit(:identifier)
+    params.require(:record).permit(:identifier, :version)
   end
 end
