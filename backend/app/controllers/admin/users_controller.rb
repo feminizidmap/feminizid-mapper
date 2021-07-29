@@ -41,7 +41,7 @@ module Admin
     private
 
     def allowed_aud
-      (action_name == 'update' || action_name == 'destroy') ? EDIT_ROLES : VIEW_ROLES
+      action_name == 'update' || action_name == 'destroy' ? EDIT_ROLES : VIEW_ROLES
     end
 
     def set_user

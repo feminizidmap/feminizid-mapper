@@ -20,14 +20,16 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
-    return false unless current_user == @user.id
+  def set_verify_user
+    if current_user.id == params[:id]
+      @user = User.find(params[:id])
+    else
+      forbidden
+    end
   end
 
   def user_params
-    params.require(:user).permit(:role,
-                                 :email,
+    params.require(:user).permit(:email,
                                  :password,
                                  :password_confirmation)
   end
