@@ -3,7 +3,6 @@
 class SourcesController < ApplicationController
   before_action :authorize_access_request!
   before_action :set_source, only: %i[show update destroy]
-  #before_action :set_record
 
   def index
     @sources = Source.all
@@ -19,7 +18,7 @@ class SourcesController < ApplicationController
     @source.update(source_params)
 
     if @source.save
-      render json: @source, status: :created, location: record_sources_url(@source.id)
+      render json: @source, status: :created, location: record_source_url(@source.id, @source.record.id)
     else
       render json: @source.errors, status: :unprocessable_entity
     end
@@ -41,11 +40,6 @@ class SourcesController < ApplicationController
 
   def set_source
     @source = Source.find(params[:id])
-  end
-
-  def set_record
-    #puts params
-    #params[:record_id] = Record.find()
   end
 
   def source_params
