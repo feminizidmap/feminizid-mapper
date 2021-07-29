@@ -75,4 +75,26 @@ RSpec.describe Admin::UsersController, type: :controller do
       expect(response).to have_http_status(:bad_request)
     end
   end
+
+  describe 'DELETE #destroy' do
+    it 'allows admin to delete user' do
+      sign_in_as(admin)
+      expect(User.count).to be(3)
+      delete :destroy, params: { id: user.id }
+      expect(response).to be_successful
+      expect(User.count).to be(2)
+    end
+
+    it 'does not allow reviewer to delete user' do
+      sign_in_as(reviewer)
+      delete :destroy, params: { id: user.id }
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it 'does not allow user to delete user' do
+      sign_in_as(user)
+      delete :destroy, params: { id: user.id }
+      expect(response).to have_http_status(:forbidden)
+    end
+  end
 end

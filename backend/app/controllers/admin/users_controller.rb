@@ -3,7 +3,7 @@
 module Admin
   class UsersController < ApplicationController
     before_action :authorize_access_request!
-    before_action :set_user, only: %i[show update]
+    before_action :set_user, only: %i[show update destroy]
     VIEW_ROLES = %w[admin reviewer].freeze
     EDIT_ROLES = %w[admin].freeze
 
@@ -27,6 +27,10 @@ module Admin
       end
     end
 
+    def destroy
+      @user.destroy
+    end
+
     def token_claims
       {
         aud: allowed_aud,
@@ -37,7 +41,7 @@ module Admin
     private
 
     def allowed_aud
-      action_name == 'update' ? EDIT_ROLES : VIEW_ROLES
+      (action_name == 'update' || action_name == 'destroy') ? EDIT_ROLES : VIEW_ROLES
     end
 
     def set_user
@@ -45,7 +49,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:role)
+      params.require(:user).permit(:role, :email)
     end
   end
 end
