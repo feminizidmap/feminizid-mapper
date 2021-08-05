@@ -16,10 +16,10 @@ Rails.application.routes.draw do
   resources :users, controller: :users, only: %i[update destroy]
   get '/me', controller: :users, action: :me
 
-  resources :changes
   resources :system_settings
   resources :records do
     resources :sources
+    resources :changes
   end
 
   resources :entities do
