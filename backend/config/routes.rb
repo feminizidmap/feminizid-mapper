@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   resources :category_items
 
   namespace :admin do
-    resources :users, only: %i[index show update destroy] do
+    resources :users do
       resources :changes, only: [:index], controller: 'users/changes'
     end
   end

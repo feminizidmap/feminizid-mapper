@@ -29,6 +29,30 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
   end
 
+  describe 'POST #create' do
+    let(:user_params) { { email: 'test@test.com', role: 'user', name: 'A Name' } }
+
+    it 'returns http success for admin' do
+      sign_in_as(admin)
+      post :create, params: { user: user_params }
+      expect(response).to be_successful
+      expect(response_json['message']).to eq 'User created'
+    end
+
+    it 'allows admins to create a user' do
+      sign_in_as(admin)
+      expect do
+        post :create, params: { user: user_params }
+      end.to change(User, :count).by(1)
+    end
+
+    it 'does not allow reviewers to create users' do
+      sign_in_as(reviewer)
+      post :create, params: user_params
+      expect(response).not_to be_successful
+    end
+  end
+
   describe 'GET #show' do
     it 'allows admin to get a user' do
       sign_in_as(admin)
