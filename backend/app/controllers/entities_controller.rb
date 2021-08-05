@@ -14,7 +14,7 @@ class EntitiesController < ApplicationController
   end
 
   def create
-    @entity = Entity.new
+    @entity = Entity.new(entity_params)
 
     if @entity.save
       render json: @entity, status: :created, location: entities_url(@entity.id)
