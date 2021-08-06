@@ -14,10 +14,10 @@ class FieldsController < ApplicationController
   end
 
   def create
-    @field = Field.new
+    @field = Field.new(field_params)
 
     if @field.save
-      render json: @field, status: :created, location: fields_url(@field.id)
+      render json: @field, status: :created, location: entity_fields_url(@field.id, @field.entity.id)
     else
       render json: @field.errors, status: :unprocessable_entity
     end
