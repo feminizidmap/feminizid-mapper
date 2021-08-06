@@ -14,10 +14,10 @@ class AttributesController < ApplicationController
   end
 
   def create
-    @attribute = Attribute.new
+    @attribute = Attribute.new(attribute_params)
 
     if @attribute.save
-      render json: @attribute, status: :created, location: attributes_url(@attribute.id)
+      render json: @attribute, status: :created, location: entity_attributes_url(@attribute.id, @attribute.entity.id)
     else
       render json: @attribute.errors, status: :unprocessable_entity
     end

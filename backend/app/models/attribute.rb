@@ -2,6 +2,6 @@
 
 class Attribute < ApplicationRecord
   belongs_to :entity
-  has_one :category
-  has_one :category_item
+  belongs_to :category
+  belongs_to :category_item
 end
