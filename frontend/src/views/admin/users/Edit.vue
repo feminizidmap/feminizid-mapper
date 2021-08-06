@@ -1,6 +1,5 @@
 <template>
   <div class="users">
-    <AppHeader></AppHeader>
     <form class="form-app form-edit" @submit.prevent="update">
       <div class="alert alert-info" v-if="notice">{{ notice }}</div>
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
@@ -23,11 +22,8 @@
 </template>
 
 <script>
- import AppHeader from '@/layout/AppHeader'
-
  export default {
    name: 'UserEdit',
-   components: { AppHeader },
    data() {
      return {
        error: '',

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # scope '(:locale)', locale: /#{Rails.application.config.available_locales.join('|')}/ do
   post '/signup', controller: :signup, action: :create
   post '/refresh', controller: :refresh, action: :create
   post '/signin', controller: :signin, action: :create
@@ -14,21 +13,26 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, controller: :users, only: %i[update destroy]
   get '/me', controller: :users, action: :me
 
-  resources :changes
   resources :system_settings
-  resources :codelist
-  resources :codelist_items
-  resources :case, controller: :fcase
-  resources :victim
-  resources :perpetrator
-  resources :crime
+  resources :records do
+    resources :sources
+    resources :changes
+  end
+
+  resources :entities do
+    resources :attributes
+    resources :fields
+  end
+
+  resources :categories
+  resources :category_items
 
   namespace :admin do
-    resources :users, only: %i[index show update] do
+    resources :users do
       resources :changes, only: [:index], controller: 'users/changes'
     end
   end
-  # end
 end

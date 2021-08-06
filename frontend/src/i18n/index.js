@@ -29,13 +29,20 @@ const messages = {
     layout: {
       totop: "to top",
       cases: "Cases",
-      codelist: "Option lists",
+      codelist: "Codelists",
       settings: "Settings",
+      schema: "Data schema",
       userManagement: "User management",
       caselist: "Cases",
-      admin: "Admin",
+      adminArea: "Admin area",
       overview: "Overview",
       incomplete: "Incomplete"
+    },
+    admin: {
+      system: 'System settings',
+      users: {
+        list: 'User management'
+      }
     },
     models: {
       codelist: {
@@ -103,13 +110,20 @@ const messages = {
     layout: {
       totop: "nach oben",
       cases: "Fälle",
-      codelist: "Optionslisten",
+      codelist: "Codelisten",
       settings: "Einstellungen",
       userManagement: "Usermanagement",
       caselist: "Fälle",
       admin: "Admin",
+      schema: "Datenschema",
       overview: "Übersicht",
       incomplete: "Unvollständig"
+    },
+    admin: {
+      system: 'Systemeinstellungen',
+      users: {
+        list: 'NutzerInnenverwaltung'
+      }
     },
     models: {
       codelist: {

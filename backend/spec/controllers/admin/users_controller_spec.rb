@@ -29,6 +29,30 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
   end
 
+  describe 'POST #create' do
+    let(:user_params) { { email: 'test@test.com', role: 'user', name: 'A Name' } }
+
+    it 'returns http success for admin' do
+      sign_in_as(admin)
+      post :create, params: { user: user_params }
+      expect(response).to be_successful
+      expect(response_json['message']).to eq 'User created'
+    end
+
+    it 'allows admins to create a user' do
+      sign_in_as(admin)
+      expect do
+        post :create, params: { user: user_params }
+      end.to change(User, :count).by(1)
+    end
+
+    it 'does not allow reviewers to create users' do
+      sign_in_as(reviewer)
+      post :create, params: user_params
+      expect(response).not_to be_successful
+    end
+  end
+
   describe 'GET #show' do
     it 'allows admin to get a user' do
       sign_in_as(admin)
@@ -73,6 +97,28 @@ RSpec.describe Admin::UsersController, type: :controller do
       sign_in_as(admin)
       patch :update, params: { id: admin.id, user: { role: :user } }
       expect(response).to have_http_status(:bad_request)
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    it 'allows admin to delete user' do
+      sign_in_as(admin)
+      expect(User.count).to be(3)
+      delete :destroy, params: { id: user.id }
+      expect(response).to be_successful
+      expect(User.count).to be(2)
+    end
+
+    it 'does not allow reviewer to delete user' do
+      sign_in_as(reviewer)
+      delete :destroy, params: { id: user.id }
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it 'does not allow user to delete user' do
+      sign_in_as(user)
+      delete :destroy, params: { id: user.id }
+      expect(response).to have_http_status(:forbidden)
     end
   end
 end

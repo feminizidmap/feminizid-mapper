@@ -20,22 +20,20 @@
               <i class="fas fa-database"></i>
               {{ $t('layout.cases') }}</router-link>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/codelists">
-              <i class="fas fa-list"></i>
-              {{ $t('layout.codelist') }}</router-link></li>
-
           <li class="nav-item dropdown" v-if="showAdminLink()">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fas fa-cog"></i>
-              {{ $t('layout.settings') }}
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-toolbox"></i>
+              {{ $t('layout.adminArea') }}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><hr class="dropdown-divider"></li>
-              <li><p class="px-3 pt-2 text-muted">{{ $t('layout.admin') }}</p></li>
-              <li><hr class="dropdown-divider"></li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownAdmin">
               <li><router-link class="dropdown-item"
-                           to="/admin/users">{{ $t('layout.userManagement') }}</router-link></li>
+                               :to="{name: 'AdminSystem'}">{{ $t('admin.system') }}</router-link></li>
+              <li><router-link :to="{ name: 'AdminUsersList' }" class="dropdown-item">{{ $t('admin.users.list') }}</router-link>
+              </li>
+              <li><router-link :to="{ name: 'AdminSchema' }" class="dropdown-item">{{ $t('layout.schema') }}</router-link>
+              </li>
+              <li><router-link :to="{ name: 'AdminCodelist' }" class="dropdown-item">{{ $t('layout.codelist') }}</router-link>
+              </li>
             </ul>
           </li>
         </ul>

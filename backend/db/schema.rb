@@ -10,77 +10,85 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_15_122702) do
+ActiveRecord::Schema.define(version: 2021_07_20_131239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "attributes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "entity_id"
+    t.uuid "category_id"
+    t.uuid "category_item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_attributes_on_category_id"
+    t.index ["category_item_id"], name: "index_attributes_on_category_item_id"
+    t.index ["entity_id"], name: "index_attributes_on_entity_id"
+  end
+
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "description", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "category_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "description", default: "", null: false
+    t.string "slug", default: "", null: false
+    t.uuid "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_category_items_on_category_id"
+  end
 
   create_table "changes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.integer "status", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "record_id"
+    t.index ["record_id"], name: "index_changes_on_record_id"
   end
 
-  create_table "codelist_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
-    t.string "description", null: false
-    t.string "lang", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "identifier"
-    t.uuid "codelist_id"
-  end
-
-  create_table "codelists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "identifier", null: false
-    t.string "name", null: false
+  create_table "entities", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "slug", null: false
     t.string "description", default: "", null: false
-    t.string "lang", null: false
+    t.uuid "record_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_id"], name: "index_entities_on_record_id"
+  end
+
+  create_table "fields", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "description", default: "", null: false
+    t.string "key", default: "", null: false
+    t.string "value", default: "", null: false
+    t.string "feature"
+    t.uuid "entity_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["entity_id"], name: "index_fields_on_entity_id"
+  end
+
+  create_table "records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "identifier", default: "", null: false
+    t.integer "version", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "crimes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "location_id"
-    t.string "address"
-    t.uuid "cause_of_death_id"
-    t.uuid "acts_of_violence_id"
-    t.uuid "weapons_id"
-    t.uuid "ftype_id"
-    t.uuid "motif_id"
-    t.uuid "fcase_id"
+  create_table "sources", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "url", default: "", null: false
+    t.uuid "record_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "fcases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "ident", null: false
-    t.string "sources"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["ident"], name: "index_fcases_on_ident"
-  end
-
-  create_table "perpetrators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "firstname", default: "", null: false
-    t.string "lastname", default: "", null: false
-    t.integer "age"
-    t.uuid "gender_id"
-    t.uuid "civil_status_id"
-    t.uuid "educational_background_id"
-    t.uuid "citizenship_type_id"
-    t.string "citizenship"
-    t.uuid "legal_status_id"
-    t.uuid "alcohol_influence_id"
-    t.uuid "drug_influence_id"
-    t.uuid "previous_psychological_condition_id"
-    t.uuid "previous_criminal_record_id"
-    t.uuid "suicide_afterwards_id"
-    t.uuid "fcase_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_id"], name: "index_sources_on_record_id"
   end
 
   create_table "system_settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -99,33 +107,9 @@ ActiveRecord::Schema.define(version: 2021_04_15_122702) do
     t.integer "role", default: 0
     t.string "reset_password_token"
     t.datetime "reset_password_token_expires_at"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
-  end
-
-  create_table "victims", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "firstname", default: "", null: false
-    t.string "lastname", default: "", null: false
-    t.integer "age"
-    t.uuid "civil_status_id"
-    t.uuid "educational_background_id"
-    t.string "address"
-    t.uuid "citizenship_type_id"
-    t.string "citizenship"
-    t.uuid "legal_status_id"
-    t.uuid "drunk_id"
-    t.uuid "drug_influence_id"
-    t.uuid "previous_reports_of_violence_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.uuid "fcase_id"
-  end
-
-  create_table "yes_nos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "answer"
-    t.integer "integer"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

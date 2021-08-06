@@ -133,6 +133,7 @@ GEM
       pry (~> 0.13.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
+    public_suffix (4.0.6)
     puma (5.3.1)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -234,6 +235,9 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.0.0)
+    validate_url (1.0.13)
+      activemodel (>= 3.0.0)
+      public_suffix
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -268,6 +272,7 @@ DEPENDENCIES
   rubocop-rspec
   spring
   tzinfo-data
+  validate_url (~> 1.0.13)
 
 RUBY VERSION
    ruby 3.0.1p64

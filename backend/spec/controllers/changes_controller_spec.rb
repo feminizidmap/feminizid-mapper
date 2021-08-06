@@ -4,13 +4,16 @@ require 'rails_helper'
 
 RSpec.describe ChangesController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
+  let(:record) { FactoryBot.create(:record) }
 
   let(:valid_attributes) do
-    { status: :created }
+    { status: :created,
+      record_id: record.id }
   end
 
   let(:invalid_attributes) do
-    { status: 'foo' }
+    { status: 'foo',
+      record_id: record.id }
   end
 
   before do
@@ -24,7 +27,7 @@ RSpec.describe ChangesController, type: :controller do
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
-      get :index
+      get :index, params: { record_id: change.record.id }
       expect(response).to be_successful
       expect(response_json.size).to eq 1
       expect(response_json.first['id']).to eq change.id
@@ -34,7 +37,7 @@ RSpec.describe ChangesController, type: :controller do
     # within the resources endpoints
     # the quick spec is here only for the presentation purposes
     it 'unauth without cookie' do
-      get :index
+      get :index, params: { record_id: change.record.id }
       expect(response).to have_http_status(:unauthorized)
     end
   end
@@ -44,7 +47,7 @@ RSpec.describe ChangesController, type: :controller do
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
-      get :show, params: { id: change.id }
+      get :show, params: { id: change.id, record_id: change.record.id }
       expect(response).to be_successful
     end
   end
@@ -55,22 +58,22 @@ RSpec.describe ChangesController, type: :controller do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
         expect do
-          post :create, params: { change: valid_attributes }
+          post :create, params: { change: valid_attributes, record_id: record.id }
         end.to change(Change, :count).by(1)
       end
 
       it 'renders a JSON response with the new change' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        post :create, params: { change: valid_attributes }
+        post :create, params: { change: valid_attributes, record_id: record.id }
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json; charset=utf-8')
-        expect(response.location).to eq(changes_url(Change.last))
+        expect(response.location).to eq(record_changes_url(Change.last, Change.last.record_id))
       end
 
       it 'unauth without CSRF' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
-        post :create, params: { change: valid_attributes }
+        post :create, params: { change: valid_attributes, record_id: record.id }
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -79,7 +82,7 @@ RSpec.describe ChangesController, type: :controller do
       pending 'renders a JSON response with errors for the new change' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        post :create, params: { change: invalid_attributes }
+        post :create, params: { change: invalid_attributes, record_id: record.id }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
@@ -97,7 +100,7 @@ RSpec.describe ChangesController, type: :controller do
       it 'updates the requested change' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        put :update, params: { id: change.id, change: new_attributes }
+        put :update, params: { id: change.id, change: new_attributes, record_id: record.id }
         change.reload
         expect(change.status).to eq new_attributes[:status].to_s
       end
@@ -105,7 +108,7 @@ RSpec.describe ChangesController, type: :controller do
       it 'renders a JSON response with the change' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        put :update, params: { id: change.to_param, change: valid_attributes }
+        put :update, params: { id: change.to_param, change: valid_attributes, record_id: record.id }
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
@@ -115,7 +118,7 @@ RSpec.describe ChangesController, type: :controller do
       pending 'renders a JSON response with errors for the change' do
         request.cookies[JWTSessions.access_cookie] = @tokens[:access]
         request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
-        put :update, params: { id: change.to_param, change: invalid_attributes }
+        put :update, params: { id: change.to_param, change: invalid_attributes, record_id: record.id }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
@@ -129,7 +132,7 @@ RSpec.describe ChangesController, type: :controller do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
       request.headers[JWTSessions.csrf_header] = @tokens[:csrf]
       expect(Change.count).to be(1)
-      delete :destroy, params: { id: change.id }
+      delete :destroy, params: { id: change.id, record_id: record.id }
       expect(Change.count).to be(0)
     end
   end

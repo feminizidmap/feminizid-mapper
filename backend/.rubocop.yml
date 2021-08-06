@@ -19,6 +19,10 @@ Metrics/BlockLength:
 
 Rails/EnvironmentVariableAccess:
   AllowReads: true
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/ReversibleMigration:
+  Enabled: false
 
 RSpec/ExampleLength:
   Enabled: false
@@ -31,5 +35,4 @@ RSpec/NestedGroups:
 
 RSpec/InstanceVariable:
   Exclude:
-    - 'spec/controllers/changes_controller_spec.rb'
-    - 'spec/controllers/refresh_controller_spec.rb'
+    - 'spec/controllers/*'

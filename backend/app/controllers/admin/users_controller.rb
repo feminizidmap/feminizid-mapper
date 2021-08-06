@@ -3,7 +3,7 @@
 module Admin
   class UsersController < ApplicationController
     before_action :authorize_access_request!
-    before_action :set_user, only: %i[show update]
+    before_action :set_user, only: %i[show update destroy]
     VIEW_ROLES = %w[admin reviewer].freeze
     EDIT_ROLES = %w[admin].freeze
 
@@ -17,6 +17,17 @@ module Admin
       render json: @user
     end
 
+    def create
+      u = User.new(user_params)
+      u.password = SecureRandom.hex(14)
+      if u.save!
+        UserMailer.account_created_by(u, current_user).deliver_now
+        render json: { status: :ok, message: 'User created' }
+      else
+        render json: { error: 'Could not create user', status: :bad_request }
+      end
+    end
+
     def update
       if current_user.id == @user.id
         render json: { error: 'Admin cannot modify their own rile' }, status: :bad_request
@@ -25,6 +36,10 @@ module Admin
         JWTSessions::Session.new(namespace: "user_#{@user.id}").flush_namespaced_access_tokens
         render json: @user
       end
+    end
+
+    def destroy
+      @user.destroy
     end
 
     def token_claims
@@ -37,7 +52,7 @@ module Admin
     private
 
     def allowed_aud
-      action_name == 'update' ? EDIT_ROLES : VIEW_ROLES
+      %w[create update destroy].include?(action_name) ? EDIT_ROLES : VIEW_ROLES
     end
 
     def set_user
@@ -45,7 +60,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:role)
+      params.require(:user).permit(:role, :email, :name)
     end
   end
 end

@@ -1,10 +1,10 @@
 <template>
-  <footer class="border-top border-5 mt-auto border-dark">
+  <footer class="border-top border-5 mt-auto pt-4 bg-dark text-light">
     <div class="container-fluid">
       <div class="row row-cols-4 pt-3 pb-1">
         <div>
           <p>Mapper is a software project developed and used by <a href="#">Feminizidmap.org</a>.</p>
-          <p>It is Free Software under the AGPL 3 or later License. The sourcecode is available on <a :href="homepage">GitHub</a>.</p>
+          <p>It is Free and Open Source Software under the AGPL 3 or later License. The sourcecode is available on <a :href="homepage">GitHub</a>.</p>
           <p>Installation and usage guides can be found on <a :href="homepage">tech.feminizidmap.org</a>.</p>
         </div>
         <div class="">
@@ -21,7 +21,7 @@
           </select>
         </div>
       </div>
-      <div class="row border-top border-5 border-dark pt-3 pb-1 text-center bg-dark text-light">
+      <div class="row border-top border-5 border-dark pt-3 pb-1 text-center">
         <p>{{ toolName}} {{ version }}</p>
         <p><a href="">⇪ {{ $t('layout.totop')}}</a></p>
       </div>

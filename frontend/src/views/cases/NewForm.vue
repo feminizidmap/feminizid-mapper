@@ -7,9 +7,10 @@
         <li class="breadcrumb-item active" aria-current="page">Neuer Fall</li>
       </ol>
     </nav>
+    <hr>
   </div>
-  <div class="row mt-4 mb-3">
-    <h2>Neuer Fall hinzufügen</h2>
+  <div class="row mt-3 mb-4">
+    <h1 class="fs-1 fw-bold">Neuer Fall hinzufügen</h1>
   </div>
   <div class="row my-2">
     <div class="col col-2">
