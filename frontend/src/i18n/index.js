@@ -29,7 +29,7 @@ const messages = {
     layout: {
       totop: "to top",
       cases: "Cases",
-      codelist: "Codelists",
+      categories: "Categories",
       settings: "Settings",
       schema: "Data schema",
       userManagement: "User management",
@@ -110,7 +110,7 @@ const messages = {
     layout: {
       totop: "nach oben",
       cases: "Fälle",
-      codelist: "Codelisten",
+      categories: "Kategorien",
       settings: "Einstellungen",
       userManagement: "Usermanagement",
       caselist: "Fälle",

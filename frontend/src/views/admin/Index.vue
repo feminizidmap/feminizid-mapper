@@ -5,8 +5,8 @@
     <hr>
   </div>
   <div class="row">
-    <div class="col col-2">
-      <nav class="">
+    <div class="col col-12 col-lg-3">
+      <nav class="mb-5">
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
             <router-link :to="{ name: 'AdminSystem' }" class="nav-link">{{ $t('admin.system')}}</router-link>
@@ -19,14 +19,14 @@
                          class="nav-link">{{ $t('layout.schema') }}</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'AdminCodelistList' }"
-                         class="nav-link">{{ $t('layout.codelist') }}</router-link>
+            <router-link :to="{ name: 'AdminCategoryList' }"
+                         class="nav-link">{{ $t('layout.categories') }}</router-link>
           </li>
         </ul>
 
       </nav>
     </div>
-    <div class="col">
+    <div class="col col-12 col-lg-9">
       <router-view></router-view>
     </div>
   </div>

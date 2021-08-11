@@ -31,6 +31,7 @@ securedAxiosInstance.interceptors.request.use(config => {
 })
 
 securedAxiosInstance.interceptors.response.use(null, error => {
+  console.log('secureAxios error')
   if (error.response
       && error.response.config
       && error.response.status === 401) {
@@ -38,6 +39,7 @@ securedAxiosInstance.interceptors.response.use(null, error => {
       .post('/refresh', {},
             { headers: { 'X-CSRF-TOKEN': store.state.csrf } })
       .then(response => {
+        console.log('hit refresh endpoint')
         plainAxiosInstance.get('/me')
                           .then(meResponse => store.commit('setCurrentUser', {
                             currentUser: meResponse.data,
