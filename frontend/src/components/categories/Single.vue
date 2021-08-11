@@ -4,13 +4,11 @@
     <template v-if="isEditing">
       <form class="border border-2 p-3 mb-5 rounded" @submit.prevent="updateCategory">
         <input class="form-control"
-               v-focus
                @blur="updateCategory"
                @keyup.enter="updateCategory"
                v-model="chCat.name"
                />
         <input class="form-control mt-3"
-               v-focus
                @blur="updateCategory"
                @keyup.enter="updateCategory"
                v-model="chCat.description"
@@ -19,6 +17,7 @@
           <i class="fas fa-save"></i>
           {{ $t('actions.save') }}
         </button>
+        <button class="btn btn-link" @click="unEdit">{{ $t('action.cancel')}}</button>
       </form>
     </template>
     <template v-else>
@@ -72,19 +71,11 @@ export default {
           this.$store.commit('removeSingleCategory', this.category)
           this.$store.commit('addAlert', { type: 'notice', message: this.$t('notice.deleteCategory') })
         })
-        .catch(error => this.$store.commit('addAlert', { type: 'error', message: error }))
+        .catch(error => this.$store.commit('addAlert', { type: 'error', message: error.message }))
      },
      showIfAdmin() {
        return this.$store.getters.isAdmin
      }
-  },
-  directives: {
-    focus: {
-      inserted(el) {
-        console.log('hello', el)
-        el.focus()
-      }
-    }
   }
  }
 </script>

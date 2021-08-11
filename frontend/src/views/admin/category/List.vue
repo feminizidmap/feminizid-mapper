@@ -36,7 +36,9 @@
       </div>
     </div>
     <div class="row mt-5">
-
+      <CategoryForm>
+        <i class="far fa-plus-square"></i><span class="ms-2">{{ $t('actions.new') }}</span>
+      </CategoryForm>
     </div>
   </div>
 </template>
@@ -44,12 +46,11 @@
 <script>
 import { sortBy, uniqBy } from 'lodash'
 import CategorySingle from '@/components/categories/Single'
- //import Single from '@/components/codelist/Single'
- //import Form from '@/components/codelist/Form'
+import CategoryForm from '@/components/categories/Form'
 
  export default {
    name: 'UsersList',
-   components: { CategorySingle },
+   components: { CategorySingle, CategoryForm },
    methods: {
      setError (error, text) {
        const e = (error.response && error.response.data && error.response.data.error) || text
