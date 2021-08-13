@@ -1,5 +1,10 @@
 <template>
-  <div class="container-fluid">
+<div class="container-fluid">
+  <div class="row mb-5">
+      <CategoryForm>
+        <i class="far fa-plus-square"></i><span class="ms-2">{{ $t('actions.new') }}</span>
+      </CategoryForm>
+    </div>
     <div class="row">
       <div class="accordion accordion-flush" id="accordionCodelist">
         <section class="accordion-item"
@@ -22,23 +27,16 @@
                :aria-labelledby="headerId(i)"
                data-bs-parent="#accordionCodelist">
             <div class="accordion-body">
-              <CategorySingle :category="i" />
+              <CategorySingle :category="i" class="mb-5" />
 
-              <div v-for="item in getItems(i)"
-                   :key="item.id">
-                {{item.name}}
-              </div>
-
+              <CategoryItemSingle
+                v-for="item in getItems(i)"
+                :key="item.id"
+                :item="item" />
             </div>
           </div>
-
         </section>
       </div>
-    </div>
-    <div class="row mt-5">
-      <CategoryForm>
-        <i class="far fa-plus-square"></i><span class="ms-2">{{ $t('actions.new') }}</span>
-      </CategoryForm>
     </div>
   </div>
 </template>
@@ -47,10 +45,11 @@
 import { sortBy, uniqBy } from 'lodash'
 import CategorySingle from '@/components/categories/Single'
 import CategoryForm from '@/components/categories/Form'
+import CategoryItemSingle from '@/components/category-items/Single'
 
  export default {
    name: 'UsersList',
-   components: { CategorySingle, CategoryForm },
+   components: { CategorySingle, CategoryForm, CategoryItemSingle },
    methods: {
      setError (error, text) {
        const e = (error.response && error.response.data && error.response.data.error) || text

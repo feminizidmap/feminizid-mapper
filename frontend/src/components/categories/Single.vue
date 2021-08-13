@@ -13,26 +13,33 @@
                @keyup.enter="updateCategory"
                v-model="chCat.description"
                />
-        <button type="submit" class="btn btn-outline-primary mt-3">
+        <div class="mt-3">
+        <button type="submit" class="btn btn-outline-primary">
           <i class="fas fa-save"></i>
-          {{ $t('actions.save') }}
+          <span class="visually-hidden">{{ $t('actions.save') }}</span>
         </button>
-        <button class="btn btn-link" @click="unEdit">{{ $t('action.cancel')}}</button>
+        <button type="button" class="btn btn-outline-secondary ms-2" @click.prevent="unEdit">
+            <i class="fa fa-ban"></i>
+            <span class="visually-hidden">{{ $t('forms.cancel') }}</span></button>
+        </div>
       </form>
     </template>
     <template v-else>
-      <h2 :title="category.slug"
-          @dblclick="edit">{{category.name}}</h2>
-      <p class="lead"
-         @dblclick="edit">{{ category.description }}</p>
+      <h2 :title="category.slug">{{category.name}}</h2>
+      <p class="lead">{{ category.description }}</p>
     </template>
   </div>
-  <div class="col col-lg-6 text-end">
+  <div class="col col-lg-6 text-end" v-if="!isEditing">
+    <button v-if="showIfAdmin"
+            @click="edit"
+            class="btn btn-outline-primary me-2">
+            <i class="fa fa-edit"></i>
+            <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
     <button v-if="showIfAdmin"
             class="btn btn-outline-danger"
             @click="removeCategory">
       <i class="fas fa-trash-alt"></i>
-      {{ $t('actions.delete') }}
+      <span class="visually-hidden">{{ $t('actions.delete') }}</span>
     </button>
   </div>
 </div>
