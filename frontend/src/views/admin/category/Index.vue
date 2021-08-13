@@ -1,5 +1,5 @@
 <template>
-<div class="categories">
+<div class="container-fluid categories">
   <header class="row">
     <h2 class="h1">{{ $t('layout.categories') }}</h2>
     <p class="fs-5">Here is some text about categories.</p>
