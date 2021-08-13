@@ -33,6 +33,10 @@
                 v-for="item in getItems(i)"
                 :key="item.id"
                 :item="item" />
+
+              <CategoryItemForm :category="i" class="mt-5">
+                <i class="far fa-plus-square"></i><span class="ms-2">{{ $t('actions.new') }}</span>
+              </CategoryItemForm>
             </div>
           </div>
         </section>
@@ -46,10 +50,14 @@ import { sortBy, uniqBy } from 'lodash'
 import CategorySingle from '@/components/categories/Single'
 import CategoryForm from '@/components/categories/Form'
 import CategoryItemSingle from '@/components/category-items/Single'
+import CategoryItemForm from '@/components/category-items/Form'
 
  export default {
    name: 'UsersList',
-   components: { CategorySingle, CategoryForm, CategoryItemSingle },
+   components: { CategorySingle,
+                 CategoryForm,
+                 CategoryItemSingle,
+                 CategoryItemForm },
    methods: {
      setError (error, text) {
        const e = (error.response && error.response.data && error.response.data.error) || text
