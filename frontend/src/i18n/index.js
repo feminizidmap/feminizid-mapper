@@ -45,18 +45,18 @@ const messages = {
       }
     },
     models: {
-      codelist: {
-        name: "Option list name",
-        description: "Option list description",
-        lang: "Language of option list",
-        noSuch: "No such list",
+      category: {
+        name: "Category name",
+        description: "Category description",
+        slug: "Category slug",
+        noSuch: "No such category"
       },
-      codelistItem: {
-        identifier: "Code",
-        name: "Option name",
-        description: "Option description",
-        lang: "Language of option",
-        noSuch: "No options",
+      categoryItem: {
+        identifier: "Category item",
+        name: "Item name",
+        slug: "Item slug",
+        description: "Item description",
+        noSuch: "No Items",
       }
     },
     prompts: {
@@ -64,8 +64,12 @@ const messages = {
       signup: "Please sign up",
       forgotpassword: "Forgot your password?",
       resetpassword: "Choose a new password",
-      newOption: "Add a new option to this list",
-      newCodelist: "Add a new option list"
+      newCategory: "Add a new category",
+      newCategoryItem: "Add a new item to this category"
+    },
+    actions: {
+      new: "Add",
+      save: "Save"
     },
     notice: {
       singedOut: "Signed out, see you!",
@@ -74,12 +78,7 @@ const messages = {
     },
     errors: {
       general: "Something went wrong",
-      cannotSignout: "Cannot sign out",
-      cannotCreateCodelist: "Cannot create option list",
-      cannotDeleteCodelist: "Cannot delete option list",
-      cannotUpdateCodelist: "Cannot update option list",
-      cannotDeleteCodelistItem: "Cannot delete option",
-      cannotUpdateCodelistItem: "Cannot update option",
+      cannotSignout: "Cannot sign out"
     }
   },
   de: {
@@ -126,18 +125,18 @@ const messages = {
       }
     },
     models: {
-      codelist: {
-        name: "Name der Optionsliste",
-        description: "Beschreibung der Optionsliste",
-        lang: "Sprache der Optionsliste",
-        noSuch: "Keine solche Liste"
+      category: {
+        name: "Name der Kategorie",
+        description: "Beschreibung der Kategorie",
+        slug: "Kategorie-Slug",
+        noSuch: "Keine solche Kategorie"
       },
-      codelistItem: {
-        identifier: "Code",
-        name: "Optionsname",
-        description: "Optionsbeschreibung",
-        lang: "Sprache der Option",
-        noSuch: "Keine Optionen",
+      categoryItem: {
+        identifier: "Kategorie-Element",
+        name: "Elementname",
+        slug: "Element-Slug",
+        description: "Elementsbeschreibung",
+        noSuch: "Keine Elemente",
       }
     },
     prompts: {
@@ -145,8 +144,12 @@ const messages = {
       signup: "Bitte registriere dich",
       forgotpassword: "Password vergessen?",
       resetpassword: "Wähle ein neues Password",
-      newOption: "Füge eine neue Option zu dieser Liste hinzu",
-      newCodelist: "Füge eine neue Optionsliste hinzu"
+      newCategory: "Füge eine neue Kategorie hinzu",
+      newCategoryItem: "Füge eine neues Element zur Kategorie hinzu"
+    },
+    actions: {
+      new: "Hinzufügen",
+      save: "Speichern"
     },
     notice: {
       singedOut: "Abgemeldet, bis bald!",
@@ -155,11 +158,7 @@ const messages = {
     },
     errors: {
       general: "Etwas is schief gelaufen",
-      cannotSignout: "Abmelden nicht möglich",
-      cannotDeleteCodelist: "Optionsliste konnte nicht gelöscht werden",
-      cannotUpdateCodelist: "Optionsliste konnte nicht bearbeitet werden",
-      cannotDeleteCodelistItem: "Option konnte nicht gelöscht werden",
-      cannotUpdateCodelistItem: "Option konnte nicht bearbeitet werden"
+      cannotSignout: "Abmelden nicht möglich"
     }
   }
 }

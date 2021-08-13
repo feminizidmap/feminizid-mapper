@@ -29,10 +29,16 @@
             <div class="accordion-body">
               <CategorySingle :category="i" class="mb-5" />
 
-              <CategoryItemSingle
+              <template v-if="getItems(i).length > 0">
+                <CategoryItemSingle
                 v-for="item in getItems(i)"
                 :key="item.id"
                 :item="item" />
+              </template>
+              <div v-else class="alert alert-info">
+                {{ $t('models.categoryItem.noSuch')}}
+              </div>
+
 
               <CategoryItemForm :category="i" class="mt-5">
                 <i class="far fa-plus-square"></i><span class="ms-2">{{ $t('actions.new') }}</span>
