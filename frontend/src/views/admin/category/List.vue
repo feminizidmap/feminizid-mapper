@@ -1,9 +1,17 @@
 <template>
 <div class="container-fluid">
-  <div class="row mb-5">
+  <div class="d-flex  justify-content-between mb-5">
       <CategoryForm>
         <i class="far fa-plus-square"></i><span class="ms-2">{{ $t('actions.new') }}</span>
       </CategoryForm>
+      <div>
+        <button disabled class="btn btn-outline-secondary">
+          <i class="fas fa-download"></i>
+          {{ $t('actions.export') }}</button>
+        <button disabled class="btn btn-outline-secondary">
+          <i class="fas fa-upload"></i>
+          {{ $t('actions.import') }}</button>
+      </div>
     </div>
     <div class="row">
       <div class="accordion accordion-flush" id="accordionCodelist">

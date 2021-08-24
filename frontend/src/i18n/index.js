@@ -29,7 +29,10 @@ const messages = {
     layout: {
       totop: "to top",
       cases: "Cases",
-      categories: "Categories",
+      categories: {
+        title: "Categories",
+        blurb: "Here is a blurb"
+      },
       settings: "Settings",
       schema: "Data schema",
       userManagement: "User management",
@@ -52,11 +55,11 @@ const messages = {
         noSuch: "No such category"
       },
       categoryItem: {
-        identifier: "Category item",
-        name: "Item name",
-        slug: "Item slug",
-        description: "Item description",
-        noSuch: "No Items",
+        identifier: "Category option",
+        name: "Option name",
+        slug: "Option slug",
+        description: "Option description",
+        noSuch: "No Item",
       }
     },
     prompts: {
@@ -109,7 +112,10 @@ const messages = {
     layout: {
       totop: "nach oben",
       cases: "Fälle",
-      categories: "Kategorien",
+      categories: {
+        title: "Kategorien",
+        blurb: "Kategorien sind Informationen mit vorher festgelegten Optionen."
+      },
       settings: "Einstellungen",
       userManagement: "Usermanagement",
       caselist: "Fälle",
@@ -132,11 +138,11 @@ const messages = {
         noSuch: "Keine solche Kategorie"
       },
       categoryItem: {
-        identifier: "Kategorie-Element",
-        name: "Elementname",
-        slug: "Element-Slug",
-        description: "Elementsbeschreibung",
-        noSuch: "Keine Elemente",
+        identifier: "Kategorie-Option",
+        name: "Optionsname",
+        slug: "Option-Slug",
+        description: "Optionsbeschreibung",
+        noSuch: "Keine Optionen",
       }
     },
     prompts: {

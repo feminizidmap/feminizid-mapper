@@ -20,7 +20,7 @@
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'AdminCategoryList' }"
-                         class="nav-link">{{ $t('layout.categories') }}</router-link>
+                         class="nav-link">{{ $t('layout.categories.title') }}</router-link>
           </li>
         </ul>
 
