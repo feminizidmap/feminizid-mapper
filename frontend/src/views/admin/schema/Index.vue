@@ -60,10 +60,10 @@ export default {
       schema.push(nE)
       this.$store.commit('setSchema', schema)
     },
-    saveNewField(all) {
+    saveNewField(obj) {
       let schema = this.$store.state.schema
-      let index = schema.indexOf(all.e)
-      schema[index].attributes.push(all.field)
+      let index = schema.indexOf(obj.e)
+      schema[index].attributes.push(obj.field)
       this.$store.commit('setSchema', schema)
     },
     saveRmField(item) {

@@ -36,7 +36,7 @@ const messages = {
       settings: "Settings",
       schema: {
         title: "Data schema",
-        blurb: "The schema defines the structure of the data, that means the possible fields on a single record.<br>Think of it as the columns in a spreadsheet.",
+        blurb: "The schema defines the structure of the data, that means the possible fields on a single record. Think of it as the columns in a spreadsheet.",
         record: {
           title: "Record",
           blurb: "Record is a single datum, one entry in your database. Everything starts here."
@@ -75,6 +75,12 @@ const messages = {
       entity: {
         name: "Entity name",
         slug: "Entity slug"
+      },
+      field: {
+        name: "Field name",
+        key: "Field slug",
+        feature: "Extra feature",
+        none: "- None - "
       }
     },
     prompts: {
@@ -84,7 +90,9 @@ const messages = {
       resetpassword: "Choose a new password",
       newCategory: "Add a new category",
       newCategoryItem: "Add a new item to this category",
-      newEntity: "Add a new entity"
+      newEntity: "Add a new entity",
+      newField: "Add a new field",
+      addCategory: "Add a category"
     },
     actions: {
       new: "Add",
@@ -138,7 +146,7 @@ const messages = {
       admin: "Admin",
       schema: {
         title: "Datenschema",
-        blurb: "Das Schema beschreibt die Datenstruktur, das heißt die möglichen Felder und Eigenschaften eines einzigen Eintrags. <br>Stell sie dir wie die Spalten einer Tabelle vor.",
+        blurb: "Das Schema beschreibt die Datenstruktur, das heißt die möglichen Felder und Eigenschaften eines einzigen Eintrags. Stell sie dir wie die Spalten einer Tabelle vor.",
         record: {
           title: "Akte",
           blurb: "Eine Akte ist ein alleinstehendes Datum, ein Eintrag in der Datenbank. Alles geht von hier aus."
@@ -174,6 +182,12 @@ const messages = {
       entity: {
         name: "Name der Einheit",
         slug: "Slug für die Einheit"
+      },
+      field: {
+        name: "Feldname",
+        key: "Feld-Slug",
+        feature: "Extra Feature",
+        none: "- Keins - "
       }
     },
     prompts: {
@@ -183,7 +197,9 @@ const messages = {
       resetpassword: "Wähle ein neues Password",
       newCategory: "Füge eine neue Kategorie hinzu",
       newCategoryItem: "Füge eine neue Option zur Kategorie hinzu",
-      newEntity: "Füge eine neue Einheit hinzu"
+      newEntity: "Füge eine neue Einheit hinzu",
+      newField: "Füge ein weiteres Feld hinzu",
+      addCategory: "Füge eine Kategorie hinzu"
     },
     actions: {
       new: "Hinzufügen",

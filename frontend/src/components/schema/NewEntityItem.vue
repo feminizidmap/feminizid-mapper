@@ -40,6 +40,8 @@
   </div>
 </template>
 <script>
+  import {slugify} from '@/util'
+
 export default {
   name: 'NewEntityItem',
   data() {
@@ -48,10 +50,6 @@ export default {
     }
   },
   methods: {
-    updateEntityName(ev) {
-      this.newEntity.name = ev.target.value
-      this.newEntity.slug = this.newEntity.name.toLowerCase().replaceAll(" ", "-")
-    },
     emitNewEntity() {
       this.$emit('newEntity', this.newEntity)
       window.bootstrap.Modal.getInstance(document.querySelector(`#${this.modalId}`)).hide()
@@ -61,12 +59,7 @@ export default {
   watch: {
     'newEntity.name': {
       handler(ev) {
-        this.newEntity.slug = ev.toLowerCase()
-          .replaceAll(" ", "-")
-          .replaceAll("ä", "ae")
-          .replaceAll("ö", "oe")
-          .replaceAll("ü", "ue")
-          .replaceAll("ß", "ss")
+        this.newEntity.slug = slugify(ev)
       }
     }
   },

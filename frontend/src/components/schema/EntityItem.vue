@@ -58,50 +58,25 @@
           Abbrechen</button>
       </form>
 
-      <button type="button"
-              class="btn btn-primary"
-              @click.prevent="toggleFieldForm"
-              v-if="!showFieldForm">
-        <i class="far fa-plus-square"></i>
-        Freifeld hinzufügen</button>
 
-      <form v-if="showFieldForm"
-            class="border border-2 p-4 mt-5 mb-3"
-            @submit.prevent="emitNewField">
-        <label>
-          <span>Name</span>
-          <input type="text" class="form-control" placeholder="Entity name"
-                 @keyup="updateNewField"
-                 :value="newField.name">
-        </label>
-        <label>
-          <span>Slug</span>
-          <input type="text" class="form-control" readonly
-                 :value="newField.slug">
-        </label>
-        <button type="submit"
-                class="btn btn-outline-primary">
-          <i class="far fa-save"></i>
-          Speichern</button>
-        <button type="button mt-5"
-                class="btn btn-link link-danger"
-                @click.prevent="toggleFieldForm">
-          <i class="far fa-times-circle"></i>
-          Abbrechen</button>
-      </form>
+      <NewFieldForm @addedNewField="emitNewField">
+        <i class="far fa-plus-square"></i>
+        Freifeld hinzufügen
+      </NewFieldForm>
     </div>
   </div>
 </div>
 </template>
 <script>
+  import NewFieldForm from '@/components/schema/NewFieldForm';
+
 export default {
   name: 'EntityItem',
+  components: { NewFieldForm },
   props: { entity: Object },
   data() {
     return {
       showAttributeForm: false,
-      showFieldForm: false,
-      newField: {},
       newAttribute: {}
     }
   },
@@ -112,17 +87,9 @@ export default {
         this.newAttribute = {}
       }
     },
-    toggleFieldForm() {
-      this.showFieldForm = !this.showFieldForm
-      if (this.showFieldForm === false) {
-        this.newField = {}
-      }
-    },
-    emitNewField() {
-      let obj = { e: this.entity, field: this.newField }
+    emitNewField(field) {
+      let obj = { e: this.entity, field }
       this.$emit('newField', obj)
-      this.newField = {}
-      this.showFieldForm = false
     },
     emitNewAttribute() {
       let obj = { e: this.entity, field: { slug: this.newAttribute,

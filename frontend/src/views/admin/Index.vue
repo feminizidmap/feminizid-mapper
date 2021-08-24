@@ -16,7 +16,7 @@
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'AdminSchema' }"
-                         class="nav-link">{{ $t('layout.schema') }}</router-link>
+                         class="nav-link">{{ $t('layout.schema.title') }}</router-link>
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'AdminCategoryList' }"
@@ -34,6 +34,13 @@
 </template>
 <script>
 export default {
-  name: 'AdminIndexView'
+  name: 'AdminIndexView',
+  created() {
+    this.$http.secured.get('/system_settings')
+      .then(resp => {
+        this.$store.commit('setSettings', resp.data)
+      })
+      .catch(() => this.$store.commit('addAlert', { type: 'danger', message: 'Could not fetch settings'}))
+  },
 }
 </script>

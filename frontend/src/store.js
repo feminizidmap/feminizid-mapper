@@ -14,7 +14,8 @@ export const store = createStore({
       cases: [],
       newCase: {},
       newCaseHistory: [],
-      schema: []
+      schema: [],
+      settings: []
     }
   },
   mutations: {
@@ -101,6 +102,9 @@ export const store = createStore({
     },
     setSchema(state, value) {
       state.schema = value
+    },
+    setSettings(state, value) {
+      state.settings = value
     }
   },
   getters: {
@@ -129,6 +133,9 @@ export const store = createStore({
     },
     isNewCaseEmpty(state) {
       return Object.entries(state.newCase).length === 0
+    },
+    getSetting: (state) => (setting) => {
+      return state.settings?.find(s => s.key === setting)
     }
   },
   plugins: [createPersistedState()]
