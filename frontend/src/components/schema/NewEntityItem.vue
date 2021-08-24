@@ -1,61 +1,81 @@
 <template>
-<div class="new-entity-item">
-  <button v-if="!showForm"
-          type="btn"
-          class="btn btn-primary"
-          @click.prevent="toggleForm">
-    <i class="far fa-plus-square"></i>
-    Hinzufügen</button>
+  <div class="entity-form">
+    <button type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal" :data-bs-target="'#' + modalId">
+      <slot></slot></button>
 
-  <div v-if="showForm" class="border border-2 p-4">
-    <form @submit.prevent="emitNewEntity" class="mb-4">
-      <label>
-        <span>Entity name</span>
-        <input type="text" class="form-control" placeholder="Entity name"
-               @keyup="updateEntityName" :value="newEntity.name">
-      </label>
-      <label>
-        <span>Slug</span>
-        <input type="text" class="form-control" readonly v-model="newEntity.slug">
-      </label>
-      <button type="submit"
-              class="btn btn-outline-primary">
-        <i class="far fa-save"></i>
-        Speichern</button>
+    <div class="modal fade"
+         :id="modalId" tabindex="-1"
+         :aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <form @submit.prevent="sendCategory" class="modal-content">
+          <div class="modal-header">
+            <h4 :id="modalLabel" class="modal-title">
+              {{ $t('prompts.newEntity') }}</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    :aria-label="$t('forms.close')"></button></div>
 
-    </form>
-    <button type="button mt-5"
-            class="btn btn-link link-danger"
-            @click.prevent="toggleForm">
-      <i class="far fa-times-circle"></i>
-      Abbrechen</button>
+          <div class="modal-body">
+            <div class="form-group mb-4">
+              <label>{{ $t('models.entity.name')}}
+                <input class="form-control" required autocomplete="off"
+                       v-model="newEntity.name" /></label></div>
+            <div class="form-group mb-4">
+              <label>{{ $t('models.entity.slug')}}
+                <input class="form-control" required autocomplete="off"
+                       v-model="newEntity.slug" readonly /></label></div>
+          </div>
+
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="submit" @click.prevent="emitNewEntity">
+              <i class="fa fa-save me-2"></i><span>{{ $t('forms.save') }}</span></button>
+            <button class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                    :aria-label="$t('forms.cancel')" type="button">
+              <i class="fa fa-ban me-2"></i><span>{{ $t('forms.cancel') }}</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
 </template>
 <script>
 export default {
   name: 'NewEntityItem',
   data() {
     return {
-      showForm: false,
       newEntity: {}
     }
   },
   methods: {
-    toggleForm() {
-      this.showForm = !this.showForm
-      if (this.showForm === false) {
-        this.newEntity = {}
-      }
-    },
     updateEntityName(ev) {
       this.newEntity.name = ev.target.value
       this.newEntity.slug = this.newEntity.name.toLowerCase().replaceAll(" ", "-")
     },
     emitNewEntity() {
       this.$emit('newEntity', this.newEntity)
-      this.showForm = false
+      window.bootstrap.Modal.getInstance(document.querySelector(`#${this.modalId}`)).hide()
       this.newEntity = {}
+    }
+  },
+  watch: {
+    'newEntity.name': {
+      handler(ev) {
+        this.newEntity.slug = ev.toLowerCase()
+          .replaceAll(" ", "-")
+          .replaceAll("ä", "ae")
+          .replaceAll("ö", "oe")
+          .replaceAll("ü", "ue")
+          .replaceAll("ß", "ss")
+      }
+    }
+  },
+  computed: {
+    modalId() {
+      return 'newEntityFormId'
+    },
+    modalLabel() {
+      return 'newEntityForm'
     }
   }
 }

@@ -3,11 +3,13 @@
   <div class="d-flex justify-content-between">
     <p class="fs-4">{{ entity.name }}</p>
 
-    <button type="button"
-            class="btn btn-outline-danger"
-            @click.prevent="emitRmEntity">
-      <i class="far fa-trash-alt"></i>
-      Entfernen</button>
+    <button @click.prevent="" class="btn btn-outline-primary me-2">
+      <i class="fa fa-edit"></i>
+      <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
+    <button @click.prevent="emitRmEntity" class="btn btn-outline-danger">
+      <i class="fa fa-trash-alt"></i>
+      <span class="visually-hidden">{{ $t('forms.delete') }}</span>
+    </button>
   </div>
   <div>
     <ul v-if="entity.attributes"

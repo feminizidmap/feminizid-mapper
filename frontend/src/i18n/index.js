@@ -34,7 +34,18 @@ const messages = {
         blurb: "Here is a blurb"
       },
       settings: "Settings",
-      schema: "Data schema",
+      schema: {
+        title: "Data schema",
+        blurb: "The schema defines the structure of the data, that means the possible fields on a single record.<br>Think of it as the columns in a spreadsheet.",
+        record: {
+          title: "Record",
+          blurb: "Record is a single datum, one entry in your database. Everything starts here."
+        },
+        entity: {
+          title: "Entity",
+          blurb: "Entities group logical information together. They describe one 'thing'."
+        }
+      },
       userManagement: "User management",
       caselist: "Cases",
       adminArea: "Admin area",
@@ -60,6 +71,10 @@ const messages = {
         slug: "Option slug",
         description: "Option description",
         noSuch: "No Item",
+      },
+      entity: {
+        name: "Entity name",
+        slug: "Entity slug"
       }
     },
     prompts: {
@@ -68,7 +83,8 @@ const messages = {
       forgotpassword: "Forgot your password?",
       resetpassword: "Choose a new password",
       newCategory: "Add a new category",
-      newCategoryItem: "Add a new item to this category"
+      newCategoryItem: "Add a new item to this category",
+      newEntity: "Add a new entity"
     },
     actions: {
       new: "Add",
@@ -120,7 +136,18 @@ const messages = {
       userManagement: "Usermanagement",
       caselist: "Fälle",
       admin: "Admin",
-      schema: "Datenschema",
+      schema: {
+        title: "Datenschema",
+        blurb: "Das Schema beschreibt die Datenstruktur, das heißt die möglichen Felder und Eigenschaften eines einzigen Eintrags. <br>Stell sie dir wie die Spalten einer Tabelle vor.",
+        record: {
+          title: "Akte",
+          blurb: "Eine Akte ist ein alleinstehendes Datum, ein Eintrag in der Datenbank. Alles geht von hier aus."
+        },
+        entity: {
+          title: "Einheit",
+          blurb: "Einheiten gruppieren logische Informationen zusammen. Sie beschreiben eine 'Sache'."
+        }
+      },
       overview: "Übersicht",
       incomplete: "Unvollständig"
     },
@@ -143,6 +170,10 @@ const messages = {
         slug: "Option-Slug",
         description: "Optionsbeschreibung",
         noSuch: "Keine Optionen",
+      },
+      entity: {
+        name: "Name der Einheit",
+        slug: "Slug für die Einheit"
       }
     },
     prompts: {
@@ -151,7 +182,8 @@ const messages = {
       forgotpassword: "Password vergessen?",
       resetpassword: "Wähle ein neues Password",
       newCategory: "Füge eine neue Kategorie hinzu",
-      newCategoryItem: "Füge eine neues Element zur Kategorie hinzu"
+      newCategoryItem: "Füge eine neue Option zur Kategorie hinzu",
+      newEntity: "Füge eine neue Einheit hinzu"
     },
     actions: {
       new: "Hinzufügen",

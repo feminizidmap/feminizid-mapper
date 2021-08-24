@@ -1,28 +1,34 @@
 <template>
 <div class="container-fluid">
   <div class="row">
-    <h2 class="h1">{{ $t('layout.schema') }}</h2>
-    <p class="fs-5">The schema defines the structure of the data, that means the possible fields on a single record.<br>Think of it as the columns in a spreadsheet.</p>
+    <h2 class="h1">{{ $t('layout.schema.title') }}</h2>
+    <p class="fs-5" v-html="$t('layout.schema.blurb')"></p>
     <hr>
   </div>
-  <div class="row mt-5">
-    <div>
-      <h3 class="h2">Record</h3>
-      <p>Record is a single datum, one entry in your database. Everything starts here.</p>
-      <div v-if="$store.state.schema !== {}">
-        <button type="button" class="btn btn-primary"
-                @click="persistSchema">SAVE</button>
+  <div class="row mt-3">
+    <div v-if="$store.state.schema !== {}" class="text-end">
+      Something something safe state
+        <button @click="persistSchema" class="btn btn-outline-primary me-2">
+            <i class="fa fa-save"></i>
+            <span class="visually-hidden">{{ $t('forms.save') }}</span></button>
     </div>
+
+    <div>
+      <h3 class="h2">{{ $t('layout.schema.record.title') }}</h3>
+      <p>{{ $t('layout.schema.record.blurb') }}</p>
     </div>
     <div class="mt-4">
-      <h4>Entities</h4>
-      <p>Entities group logical information together. Usually the entities are Victim, Perpetrator, Crime but you can have more if you want</p>
+      <h4>{{ $t('layout.schema.entity.title') }}</h4>
+      <p>{{ $t('layout.schema.entity.blurb') }}</p>
       <div>
-        <NewEntityItem @newEntity="saveNewEntity"></NewEntityItem>
+        <NewEntityItem @newEntity="saveNewEntity">
+          <i class="far fa-plus-square"></i>
+          Hinzufügen
+        </NewEntityItem>
         <ul v-if="$store.state.schema.length > 0"
-          class="mt-4 ms-3 border-start border-4">
+          class="mt-4 ms-3 ps-0 list-unstyled">
 
-          <li class="mt-4"
+          <li class="border-start border-3 mb-4 ps-3"
               v-for="(entity, i) in $store.state.schema"
               :key="i">
             <EntityItem :entity="entity"
