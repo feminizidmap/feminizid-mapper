@@ -80,7 +80,11 @@ const messages = {
         name: "Field name",
         key: "Field slug",
         feature: "Extra feature",
-        none: "- None - "
+        none: "- None - ",
+        noSuch: "No fields"
+      },
+      attribute: {
+        title: "Kategorie"
       }
     },
     prompts: {
@@ -187,7 +191,8 @@ const messages = {
         name: "Feldname",
         key: "Feld-Slug",
         feature: "Extra Feature",
-        none: "- Keins - "
+        none: "- Keins - ",
+        noSuch: "Keine Felder"
       }
     },
     prompts: {

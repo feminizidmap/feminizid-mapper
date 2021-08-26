@@ -122,6 +122,9 @@ export const store = createStore({
       //return item.length > 0 ? item[0] : null
       return state.cases.find(fcase => fcase.id == id)
     },
+    getCategoryById: (state) => (catID) => {
+      return state.categories.find(c => c.id === catID)
+    },
     getItemsForCategory: (state) => (category) => {
       return state.category_items.filter(i => i.category_id === category.id)
     },

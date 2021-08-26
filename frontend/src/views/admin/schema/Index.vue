@@ -32,10 +32,11 @@
               v-for="(entity, i) in $store.state.schema"
               :key="i">
             <EntityItem :entity="entity"
+                        :ident="i"
                         @newField="saveNewField"
-                        @newAttribute="saveNewField"
                         @rmField="saveRmField"
                         @rmEntity="saveRmEntity"
+                        @updateEntity="updateEntity "
                         ></EntityItem>
           </li>
         </ul>
@@ -52,8 +53,16 @@ export default {
   name: 'Schema',
   components: { EntityItem, NewEntityItem },
   methods: {
+    updateEntity(e) {
+      let schema = this.$store.state.schema
+      let index = schema.indexOf(e.old)
+      let attrs = schema[index].attributes
+      schema[index] = e.mew
+      schema[index].attributes = attrs
+      this.$store.commit('setSchema', schema)
+    },
     saveNewEntity(nE) {
-      let schema = this.$store.state.schema;
+      let schema = this.$store.state.schema
       if (!nE.attributes) {
         nE.attributes = []
       }

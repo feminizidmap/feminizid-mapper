@@ -50,6 +50,7 @@
   import {slugify} from '@/util'
 export default {
   name: 'NewFieldForm',
+  props: { ident: Number },
   data() {
     return {
       newField: {}
@@ -71,10 +72,10 @@ export default {
   },
   computed: {
     modalId() {
-      return 'newFieldFormId'
+      return `newFieldFormId-${this.ident}`
     },
     modalLabel() {
-      return 'newFieldForm'
+      return `newFieldForm-${this.ident}`
     },
     fieldFeatures() {
       return JSON.parse(this.$store.getters.getSetting('settings_features').value)
