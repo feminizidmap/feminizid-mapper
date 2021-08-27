@@ -27,7 +27,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownAdmin">
               <li><router-link class="dropdown-item"
-                               :to="{name: 'AdminSystem'}">{{ $t('admin.system') }}</router-link></li>
+                               :to="{name: 'AdminSystem'}">{{ $t('admin.system.title') }}</router-link></li>
               <li><router-link :to="{ name: 'AdminUsersList' }" class="dropdown-item">{{ $t('admin.users.list') }}</router-link>
               </li>
               <li><router-link :to="{ name: 'AdminSchema' }" class="dropdown-item">{{ $t('layout.schema.title') }}</router-link>

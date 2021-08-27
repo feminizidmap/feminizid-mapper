@@ -54,7 +54,10 @@ const messages = {
       incomplete: "Incomplete"
     },
     admin: {
-      system: 'System settings',
+      system: {
+        title: 'System settings',
+        blurb: 'Here is an overview of all system wide settings'
+      },
       users: {
         list: 'User management'
       }
@@ -172,7 +175,10 @@ const messages = {
       incomplete: "Unvollständig"
     },
     admin: {
-      system: 'Systemeinstellungen',
+      system: {
+        title: 'Systemeinstellungen',
+        blurb: 'Hier ist die Übersicht über systemweite Einstellungen'
+      },
       users: {
         list: 'NutzerInnenverwaltung'
       }

@@ -9,7 +9,7 @@
       <nav class="mb-5">
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <router-link :to="{ name: 'AdminSystem' }" class="nav-link">{{ $t('admin.system')}}</router-link>
+            <router-link :to="{ name: 'AdminSystem' }" class="nav-link">{{ $t('admin.system.title')}}</router-link>
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'AdminUsersList' }" class="nav-link">{{ $t('admin.users.list') }}</router-link>
