@@ -62,6 +62,7 @@ const messages = {
     models: {
       category: {
         name: "Category name",
+        single: "Category",
         description: "Category description",
         slug: "Category slug",
         noSuch: "No such category"
@@ -79,6 +80,7 @@ const messages = {
       },
       field: {
         name: "Field name",
+        single: "Field",
         key: "Field slug",
         feature: "Extra feature",
         none: "- None - ",
@@ -97,16 +99,20 @@ const messages = {
       newCategoryItem: "Add a new item to this category",
       newEntity: "Add a new entity",
       newField: "Add a new field",
-      addCategory: "Add a category"
+      addCategory: "Add a category",
+      newFieldOrAttribute: "Add a field or category"
     },
     actions: {
       new: "Add",
-      save: "Save"
+      save: "Save",
+      loading: "Loading..."
     },
     notice: {
       singedOut: "Signed out, see you!",
       deleteCodelist: "Successfully deleted option list",
       deleteCodelistItem: "Successfully deleted option",
+      schemaSet: "Schema successfully saved",
+      schemaNotSet: "Schema could not be saved"
     },
     errors: {
       general: "Something went wrong",
@@ -174,6 +180,7 @@ const messages = {
     models: {
       category: {
         name: "Name der Kategorie",
+        single: "Kategorie",
         description: "Beschreibung der Kategorie",
         slug: "Kategorie-Slug",
         noSuch: "Keine solche Kategorie"
@@ -191,6 +198,7 @@ const messages = {
       },
       field: {
         name: "Feldname",
+        single: "Feld",
         key: "Feld-Slug",
         feature: "Extra Feature",
         none: "- Keins - ",
@@ -206,11 +214,13 @@ const messages = {
       newCategoryItem: "Füge eine neue Option zur Kategorie hinzu",
       newEntity: "Füge eine neue Einheit hinzu",
       newField: "Füge ein weiteres Feld hinzu",
-      addCategory: "Füge eine Kategorie hinzu"
+      addCategory: "Füge eine Kategorie hinzu",
+      newFieldOrAttribute: "Füge ein Feld oder eine Kategorie hinzu"
     },
     actions: {
       new: "Hinzufügen",
-      save: "Speichern"
+      save: "Speichern",
+      loading: "Laden..."
     },
     notice: {
       singedOut: "Abgemeldet, bis bald!",

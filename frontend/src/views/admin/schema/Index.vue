@@ -11,12 +11,12 @@
       <h3>{{ $t('layout.schema.entity.title') }}</h3>
       <p>{{ $t('layout.schema.entity.blurb') }}</p>
       <div>
-        <NewEntityItem @newEntity="saveNewEntity">
+        <NewEntityItem @newEntity="saveNewEntity" v-if="showIfAdmin">
           <i class="far fa-plus-square"></i>
-          Hinzufügen
+          {{ $t('actions.new') }}
         </NewEntityItem>
         <ul v-if="$store.state.schema.length > 0"
-          class="mt-4 ms-3 ps-0 list-unstyled">
+          class="mt-4 ms-1 ps-0 list-unstyled">
           <li class="border-start border-3 mb-4 ps-3"
               v-for="(entity, i) in $store.state.schema"
               :key="i">
@@ -139,6 +139,11 @@ export default {
         this.setLoadingFlag()
         this.setActiveSchema()
       }
+    }
+  },
+  computed: {
+    showIfAdmin() {
+      return this.$store.getters.isAdmin
     }
   }
 }

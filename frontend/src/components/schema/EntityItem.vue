@@ -38,7 +38,7 @@
   <div>
     <ul v-if="entity.attributes.length"
         class="list-unstyled">
-      <li class="ms-3 mb-3 ps-3"
+      <li class="ms-2 mb-3 ps-3"
         v-for="(attr, i) in entity.attributes"
         :key="i">
         <FieldItem :field="attr"
@@ -49,16 +49,15 @@
       {{ $t('models.field.noSuch')}}
     </div>
 
-    <div class="mt-3">
-      <NewAttributeForm @addedNewAttribute="emitNewAttribute" :ident="ident">
+    <div class="mt-3" v-if="showIfAdmin">
+      <NewFormModal
+        @addedNewAttribute="emitNewAttribute"
+        @addedNewField="emitNewField"
+        :ident="ident"
+        >
         <i class="far fa-plus-square"></i>
-        Attribute hinzufügen
-      </NewAttributeForm>
-
-      <NewFieldForm @addedNewField="emitNewField" :ident="ident">
-        <i class="far fa-plus-square"></i>
-        Feld hinzufügen
-      </NewFieldForm>
+        {{ $t('actions.new') }}
+      </NewFormModal>
     </div>
   </div>
 </div>
@@ -66,13 +65,11 @@
 <script>
   import { slugify } from '@/util'
 import FieldItem from '@/components/schema/FieldItem'
-import NewFieldForm from '@/components/schema/NewFieldForm'
-import NewAttributeForm from '@/components/schema/NewAttributeForm'
+import NewFormModal from '@/components/schema/NewFieldOrAttribute'
 
 export default {
   name: 'EntityItem',
-  components: { NewFieldForm,
-                NewAttributeForm,
+  components: { NewFormModal,
                 FieldItem },
   props: { entity: Object, ident: Number },
   data() {
