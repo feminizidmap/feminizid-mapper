@@ -28,6 +28,7 @@ const messages = {
     },
     layout: {
       totop: "to top",
+      changes2Save: "There are local changes that need to be saved",
       cases: "Cases",
       categories: {
         title: "Categories",
@@ -139,6 +140,7 @@ const messages = {
     },
     layout: {
       totop: "nach oben",
+      changes2Save: "There are local changes that need to be saved",
       cases: "Fälle",
       categories: {
         title: "Kategorien",
@@ -214,6 +216,8 @@ const messages = {
       singedOut: "Abgemeldet, bis bald!",
       deleteCodelist: "Optionsliste erfolgreich gelöscht",
       deleteCodelistItem: "Option erfolgreich gelöscht",
+      schemaSet: "Datenschema erfolgreich gespeichert",
+      schemaNotSet: "Datenschema konnte nicht gespeichert werden"
     },
     errors: {
       general: "Etwas is schief gelaufen",

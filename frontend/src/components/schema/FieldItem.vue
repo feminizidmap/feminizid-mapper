@@ -1,5 +1,5 @@
 <template>
-<div class="field-item row align-items-center p-2  border-start border-3">
+<div class="field-item row align-items-center py-2 ps-2  border-start border-3">
   <div class="col col-lg-10 row align-items-center">
     <div class="col col-6 col-lg-2 m-0">
       <p class="text-muted m-0">

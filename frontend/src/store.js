@@ -10,11 +10,11 @@ export const store = createStore({
       csrf: null,
       categories: [],
       category_items: [],
-      systemSettings: [],
       cases: [],
       newCase: {},
       newCaseHistory: [],
       schema: [],
+      schemaHasChanged: false,
       settings: []
     }
   },
@@ -105,6 +105,9 @@ export const store = createStore({
     },
     setSettings(state, value) {
       state.settings = value
+    },
+    setSchemaHasChanged(state, value) {
+      state.schemaHasChanged = value
     }
   },
   getters: {
@@ -139,6 +142,9 @@ export const store = createStore({
     },
     getSetting: (state) => (setting) => {
       return state.settings?.find(s => s.key === setting)
+    },
+    hasStoreLocalChange(state) {
+      return Object.keys(state.schema).length !== 0
     }
   },
   plugins: [createPersistedState()]

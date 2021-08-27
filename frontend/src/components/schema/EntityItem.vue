@@ -20,7 +20,7 @@
   </div>
   <div v-else class="d-flex p-2 justify-content-between">
     <h5 class="fs-4 fw-bold">{{ entity.name }}</h5>
-    <div>
+    <div class="me-lg-3">
       <button v-if="showIfAdmin()"
               @click.prevent="edit"
               class="btn btn-outline-primary me-2">
@@ -45,7 +45,7 @@
                    @rmField="emitRmField"></FieldItem>
       </li>
     </ul>
-    <div v-else class="alert alert-info">
+    <div v-else class="alert alert-info ms-2 me-4 mt-3">
       {{ $t('models.field.noSuch')}}
     </div>
 
