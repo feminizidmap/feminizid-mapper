@@ -3,9 +3,8 @@ import AdminUsersList from '@/views/admin/users/List'
 import AdminUsersEdit from '@/views/admin/users/Edit'
 import AdminUsersChangesList from '@/views/admin/users/changes/List'
 
-import CodelistIndex from '@/views/admin/codelist/Index'
-import CodelistList from '@/views/admin/codelist/List'
-import CodelistSingle from '@/views/admin/codelist/Single'
+import CategoryIndex from '@/views/admin/category/Index'
+import CategoryList from '@/views/admin/category/List'
 
 import AdminSchema from '@/views/admin/schema/Index'
 
@@ -36,19 +35,14 @@ export default {
       component: AdminUsersChangesList
     },
     {
-      path: 'codelists',
-      name: 'AdminCodelist',
-      component: CodelistIndex,
+      path: 'categories',
+      name: 'AdminCategories',
+      component: CategoryIndex,
       children: [
         {
           path: '',
-          name: 'AdminCodelistList',
-          component: CodelistList
-        },
-        {
-          path: ':codelistkey',
-          name: 'CodelistSingle',
-          component: CodelistSingle
+          name: 'AdminCategoryList',
+          component: CategoryList
         }
       ]
     },

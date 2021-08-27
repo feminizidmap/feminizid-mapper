@@ -5,8 +5,8 @@
     <hr>
   </div>
   <div class="row">
-    <div class="col col-2">
-      <nav class="">
+    <div class="col col-12 col-lg-3">
+      <nav class="mb-5">
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
             <router-link :to="{ name: 'AdminSystem' }" class="nav-link">{{ $t('admin.system')}}</router-link>
@@ -16,17 +16,17 @@
           </li>
           <li class="nav-item">
             <router-link :to="{ name: 'AdminSchema' }"
-                         class="nav-link">{{ $t('layout.schema') }}</router-link>
+                         class="nav-link">{{ $t('layout.schema.title') }}</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'AdminCodelistList' }"
-                         class="nav-link">{{ $t('layout.codelist') }}</router-link>
+            <router-link :to="{ name: 'AdminCategoryList' }"
+                         class="nav-link">{{ $t('layout.categories.title') }}</router-link>
           </li>
         </ul>
 
       </nav>
     </div>
-    <div class="col">
+    <div class="col col-12 col-lg-9">
       <router-view></router-view>
     </div>
   </div>
@@ -34,6 +34,13 @@
 </template>
 <script>
 export default {
-  name: 'AdminIndexView'
+  name: 'AdminIndexView',
+  created() {
+    this.$http.secured.get('/system_settings')
+      .then(resp => {
+        this.$store.commit('setSettings', resp.data)
+      })
+      .catch(() => this.$store.commit('addAlert', { type: 'danger', message: 'Could not fetch settings'}))
+  },
 }
 </script>

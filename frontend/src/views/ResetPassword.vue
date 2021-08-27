@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-5">
     <div class="row justify-content-center">
-      <form class="text-center col-sm-3" @submit.prevent="reset">
+      <form class="text-center col-md-4 col-lg-3 " @submit.prevent="reset">
         <h2 class="mb-4">{{ $t('prompts.resetpassword') }}</h2>
         <div class="form-floating mb-1">
           <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">

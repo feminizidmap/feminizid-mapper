@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-5">
     <div class="row justify-content-center">
-      <form class="form-signup col-sm-3 text-center" @submit.prevent="submit">
+      <form class="form-signup col-md-4 col-lg-3  text-center" @submit.prevent="submit">
         <h2 class="mb-4">{{ $t('prompts.forgotpassword') }}</h2>
         <div class="form-floating mb-4">
           <input v-model="email" type="email" class="form-control" id="email" placeholder="email@example.com" required>

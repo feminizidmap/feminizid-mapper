@@ -1,7 +1,7 @@
 <template>
   <footer class="border-top border-5 mt-auto pt-4 bg-dark text-light">
     <div class="container-fluid">
-      <div class="row row-cols-4 pt-3 pb-1">
+      <div class="row row-cols-md-4 pt-3 pb-1">
         <div>
           <p>Mapper is a software project developed and used by <a href="#">Feminizidmap.org</a>.</p>
           <p>It is Free and Open Source Software under the AGPL 3 or later License. The sourcecode is available on <a :href="homepage">GitHub</a>.</p>

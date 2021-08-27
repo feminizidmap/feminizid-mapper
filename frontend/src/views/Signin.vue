@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-5">
     <div class="row justify-content-center">
-      <form class="col-sm-3 text-center" @submit.prevent="signin">
+      <form class="col-md-4 col-lg-3 text-center" @submit.prevent="signin">
         <h2 class="mb-4">{{ $t('prompts.signin') }}</h2>
         <div class="form-floating mb-1">
           <input v-model="email" type="email" class="form-control" id="email" placeholder="email@example.com">

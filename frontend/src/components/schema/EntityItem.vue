@@ -1,133 +1,114 @@
 <template>
 <div class="entity-item">
-  <div class="d-flex justify-content-between">
-    <p class="fs-4">{{ entity.name }}</p>
-
-    <button type="button"
-            class="btn btn-outline-danger"
-            @click.prevent="emitRmEntity">
-      <i class="far fa-trash-alt"></i>
-      Entfernen</button>
-  </div>
-  <div>
-    <ul v-if="entity.attributes"
-        class="border-start border-4">
-      <li
-        v-for="(attr, i) in entity.attributes"
-        :key="i"
-        class="d-flex justify-content-between">
-        <div>
-          {{ attr.name }}
+  <div v-if="isEditing" >
+    <form class="border border-2 p-3 mb-5 rounded" @submit.prevent="updateEntity">
+        <input class="form-control"
+               v-model="chEntity.name" />
+        <input class="form-control mt-3"
+               v-model="chEntity.slug"
+               readonly />
+        <div class="mt-3">
+        <button type="submit" class="btn btn-outline-primary">
+          <i class="fas fa-save"></i>
+          <span class="visually-hidden">{{ $t('actions.save') }}</span>
+        </button>
+        <button type="button" class="btn btn-outline-secondary ms-2" @click.prevent="unEdit">
+            <i class="fa fa-ban"></i>
+            <span class="visually-hidden">{{ $t('forms.cancel') }}</span></button>
         </div>
-        <button type="button"
-                class="btn btn-outline-danger"
-                @click.prevent="emitRmField(attr)">
-          <i class="far fa-trash-alt"></i>
-          Entfernen</button>
+      </form>
+  </div>
+  <div v-else class="d-flex p-2 justify-content-between">
+    <h5 class="fs-4 fw-bold">{{ entity.name }}</h5>
+    <div class="me-lg-3">
+      <button v-if="showIfAdmin()"
+              @click.prevent="edit"
+              class="btn btn-outline-primary me-2">
+        <i class="fa fa-edit"></i>
+        <span class="visually-hidden">{{ $t('forms.edit') }}</span></button>
+      <button v-if="showIfAdmin()"
+              @click.prevent="emitRmEntity"
+              class="btn btn-outline-danger">
+        <i class="fa fa-trash-alt"></i>
+        <span class="visually-hidden">{{ $t('forms.delete') }}</span>
+    </button>
+    </div>
+  </div>
+
+  <div>
+    <ul v-if="entity.attributes.length"
+        class="list-unstyled">
+      <li class="ms-2 mb-3 ps-3"
+        v-for="(attr, i) in entity.attributes"
+        :key="i">
+        <FieldItem :field="attr"
+                   @rmField="emitRmField"></FieldItem>
       </li>
     </ul>
+    <div v-else class="alert alert-info ms-2 me-4 mt-3">
+      {{ $t('models.field.noSuch')}}
+    </div>
 
-    <div class="mt-3">
-      <button type="button"
-              class="btn btn-primary"
-              @click.prevent="toggleAttributeForm"
-              v-if="!showAttributeForm">
+    <div class="mt-3" v-if="showIfAdmin">
+      <NewFormModal
+        @addedNewAttribute="emitNewAttribute"
+        @addedNewField="emitNewField"
+        :ident="ident"
+        >
         <i class="far fa-plus-square"></i>
-        Codelist-Feld hinzufügen</button>
-
-      <form v-if="showAttributeForm"
-            @submit.prevent="emitNewAttribute"
-            class="border border-2 p-4 mt-3 mb-5">
-        <select
-          @change="updateNewAttribute"
-          class="form-select" aria-label="Select">
-          <option v-for="(item, i) in $store.state.codelists"
-                  :key="i"
-                  :value="item.id">{{ item.name }}</option>
-        </select>
-        <button type="submit"
-                class="btn btn-outline-primary">
-          <i class="far fa-save"></i>
-          Speichern</button>
-        <button type="button mt-5"
-                class="btn btn-link link-danger"
-                @click.prevent="toggleAttributeForm">
-          <i class="far fa-times-circle"></i>
-          Abbrechen</button>
-      </form>
-
-      <button type="button"
-              class="btn btn-primary"
-              @click.prevent="toggleFieldForm"
-              v-if="!showFieldForm">
-        <i class="far fa-plus-square"></i>
-        Freifeld hinzufügen</button>
-
-      <form v-if="showFieldForm"
-            class="border border-2 p-4 mt-5 mb-3"
-            @submit.prevent="emitNewField">
-        <label>
-          <span>Name</span>
-          <input type="text" class="form-control" placeholder="Entity name"
-                 @keyup="updateNewField"
-                 :value="newField.name">
-        </label>
-        <label>
-          <span>Slug</span>
-          <input type="text" class="form-control" readonly
-                 :value="newField.slug">
-        </label>
-        <button type="submit"
-                class="btn btn-outline-primary">
-          <i class="far fa-save"></i>
-          Speichern</button>
-        <button type="button mt-5"
-                class="btn btn-link link-danger"
-                @click.prevent="toggleFieldForm">
-          <i class="far fa-times-circle"></i>
-          Abbrechen</button>
-      </form>
+        {{ $t('actions.new') }}
+      </NewFormModal>
     </div>
   </div>
 </div>
 </template>
 <script>
+  import { slugify } from '@/util'
+import FieldItem from '@/components/schema/FieldItem'
+import NewFormModal from '@/components/schema/NewFieldOrAttribute'
+
 export default {
   name: 'EntityItem',
-  props: { entity: Object },
+  components: { NewFormModal,
+                FieldItem },
+  props: { entity: Object, ident: Number },
   data() {
     return {
-      showAttributeForm: false,
-      showFieldForm: false,
-      newField: {},
-      newAttribute: {}
+      isEditing: false,
+      chEntity: {}
+    }
+  },
+  watch: {
+    'chEntity.name': {
+      handler(ev) {
+        this.chEntity.slug = slugify(ev)
+      }
     }
   },
   methods: {
-    toggleAttributeForm() {
-      this.showAttributeForm = !this.showAttributeForm
-      if (this.showAttributeForm === false) {
-        this.newAttribute = {}
-      }
+    edit() {
+      this.isEditing = true
+      this.chEntity = Object.assign({}, this.entity)
     },
-    toggleFieldForm() {
-      this.showFieldForm = !this.showFieldForm
-      if (this.showFieldForm === false) {
-        this.newField = {}
-      }
+    unEdit() {
+      this.isEditing = false
     },
-    emitNewField() {
-      let obj = { e: this.entity, field: this.newField }
+    updateEntity() {
+      this.$emit('updateEntity', { old: this.entity, mew: this.chEntity }) // yes this a pokemon joke
+      this.unEdit()
+    },
+    emitNewField(field) {
+      let obj = { e: this.entity,
+                  field }
+      obj.field.type = 'field'
       this.$emit('newField', obj)
-      this.newField = {}
-      this.showFieldForm = false
     },
-    emitNewAttribute() {
-      let obj = { e: this.entity, field: { slug: this.newAttribute,
-                                           name: this.newAttribute}}
-      this.$emit('newAttribute', obj)
-      this.newAttribute = {}
-      this.showAttributeForm = false
+    emitNewAttribute(attribute) {
+      let obj = { e: this.entity,
+                  field: this.$store.getters.getCategoryById(attribute) }
+      obj.field.type = 'category'
+
+      this.$emit('newField', obj)
     },
     emitRmField(attr) {
       this.$emit('rmField', {e: this.entity, a: attr})
@@ -135,12 +116,8 @@ export default {
     emitRmEntity() {
       this.$emit('rmEntity', this.entity)
     },
-    updateNewField(ev) {
-      this.newField.name = ev.target.value
-      this.newField.slug = this.newField.name.toLowerCase().replaceAll(" ", "-")
-    },
-    updateNewAttribute(ev) {
-      this.newAttribute = ev.target.value
+    showIfAdmin() {
+      return this.$store.getters.isAdmin
     }
   }
 }

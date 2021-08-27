@@ -8,13 +8,14 @@ export const store = createStore({
       currentUser: {},
       signedIn: false,
       csrf: null,
-      codelists: [],
-      codelistItems: [],
-      systemSettings: [],
+      categories: [],
+      category_items: [],
       cases: [],
       newCase: {},
       newCaseHistory: [],
-      schema: []
+      schema: [],
+      schemaHasChanged: false,
+      settings: []
     }
   },
   mutations: {
@@ -47,33 +48,33 @@ export const store = createStore({
         item
       ]
     },
-    setCodelists(state, list) {
-      state.codelists = list
+    setCategories(state, list) {
+      state.categories = list
     },
-    removeSingleCodelist(state, item) {
-      state.codelists.splice(state.codelists.indexOf(item), 1)
+    addSingleCategory(state, item) {
+      state.categories.push(item)
     },
-    addToCodelist(state, item) {
-      state.codelists.push(item)
+    removeSingleCategory(state, item) {
+      state.categories.splice(state.categories.indexOf(item), 1)
     },
-    updateSingleCodelist(state, item) {
-      state.codelists = [
-        ...state.codelists.filter(element => element.id !== item.id),
+    updateSingleCategory(state, item) {
+      state.categories = [
+        ...state.categories.filter(element => element.id !== item.id),
         item
       ]
     },
-    setCodelistItems(state, list) {
-      state.codelistItems = list
+    setCategoryItems(state, list) {
+      state.category_items = list
     },
-    removeSingleCodelistItem(state, item) {
-      state.codelistItems.splice(state.codelistItems.indexOf(item), 1)
+    addSingleCategoryItem(state, item) {
+      state.category_items.push(item)
     },
-    addToCodelistItems(state, item) {
-      state.codelistItems.push(item)
+    removeSingleCategoryItem(state, item) {
+      state.category_items.splice(state.category_items.indexOf(item), 1)
     },
-    updateSingleCodelistItem(state, item) {
-      state.codelistItems = [
-        ...state.codelistItems.filter(element => element.id !== item.id),
+    updateSingleCategoryItem(state, item) {
+      state.category_items = [
+        ...state.category_items.filter(element => element.id !== item.id),
         item
       ]
     },
@@ -101,6 +102,12 @@ export const store = createStore({
     },
     setSchema(state, value) {
       state.schema = value
+    },
+    setSettings(state, value) {
+      state.settings = value
+    },
+    setSchemaHasChanged(state, value) {
+      state.schemaHasChanged = value
     }
   },
   getters: {
@@ -118,35 +125,11 @@ export const store = createStore({
       //return item.length > 0 ? item[0] : null
       return state.cases.find(fcase => fcase.id == id)
     },
-    isCodelistsEmpty(state) {
-      return state.codelists.length === 0
+    getCategoryById: (state) => (catID) => {
+      return state.categories.find(c => c.id === catID)
     },
-    getCodelistById: (state) => (id) => {
-      const item = state.codelists.filter(x => x.id === id)
-      return item.length > 0 ? item[0] : null
-    },
-    getCodelistsByIdent: (state) => (ident) => {
-      return state.codelists.filter(x => x.identifier === ident)
-    },
-    getCodelistsByIdentAndLang: (state) => (ident, lang) => {
-      return state.codelists
-        .filter(x => x.identifier == ident)
-        .filter(x => x.lang == lang)
-    },
-    getCodelistItemsByListId: (state) => (id) => {
-      return state.codelistItems.filter(x => x.codelist_id === id)
-    },
-    getCodelistItemsByIdentAndLang: (state) => (ident, lang) => {
-      return state.codelistItems
-        .filter(x => x.identifier == ident)
-        .filter(x => x.lang == lang)
-    },
-    getCodelistItemsByIdent: (state) => (ident) => {
-      return state.codelistItems.filter(x => x.identifier === ident)
-    },
-    getCodelistItemById: (state) => (id) => {
-      const item = state.codelistItems.filter(x => x.id === id)
-      return item.length > 0 ? item[0] : null
+    getItemsForCategory: (state) => (category) => {
+      return state.category_items.filter(i => i.category_id === category.id)
     },
     isSignedIn(state) {
       return state.signedIn
@@ -156,6 +139,12 @@ export const store = createStore({
     },
     isNewCaseEmpty(state) {
       return Object.entries(state.newCase).length === 0
+    },
+    getSetting: (state) => (setting) => {
+      return state.settings?.find(s => s.key === setting)
+    },
+    hasStoreLocalChange(state) {
+      return Object.keys(state.schema).length !== 0
     }
   },
   plugins: [createPersistedState()]

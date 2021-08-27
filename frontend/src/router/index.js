@@ -5,12 +5,13 @@ import Signup from '@/views/Signup'
 import ForgotPassword from '@/views/ForgotPassword'
 import ResetPassword from '@/views/ResetPassword'
 
+import Protected from '@/views/Protected'
 import cases from './case'
 import admin from './admin'
 
 const routes = [
   {
-    path: '/',
+    path: '/signin',
     name: 'Signin',
     component: Signin
   },
@@ -30,12 +31,19 @@ const routes = [
     component: ResetPassword
   },
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
-  },
-  cases,
-  admin
+    name: 'Protected',
+    path: '/',
+    component: Protected,
+    children: [
+      {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
+      },
+      cases,
+      admin
+    ]
+  }
 ]
 
 const router = createRouter({
