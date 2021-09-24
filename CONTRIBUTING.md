@@ -19,8 +19,11 @@ We’re also planning a map-based visualization app that consumes data from the 
 
 ## How can you help?
 
-If you are interested in contributing please contact me directly via mail@lislis.de or open a ticket on the issue tracker and ping me @lislis.
-
 We’re looking for help on both the front- and backend, contributors to documentation and translation and with an interest in our vision.
 
+If you are interested in contributing please contact me directly via mail@lislis.de or open a ticket on the issue tracker and ping me @lislis. For bigger tasks/ small projects in mapper created some labels that you can check out.
+
+There is the possibility of paying you for your work if you make a significant contribution to the project.
+
 I’m working on writing more documentation to get started and tickets for smaller tasks that can easily be picked up. But feel free to ask questions in tickets, everything is still pretty new and often it’s not just you who has a certain question! In any case, questions and feedback are welcome and help me onboard you and others!
+
