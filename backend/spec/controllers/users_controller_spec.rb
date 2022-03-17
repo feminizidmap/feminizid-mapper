@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe UsersController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   before { sign_in_as(user) }
 
@@ -21,7 +21,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it "does not allow user to update other's email and password" do
-      user2 = FactoryBot.create(:user)
+      user2 = create(:user)
       put :update, params: { id: user2.to_param, user: { email: 'new@mail.org' } }
       expect(response).to have_http_status(:forbidden)
       expect(user2.reload.email).not_to eq('new@mail.org')
@@ -44,7 +44,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     it 'does not allow user to delete another user' do
-      user2 = FactoryBot.create(:user)
+      user2 = create(:user)
       expect(User.count).to be(2)
       delete :destroy, params: { id: user2.id }
       expect(response).not_to be_successful

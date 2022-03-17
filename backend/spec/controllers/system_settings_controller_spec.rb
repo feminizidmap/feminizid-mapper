@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe SystemSettingsController, type: :controller do
-  let(:admin) { FactoryBot.create(:user, role: :admin) }
-  let(:user) { FactoryBot.create(:user, role: :user) }
-  let!(:system_setting) { FactoryBot.create(:system_setting) }
+  let(:admin) { create(:user, role: :admin) }
+  let(:user) { create(:user, role: :user) }
+  let!(:system_setting) { create(:system_setting) }
 
   let(:valid_attributes) do
     { key: 'settings_numbers',
@@ -96,7 +96,7 @@ RSpec.describe SystemSettingsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:system_setting) { FactoryBot.create(:system_setting) }
+    let!(:system_setting) { create(:system_setting) }
     let(:new_attributes) do
       { value: [3, 4, 5].to_json }
     end
@@ -144,7 +144,7 @@ RSpec.describe SystemSettingsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:system_setting) { FactoryBot.create(:system_setting) }
+    let!(:system_setting) { create(:system_setting) }
 
     context 'with admin role' do
       it 'destroys the requested system_setting' do

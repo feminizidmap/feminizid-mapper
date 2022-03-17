@@ -45,3 +45,5 @@ de:
 
       Einen schönen Tag!
     foo: "bar"
+    reset_subject: "Passwort zurücksetzen"
+    created_subject: "Konto für dich erstellt"

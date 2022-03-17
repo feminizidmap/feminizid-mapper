@@ -7,7 +7,7 @@ RSpec.describe RefreshController, type: :controller do
   let(:csrf_token) { @tokens[:csrf] }
 
   describe 'POST #create' do
-    let(:user) { FactoryBot.create(:user) }
+    let(:user) { create(:user) }
 
     context 'when successful' do
       before do

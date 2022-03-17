@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe RecordsController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   let(:valid_attributes) do
     { identifier: '2021-02-18-xx' }
@@ -20,7 +20,7 @@ RSpec.describe RecordsController, type: :controller do
   end
 
   describe 'GET #index' do
-    let!(:record) { FactoryBot.create(:record) }
+    let!(:record) { create(:record) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -37,7 +37,7 @@ RSpec.describe RecordsController, type: :controller do
   end
 
   describe 'GET #show' do
-    let!(:record) { FactoryBot.create(:record) }
+    let!(:record) { create(:record) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -84,7 +84,7 @@ RSpec.describe RecordsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:record) { FactoryBot.create(:record) }
+    let!(:record) { create(:record) }
 
     context 'with valid params' do
       let(:new_attributes) do
@@ -120,7 +120,7 @@ RSpec.describe RecordsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:record) { FactoryBot.create(:record) }
+    let!(:record) { create(:record) }
 
     it 'destroys the requested change' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]

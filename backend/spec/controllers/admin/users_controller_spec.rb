@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe Admin::UsersController, type: :controller do
-  let!(:user) { FactoryBot.create(:user) }
-  let!(:reviewer) { FactoryBot.create(:user, role: :reviewer) }
-  let!(:admin) { FactoryBot.create(:user, role: :admin) }
+  let!(:user) { create(:user) }
+  let!(:reviewer) { create(:user, role: :reviewer) }
+  let!(:admin) { create(:user, role: :admin) }
 
   describe 'GET #index' do
     it 'allows admin to receive users list' do

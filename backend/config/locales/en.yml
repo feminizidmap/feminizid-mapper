@@ -45,3 +45,5 @@ en:
 
       Have a nice day!
     foo: "bar"
+    reset_subject: "Reset your password"
+    created_subject: "Account created for you"

@@ -2,6 +2,8 @@
 
 require_relative 'support/response_helper'
 require_relative 'support/auth_helper'
+# require_relative 'support/factory_bot'
+
 require 'coveralls'
 Coveralls.wear!
 
