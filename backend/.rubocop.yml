@@ -19,6 +19,9 @@ Metrics/BlockLength:
 
 Rails/EnvironmentVariableAccess:
   AllowReads: true
+Rails/FilePath:
+  Exclude:
+    - 'spec/rails_helper.rb'
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 Rails/ReversibleMigration:

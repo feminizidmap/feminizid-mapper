@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe CategoryItemsController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-  let(:category) { FactoryBot.create(:category) }
+  let(:user) { create(:user) }
+  let(:category) { create(:category) }
 
   let(:valid_attributes) do
     { name: 'Foobar',
@@ -23,7 +23,7 @@ RSpec.describe CategoryItemsController, type: :controller do
   end
 
   describe 'GET #index' do
-    let!(:category_item) { FactoryBot.create(:category_item) }
+    let!(:category_item) { create(:category_item) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -40,7 +40,7 @@ RSpec.describe CategoryItemsController, type: :controller do
   end
 
   describe 'GET #show' do
-    let!(:category_item) { FactoryBot.create(:category_item) }
+    let!(:category_item) { create(:category_item) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -87,7 +87,7 @@ RSpec.describe CategoryItemsController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:category_item) { FactoryBot.create(:category_item) }
+    let!(:category_item) { create(:category_item) }
 
     context 'with valid params' do
       let(:new_attributes) do
@@ -123,7 +123,7 @@ RSpec.describe CategoryItemsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:category_item) { FactoryBot.create(:category_item) }
+    let!(:category_item) { create(:category_item) }
 
     it 'destroys the requested change' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]

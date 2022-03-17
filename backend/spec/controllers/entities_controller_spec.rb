@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe EntitiesController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-  let(:record) { FactoryBot.create(:record) }
+  let(:user) { create(:user) }
+  let(:record) { create(:record) }
 
   let(:valid_attributes) do
     { name: 'Foobar',
@@ -24,7 +24,7 @@ RSpec.describe EntitiesController, type: :controller do
   end
 
   describe 'GET #index' do
-    let!(:entity) { FactoryBot.create(:entity) }
+    let!(:entity) { create(:entity) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -41,7 +41,7 @@ RSpec.describe EntitiesController, type: :controller do
   end
 
   describe 'GET #show' do
-    let!(:entity) { FactoryBot.create(:entity) }
+    let!(:entity) { create(:entity) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -88,7 +88,7 @@ RSpec.describe EntitiesController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:entity) { FactoryBot.create(:entity) }
+    let!(:entity) { create(:entity) }
 
     context 'with valid params' do
       let(:new_attributes) do
@@ -124,7 +124,7 @@ RSpec.describe EntitiesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:entity) { FactoryBot.create(:entity) }
+    let!(:entity) { create(:entity) }
 
     it 'destroys the requested change' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]

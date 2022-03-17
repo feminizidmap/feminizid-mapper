@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe PasswordResetsController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
+  let(:user) { create(:user) }
 
   describe 'POST #create' do
     it do

@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe Admin::Users::ChangesController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-  let(:reviewer) { FactoryBot.create(:user, role: :reviewer) }
-  let(:admin) { FactoryBot.create(:user, role: :admin) }
-  let!(:change) { FactoryBot.create(:change, user: user) }
+  let(:user) { create(:user) }
+  let(:reviewer) { create(:user, role: :reviewer) }
+  let(:admin) { create(:user, role: :admin) }
+  let!(:change) { create(:change, user: user) }
   # let!(:change2) { FactoryBot.create(:change, user: reviewer) }
 
   describe 'GET #index' do

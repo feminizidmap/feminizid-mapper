@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe ChangesController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-  let(:record) { FactoryBot.create(:record) }
+  let(:user) { create(:user) }
+  let(:record) { create(:record) }
 
   let(:valid_attributes) do
     { status: :created,
@@ -23,7 +23,7 @@ RSpec.describe ChangesController, type: :controller do
   end
 
   describe 'GET #index' do
-    let!(:change) { FactoryBot.create(:change, user: user) }
+    let!(:change) { create(:change, user: user) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -43,7 +43,7 @@ RSpec.describe ChangesController, type: :controller do
   end
 
   describe 'GET #show' do
-    let!(:change) { FactoryBot.create(:change, user: user) }
+    let!(:change) { create(:change, user: user) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -90,7 +90,7 @@ RSpec.describe ChangesController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:change) { FactoryBot.create(:change, user: user) }
+    let!(:change) { create(:change, user: user) }
 
     context 'with valid params' do
       let(:new_attributes) do
@@ -126,7 +126,7 @@ RSpec.describe ChangesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:change) { FactoryBot.create(:change, user: user) }
+    let!(:change) { create(:change, user: user) }
 
     it 'destroys the requested change' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]

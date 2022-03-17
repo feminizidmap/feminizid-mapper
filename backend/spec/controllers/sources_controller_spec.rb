@@ -3,8 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe SourcesController, type: :controller do
-  let(:user) { FactoryBot.create(:user) }
-  let(:record) { FactoryBot.create(:record) }
+  let(:user) { create(:user) }
+  let(:record) { create(:record) }
 
   let(:valid_attributes) do
     { url: 'http://foo.bar' }
@@ -21,7 +21,7 @@ RSpec.describe SourcesController, type: :controller do
   end
 
   describe 'GET #index' do
-    let!(:source) { FactoryBot.create(:source) }
+    let!(:source) { create(:source) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -38,7 +38,7 @@ RSpec.describe SourcesController, type: :controller do
   end
 
   describe 'GET #show' do
-    let!(:source) { FactoryBot.create(:source) }
+    let!(:source) { create(:source) }
 
     it 'returns a success response' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
@@ -85,7 +85,7 @@ RSpec.describe SourcesController, type: :controller do
   end
 
   describe 'PUT #update' do
-    let!(:source) { FactoryBot.create(:source) }
+    let!(:source) { create(:source) }
 
     context 'with valid params' do
       let(:new_attributes) do
@@ -121,7 +121,7 @@ RSpec.describe SourcesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let!(:source) { FactoryBot.create(:source) }
+    let!(:source) { create(:source) }
 
     it 'destroys the requested change' do
       request.cookies[JWTSessions.access_cookie] = @tokens[:access]
