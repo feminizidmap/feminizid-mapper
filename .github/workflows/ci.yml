@@ -60,9 +60,9 @@ jobs:
 
   test_vue:
     runs-on: ubuntu-latest
-    #defaults:
-    #  run:
-    #    working-directory: frontend
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -70,13 +70,9 @@ jobs:
           node-version: '17'
           cache: 'yarn'
           cache-dependency-path: frontend/yarn.lock
-      - run: pwd
       - name: Install dependencies
-        working-directory: frontend
         run: yarn install
       - name: Run ESLint
-        working-directory: frontend
         run: yarn lint
       - name: Run unit tests
-        working-directory: frontend
-        run: yarn test:unit
+        run: yarn test:unit ----openssl-legacy-provider
