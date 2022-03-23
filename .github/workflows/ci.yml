@@ -65,7 +65,7 @@ jobs:
         working-directory: frontend
     strategy:
       matrix:
-        node-version: [14]
+        node-version: [16]
     steps:
       - name: Setup Node.js environment
         uses: actions/setup-node@v1.4.3
