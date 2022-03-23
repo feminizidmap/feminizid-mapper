@@ -75,4 +75,4 @@ jobs:
       - name: Run ESLint
         run: yarn lint
       - name: Run unit tests
-        run: NODE_OPTIONS=--openssl-legacy-provider yarn test:unit
+        run: yarn test:unit
