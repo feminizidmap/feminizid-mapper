@@ -60,19 +60,23 @@ jobs:
 
   test_vue:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
+    #defaults:
+    #  run:
+    #    working-directory: frontend
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
+        working-directory: frontend
         with:
           node-version: '17'
           cache: 'yarn'
       - run: pwd
       - name: Install dependencies
+        working-directory: frontend
         run: yarn install
       - name: Run ESLint
+        working-directory: frontend
         run: yarn lint
       - name: Run unit tests
+        working-directory: frontend
         run: yarn test:unit
