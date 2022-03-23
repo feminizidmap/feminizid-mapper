@@ -69,6 +69,7 @@ jobs:
         with:
           node-version: '17'
           cache: 'yarn'
+      - run: pwd
       - name: Install dependencies
         run: yarn install
       - name: Run ESLint
