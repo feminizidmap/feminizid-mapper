@@ -9,11 +9,11 @@
    name: 'Signout',
    methods: {
      signOut () {
-       this.$http.secured.delete('/signin')
+       this.$httpSecured.delete('/signin')
            .then(() => {
              this.$store.commit('addAlert', { type: 'notice', message: this.$t('notice.singedOut') })
              this.$store.commit('unsetCurrentUser')
-             this.$router.replace('/')
+             this.$router.replace('/signin')
            })
            .catch(error => this.setError(error, this.$t('errors.cannotSignout')))
      },

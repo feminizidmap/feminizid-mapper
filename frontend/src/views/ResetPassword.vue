@@ -34,7 +34,7 @@
    },
    methods: {
      reset() {
-       this.$http.plain.patch(`/password_resets/${this.$route.params.token}`, { password: this.password, password_confirmation: this.password_confirmation })
+       this.$http.patch(`/password_resets/${this.$route.params.token}`, { password: this.password, password_confirmation: this.password_confirmation })
            .then(response => this.resetSuccessful(response))
            .catch(error => this.resetFailed(error))
      },
@@ -49,7 +49,7 @@
        this.$store.commit('addAlert', { type: 'error', message: e})
      },
      checkPasswordToken() {
-       this.$http.plain.get(`/password_resets/${this.$route.params.token}`)
+       this.$http.get(`/password_resets/${this.$route.params.token}`)
            .catch(error => {
              this.resetFailed(error)
              this.$router.replace('/')

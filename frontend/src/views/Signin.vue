@@ -40,7 +40,8 @@
    },
    methods: {
      signin () {
-       this.$http.plain.post('/signin', { email: this.email, password: this.password })
+       //debugger // eslint-disable-line
+       this.$http.post('/signin', { email: this.email, password: this.password })
            .then(response => this.signinSuccessful(response))
            .catch(error => this.signinFailed(error))
      },
@@ -49,7 +50,7 @@
          this.signinFailed(response)
          return
        }
-       this.$http.plain.get('/me')
+       this.$http.get('/me')
            .then(meResponse => {
              this.$store.commit('setCurrentUser', { currentUser: meResponse.data,
                                                     csrf: response.data.csrf })
@@ -71,6 +72,3 @@
    }
  }
 </script>
-
-<style lang="css">
-</style>

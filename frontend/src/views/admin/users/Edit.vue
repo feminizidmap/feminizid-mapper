@@ -36,7 +36,7 @@
    },
    methods: {
      update () {
-       this.$http.secured.patch(`/admin/users/${this.$route.params.id}`, { user: { role: this.user.role } })
+       this.$httpSecured.patch(`/admin/users/${this.$route.params.id}`, { user: { role: this.user.role } })
            .then(response => this.updateSuccessful(response))
            .catch(error => this.updateFailed(error))
      },
@@ -54,7 +54,7 @@
      },
      checkSignedIn() {
        if (this.$store.state.signedIn && this.$store.getters.isAdmin) {
-         this.$http.secured.get(`/admin/users/${this.$route.params.id}`)
+         this.$httpSecured.get(`/admin/users/${this.$route.params.id}`)
              .then(response => {
                if (this.$store.getters.currentUserId === response.data.id) {
                  this.$router.replace('/')

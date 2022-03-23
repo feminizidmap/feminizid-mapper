@@ -47,7 +47,7 @@
    },
    created () {
      if (this.$store.state.signedIn && (this.$store.getters.isAdmin || this.$store.getters.isReviewer)) {
-       this.$http.secured.get('/admin/users')
+       this.$httpSecured.get('/admin/users')
            .then(response => { this.users = response.data })
            .catch(error => { this.setError(error, 'Something went wrong') })
      } else {

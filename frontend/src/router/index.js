@@ -6,6 +6,7 @@ import ForgotPassword from '@/views/ForgotPassword'
 import ResetPassword from '@/views/ResetPassword'
 
 import Protected from '@/views/Protected'
+
 import cases from './case'
 import admin from './admin'
 

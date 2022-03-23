@@ -36,7 +36,7 @@
 export default {
   name: 'AdminIndexView',
   created() {
-    this.$http.secured.get('/system_settings')
+    this.$httpSecured.get('/system_settings')
       .then(resp => {
         this.$store.commit('setSettings', resp.data)
       })

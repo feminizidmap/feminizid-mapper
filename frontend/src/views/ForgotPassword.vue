@@ -28,7 +28,7 @@
    },
    methods: {
      submit() {
-       this.$http.plain.post('/password_resets', { email: this.email })
+       this.$http.post('/password_resets', { email: this.email })
            .then(() => this.submitSuccessful())
            .catch(error => this.submitFailed(error))
      },

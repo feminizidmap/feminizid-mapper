@@ -92,7 +92,7 @@ export default {
       this.isLoading = true
       let schemaSettingsId = this.$store.getters.getSetting('settings_schema')
       if (schemaSettingsId) {
-        this.$http.secured.patch(`/system_settings/${schemaSettingsId.id}`,
+        this.$httpSecured.patch(`/system_settings/${schemaSettingsId.id}`,
                                  { system_setting:
                                    { 'key': 'settings_schema',
                                      value: JSON.stringify(this.$store.state.schema)}})
@@ -105,7 +105,7 @@ export default {
           })
           .finally(() => { this.isLoading = false })
       } else {
-        this.$http.secured.post(`/system_settings/`,
+        this.$httpSecured.post(`/system_settings/`,
                                 { system_setting:
                                   { 'key': 'settings_schema',
                                     value: JSON.stringify(this.$store.state.schema)}})

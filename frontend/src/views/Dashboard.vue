@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     populateCases() {
-      this.$http.secured.get('/case')
+      this.$httpSecured.get('/case')
         .then(response => {
           this.$store.commit('setCases', response.data.data)
         })

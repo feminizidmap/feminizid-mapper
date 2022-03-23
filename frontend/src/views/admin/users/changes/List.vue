@@ -34,7 +34,7 @@
    },
    created () {
      if (this.$store.state.signedIn && this.$store.getters.isAdmin) {
-       this.$http.secured.get(`/admin/users/${this.$route.params.id}/changes`)
+       this.$httpSecured.get(`/admin/users/${this.$route.params.id}/changes`)
            .then(response => {
              this.changes = response.data
            })

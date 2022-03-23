@@ -44,7 +44,7 @@
    },
    methods: {
      signup () {
-       this.$http.plain.post('/signup', { email: this.email,
+       this.$http.post('/signup', { email: this.email,
                                           password: this.password,
                                           password_confirmation: this.password_confirmation })
            .then(response => this.signupSuccessful(response))
@@ -55,7 +55,7 @@
          this.signupFailed(response)
          return
        }
-       this.$http.plain.get('/me')
+       this.$http.get('/me')
            .then(meResponse => {
              this.$store.commit('setCurrentUser', { currentUser: meResponse.data,
                                                     csrf: response.data.csrf })

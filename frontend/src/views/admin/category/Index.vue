@@ -20,14 +20,14 @@ export default {
   },
   methods: {
     populateCodelists() {
-      this.$http.secured.get('/categories')
+      this.$httpSecured.get('/categories')
         .then(response => {
           this.$store.commit('setCategories', response.data)
         })
         .catch(error => {
           this.$store.commit('addAlert', { type: 'error', message: error })
         })
-      this.$http.secured.get('/category_items')
+      this.$httpSecured.get('/category_items')
         .then(resp => {
           this.$store.commit('setCategoryItems', resp.data)
         })
