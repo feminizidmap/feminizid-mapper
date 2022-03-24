@@ -19,9 +19,10 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        name: deploy frontend
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_FRONTEND_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
+      ## The frontend gets deployed to netlify through a webhook now
+      #- uses: akhileshns/heroku-deploy@v3.12.12
+      #  name: deploy frontend
+      #  with:
+      #    heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #    heroku_app_name: ${{secrets.HEROKU_FRONTEND_APP_NAME}}
+      #    heroku_email: ${{secrets.HEROKU_EMAIL}}
