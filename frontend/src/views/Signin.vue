@@ -50,7 +50,7 @@
          this.signinFailed(response)
          return
        }
-       this.$http.get('/me')
+       this.$http.get('/me', {})
            .then(meResponse => {
              this.$store.commit('setCurrentUser', { currentUser: meResponse.data,
                                                     csrf: response.data.csrf })
