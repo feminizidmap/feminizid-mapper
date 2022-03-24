@@ -1,0 +1,9 @@
+[build]
+  command = "yarn build"
+  publish="dist"
+  base = "frontend"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
