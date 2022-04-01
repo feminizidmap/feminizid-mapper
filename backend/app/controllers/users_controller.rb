@@ -19,9 +19,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update!(user_params)
-    JWTSessions::Session.new(namespace: "user_#{@user.id}").flush_namespaced_access_tokens
-    render json: { data: @user, status: :ok, message: 'Success' }
+    if @user.update!(user_params)
+      render json: { data: @user, status: :ok, message: 'Success' }
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
