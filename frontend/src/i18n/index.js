@@ -4,6 +4,7 @@ const messages = {
   en: {
     forms: {
       email: "Email address",
+      name: "Username",
       password: "Password",
       newPassword: "New password",
       passwordConfirmation: "Password confirmation",
@@ -35,6 +36,7 @@ const messages = {
         blurb: "Here is a blurb"
       },
       settings: "Settings",
+      profile: "Profile",
       schema: {
         title: "Data schema",
         blurb: "The schema defines the structure of the data, that means the possible fields on a single record. Think of it as the columns in a spreadsheet.",
@@ -125,6 +127,7 @@ const messages = {
   de: {
     forms: {
       email: "Email-Addresse",
+      name: "Userinnenname",
       password: "Passwort",
       newPassword: "Neues Passwort",
       passwordConfirmation: "Passwort bestätigen",
@@ -156,6 +159,7 @@ const messages = {
         blurb: "Kategorien sind Informationen mit vorher festgelegten Optionen."
       },
       settings: "Einstellungen",
+      profile: "Profil",
       userManagement: "Usermanagement",
       caselist: "Fälle",
       admin: "Admin",

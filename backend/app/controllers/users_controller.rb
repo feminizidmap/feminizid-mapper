@@ -8,10 +8,20 @@ class UsersController < ApplicationController
     render json: current_user
   end
 
+  def index
+    @users = User.all
+    render json: @users 
+  end
+
+  def show
+    @user = User.find(params[:id])
+    render json: { data: @user, status: :ok, message: 'Success' }
+  end
+
   def update
     @user.update!(user_params)
     JWTSessions::Session.new(namespace: "user_#{@user.id}").flush_namespaced_access_tokens
-    render json: @user
+    render json: { data: @user, status: :ok, message: 'Success' }
   end
 
   def destroy
@@ -29,8 +39,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email,
-                                 :password,
-                                 :password_confirmation)
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :role)
   end
 end
