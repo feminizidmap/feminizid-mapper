@@ -18,6 +18,9 @@
           </div>
           <button type="submit" class="btn btn-lg btn-primary w-100 mb-4">{{ $t('forms.save') }}</button>
         </form>
+        <div>
+          <router-link :to="{path: '/password_resets/' + user.reset_password_token}">{{ $t('forms.change_password') }}</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -49,8 +52,6 @@ export default {
       this.$httpSecured.get(`/users/${this.$store.getters.currentUserId}`)
         .then(response => {
           this.user = response.data.data;
-          this.email = this.user.email;
-          this.name = this.user.name;
         })
         .catch(error => { this.setError(error, 'Something went wrong') })
     },

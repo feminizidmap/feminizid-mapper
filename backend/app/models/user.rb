@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
 
   def attributes
-    { id: id, email: email, role: role, name: name }
+    { id: id, email: email, role: role, name: name, reset_password_token: reset_password_token }
   end
 
   def generate_password_token!
