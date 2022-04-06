@@ -3,9 +3,11 @@ import { createI18n } from 'vue-i18n'
 const messages = {
   en: {
     forms: {
+      profileSettings: "Profile settings",
       email: "Email address",
       name: "Username",
       password: "Password",
+      changePassword: "Change password",
       newPassword: "New password",
       passwordConfirmation: "Password confirmation",
       signIn: "Sign in",
@@ -126,9 +128,11 @@ const messages = {
   },
   de: {
     forms: {
+      profileSettings: "Profil Einstellungen",
       email: "Email-Addresse",
       name: "Userinnenname",
       password: "Passwort",
+      changePassword: "Passwort ändern",
       newPassword: "Neues Passwort",
       passwordConfirmation: "Passwort bestätigen",
       signIn: "Anmelden",

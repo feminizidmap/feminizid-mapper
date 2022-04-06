@@ -1,27 +1,24 @@
 <template>
-  <div class="ui stackable grid container">
-
-    <div class="eight wide column">
-      <div class="ui segment">
-        <h2 class="ui dividing header">Edit Profile</h2>
-        <div class="alert alert-info" v-if="notice">{{ notice }}</div>
-        <div class="alert alert-danger" v-if="error">{{ error }}</div>
-
-        <form class="form-signup col-md-4 col-lg-3  text-center" @submit.prevent="update">
-          <div class="form-floating mb-1">
-            <input v-model="user.email" type="email" class="form-control" id="email" @change="edited = true">
-            <label for="email" class="form-label">{{ $t('forms.email') }}</label>
-          </div>
-          <div class="form-floating mb-1">
-            <input v-model="user.name" type="name" class="form-control" id="name" @change="edited = true">
-            <label for="name" class="form-label">{{ $t('forms.name') }}</label> 
-          </div>
-          <button type="submit" class="btn btn-lg btn-primary w-100 mb-4">{{ $t('forms.save') }}</button>
-        </form>
-        <div>
-          <router-link :to="{path: '/password_resets/' + user.reset_password_token}">{{ $t('forms.change_password') }}</router-link>
+  <div class="container text-center mt-3">
+    <h2>{{ $t('forms.profileSettings') }}</h2>
+    <div class="d-flex justify-content-center align-items-center mt-2">
+      
+      <div class="alert alert-info" v-if="notice">{{ notice }}</div>
+      <div class="alert alert-danger" v-if="error">{{ error }}</div>
+      <form @submit.prevent="update">
+        <div class="form-floating mb-1">
+          <input v-model="user.email" type="email" class="form-control" id="email" @change="edited = true">
+          <label for="email" class="form-label">{{ $t('forms.email') }}</label>
         </div>
-      </div>
+        <div class="form-floating mb-4">
+          <input v-model="user.name" type="name" class="form-control" id="name" @change="edited = true">
+          <label for="name" class="form-label">{{ $t('forms.name') }}</label> 
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-4">{{ $t('forms.save') }}</button>
+      </form>
+    </div>
+    <div>
+      <router-link :to="{path: '/password_resets/' + user.reset_password_token}">{{ $t('forms.changePassword') }}</router-link>
     </div>
   </div>
 </template>
