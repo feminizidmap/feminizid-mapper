@@ -18,7 +18,9 @@
       </form>
     </div>
     <div>
-      <router-link :to="{path: '/password_resets/' + user.reset_password_token}">{{ $t('forms.changePassword') }}</router-link>
+      <button class="btn btn-outline-primary"
+          type="button"
+          @click.prevent="changePassword">{{ $t('forms.changePassword') }}</button>
     </div>
   </div>
 </template>
@@ -74,6 +76,9 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || ''
       this.notice = ''
     },
+    changePassword() {
+      this.$router.replace('/password_resets/' + this.user.reset_password_token)
+    }
   }
 }
 </script>

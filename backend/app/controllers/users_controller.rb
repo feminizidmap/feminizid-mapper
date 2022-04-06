@@ -15,6 +15,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user.generate_password_token!
     render json: { data: @user, status: :ok, message: 'Success' }
   end
 
