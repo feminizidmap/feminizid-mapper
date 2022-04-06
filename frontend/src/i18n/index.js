@@ -20,7 +20,8 @@ const messages = {
       delete: "Delete",
       create: "Add",
       cancel: "Cancel",
-      close: "Close"
+      close: "Close",
+      deleteAccount: "Delete account"
     },
     dashboard: {
       title: "Dashboard"
@@ -119,7 +120,8 @@ const messages = {
       deleteCodelist: "Successfully deleted option list",
       deleteCodelistItem: "Successfully deleted option",
       schemaSet: "Schema successfully saved",
-      schemaNotSet: "Schema could not be saved"
+      schemaNotSet: "Schema could not be saved",
+      deleteAccount: "Successfully deleted account"
     },
     errors: {
       general: "Something went wrong",
@@ -145,7 +147,8 @@ const messages = {
       delete: "Löschen",
       create: "Hinzufügen",
       cancel: "Abbrechen",
-      close: "Schließen"
+      close: "Schließen",
+      deleteAccount: "Account löschen"
     },
     dashboard: {
       title: "Dashboard"
@@ -241,7 +244,8 @@ const messages = {
       deleteCodelist: "Optionsliste erfolgreich gelöscht",
       deleteCodelistItem: "Option erfolgreich gelöscht",
       schemaSet: "Datenschema erfolgreich gespeichert",
-      schemaNotSet: "Datenschema konnte nicht gespeichert werden"
+      schemaNotSet: "Datenschema konnte nicht gespeichert werden",
+      deleteAccount: "Account erfolgreich gelöscht"
     },
     errors: {
       general: "Etwas is schief gelaufen",

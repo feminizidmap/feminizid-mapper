@@ -17,10 +17,15 @@
         <button type="submit" class="btn btn-primary w-100 mb-4">{{ $t('forms.save') }}</button>
       </form>
     </div>
-    <div>
+    <div class="mb-2">
       <button class="btn btn-outline-primary"
           type="button"
           @click.prevent="changePassword">{{ $t('forms.changePassword') }}</button>
+    </div>
+    <div>
+      <button class="btn btn-outline-danger"
+          type="button"
+          @click.prevent="deleteUser">{{ $t('forms.deleteAccount') }}</button>
     </div>
   </div>
 </template>
@@ -71,6 +76,7 @@ export default {
     updateSuccessful() {
       this.notice = 'Profile updated'
       this.error = ''
+      this.edited = false
     },
     updateFailed(error) {
       this.error = (error.response && error.response.data && error.response.data.error) || ''
@@ -78,6 +84,15 @@ export default {
     },
     changePassword() {
       this.$router.replace('/password_resets/' + this.user.reset_password_token)
+    },
+    deleteUser() {
+      this.$httpSecured.delete(`/users/${this.user.id}`)
+           .then(() => {
+             this.$store.commit('addAlert', { type: 'notice', message: this.$t('notice.deleteAccount') })
+             this.$store.commit('unsetCurrentUser')
+             this.$router.replace('/signin')
+           })
+           .catch(error => this.setError(error, 'Cannot delete account.'))
     }
   }
 }
