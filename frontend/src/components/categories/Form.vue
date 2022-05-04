@@ -55,7 +55,7 @@ export default {
   methods: {
     async sendCategory() {
       try {
-        const response = await this.$http.secured.post('/categories', { category: this.newCat })
+        const response = await this.$httpSecured.post('/categories', { category: this.newCat })
         this.$store.commit('addSingleCategory', response.data)
         window.bootstrap.Modal.getInstance(document.querySelector(`#${this.modalId}`)).hide()
         this.newCat = {}

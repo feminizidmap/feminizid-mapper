@@ -63,7 +63,7 @@ export default {
       this.isEditing = false
     },
     updateCategory() {
-      this.$http.secured.put(`/categories/${this.chCat.id}`,
+      this.$httpSecured.put(`/categories/${this.chCat.id}`,
                              { category: this.chCat })
         .then((back) => {
           this.isEditing = false
@@ -72,7 +72,7 @@ export default {
         .catch(error => this.$store.commit('addAlert', { type: 'error', message: error.message }))
     },
     removeCategory() {
-      this.$http.secured.delete(`/categories/${this.category.id}`)
+      this.$httpSecured.delete(`/categories/${this.category.id}`)
         .then(() => {
           this.isEditing = false
           this.$store.commit('removeSingleCategory', this.category)

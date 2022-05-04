@@ -63,7 +63,7 @@ export default {
     async sendCodeItem() {
       try {
         this.newItem.category_id = this.category.id
-        const response = await this.$http.secured.post('/category_items', { category_item: this.newItem })
+        const response = await this.$httpSecured.post('/category_items', { category_item: this.newItem })
         this.$store.commit('addSingleCategoryItem', response.data)
         window.bootstrap.Modal.getInstance(document.querySelector(`#${this.modalId}`)).hide()
         this.newItem = {}
