@@ -69,7 +69,7 @@ export default {
       this.isEditedItem = false
     },
     updateItem() {
-      this.$http.secured.put(`/category_items/${this.item.id}`,
+      this.$httpSecured.put(`/category_items/${this.item.id}`,
                              { category_item: this.chItem })
         .then((back) => {
           this.$store.commit('updateSingleCategoryItem', back.data)
@@ -78,7 +78,7 @@ export default {
         .catch(error => this.$store.commit('addAlert', { type: 'error', message: error.response.data.error }))
     },
     removeItem() {
-      this.$http.secured.delete(`/category_items/${this.item.id}`)
+      this.$httpSecured.delete(`/category_items/${this.item.id}`)
         .then(() => {
              this.isEditedItem = false
              this.$store.commit('addAlert', { type: 'notice', message: this.$t('notice.deleteCatgoryItem') })
