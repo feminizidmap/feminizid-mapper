@@ -16,9 +16,9 @@
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <router-link class="nav-link"
-                         to="/cases">
+                         to="/records">
               <i class="fas fa-database"></i>
-              {{ $t('layout.cases') }}</router-link>
+              {{ $t('layout.records') }}</router-link>
           </li>
           <li class="nav-item dropdown" v-if="showAdminLink()">
             <a class="nav-link dropdown-toggle" href="#" id="dropdownAdmin" role="button" data-bs-toggle="dropdown" aria-expanded="false">

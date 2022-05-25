@@ -29,7 +29,7 @@ const messages = {
     layout: {
       totop: "to top",
       changes2Save: "There are local changes that need to be saved",
-      cases: "Cases",
+      records: "Records",
       categories: {
         title: "Categories",
         blurb: "Here is a blurb"
@@ -150,7 +150,7 @@ const messages = {
     layout: {
       totop: "nach oben",
       changes2Save: "There are local changes that need to be saved",
-      cases: "Fälle",
+      records: "Einträge",
       categories: {
         title: "Kategorien",
         blurb: "Kategorien sind Informationen mit vorher festgelegten Optionen."
@@ -158,6 +158,7 @@ const messages = {
       settings: "Einstellungen",
       userManagement: "Usermanagement",
       caselist: "Fälle",
+      adminArea: "Admin Area",
       admin: "Admin",
       schema: {
         title: "Datenschema",

@@ -9,6 +9,7 @@ import Protected from '@/views/Protected'
 
 import cases from './case'
 import admin from './admin'
+import records from './record'
 
 const routes = [
   {
@@ -42,7 +43,8 @@ const routes = [
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
       },
       cases,
-      admin
+      admin,
+      records
     ]
   }
 ]

@@ -10,8 +10,8 @@ export const store = createStore({
       csrf: null,
       categories: [],
       category_items: [],
-      cases: [],
-      newCase: {},
+      records: [],
+      newRecord: {},
       newCaseHistory: [],
       schema: [],
       schemaHasChanged: false,
@@ -33,18 +33,18 @@ export const store = createStore({
       state.signedIn = true
       state.csrf = csrf
     },
-    setCases(state, list) {
-      state.cases = list
+    setRecords(state, list) {
+      state.records = list
     },
-    addToCases(state, item) {
-      state.cases.push(item)
+    addToRecords(state, item) {
+      state.records.push(item)
     },
-    removeSingleCase(state, item) {
-      state.cases.splice(state.cases.indexOf(item), 1)
+    removeSingleRecord(state, item) {
+      state.records.splice(state.records.indexOf(item), 1)
     },
-    updateSingleCase(state, item) {
-      state.cases = [
-        ...state.cases.filter(element => element.id !== item.id),
+    updateSingleRecord(state, item) {
+      state.records = [
+        ...state.records.filter(element => element.id !== item.id),
         item
       ]
     },

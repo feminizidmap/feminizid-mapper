@@ -10,25 +10,18 @@
     <div class="row">
       <section class="col-12 col-md-4">
         <div class="d-flex justify-content-between">
-          <h2 class="h2">{{ $t('layout.caselist') }}</h2>
+          <h2 class="h2">{{ $t('layout.records') }}</h2>
           <div>
-          <router-link to="/cases" class="btn btn-outline-primary me-2">Alle {{ $t('layout.cases') }}</router-link>
-          <router-link to="/cases/new" class="btn btn-primary">Neuer Fall</router-link>
+          <router-link to="/records" class="btn btn-outline-primary me-2">Alle {{ $t('layout.records') }}</router-link>
+          <router-link to="/records/new" class="btn btn-primary">Neuer Eintrag</router-link>
           </div>
         </div>
-        <CasesList :cases="cases">
-          <CasesItemSimple v-for="fcase in cases"
-                           :key="fcase.id"
-                           :item="fcase" />
-        </CasesList>
+        <RecordsList :records="records">
+          <RecordsItemSimple v-for="record in records"
+                           :key="record.id"
+                           :item="record" />
+        </RecordsList>
         <hr>
-        <router-link to="/cases" class="btn btn-outline-primary">Alle {{ $t('layout.cases') }}</router-link>
-      </section>
-      <section class="col-12 col-md-3">
-        <ChangesList />
-      </section>
-      <section class="col-12 col-md-4">
-        @todo stats? summary?
       </section>
     </div>
   </div>
@@ -36,13 +29,12 @@
 </template>
 
 <script>
-  import CasesList from '@/components/cases/List'
-  import CasesItemSimple from '@/components/cases/ItemSimple'
-import ChangesList from '@/components/changes/List'
+  import RecordsList from '@/components/records/List'
+  import RecordsItemSimple from '@/components/records/ItemSimple'
 
 export default {
   name: 'Dashboard',
-  components: { CasesList, CasesItemSimple, ChangesList },
+  components: { RecordsList, RecordsItemSimple },
   data () {
     return {
 
@@ -52,14 +44,14 @@ export default {
     if (!this.$store.state.signedIn) {
       this.$router.replace('/')
     } else {
-      this.populateCases()
+      this.populateRecords()
     }
   },
   methods: {
-    populateCases() {
-      this.$httpSecured.get('/case')
+    populateRecords() {
+      this.$httpSecured.get('/records')
         .then(response => {
-          this.$store.commit('setCases', response.data.data)
+          this.$store.commit('setRecords', response.data.data)
         })
         .catch(error => { this.setError(error, 'Something went wrong') })
     },
@@ -69,8 +61,8 @@ export default {
     }
   },
   computed: {
-    cases() {
-      return this.$store.state.cases
+    records() {
+      return this.$store.state.records
     }
   }
 }

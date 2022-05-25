@@ -19,7 +19,7 @@
    name: 'AppAlerts',
    watch: {
      alerts(n, a) {
-       console.log(n, a, 'hullo')
+       //console.log(n, a, 'hullo')
        if (n.length > a.length) {
          setTimeout(() => {
            this.$store.commit('removeAlert', n[n.length -1])
