@@ -51,7 +51,7 @@ export default {
       return this.$store.getters.isAdmin
     },
     reallyRmRecord() {
-      this.$http.secured.delete(`/record/${this.item.id}`).then(() => {
+      this.$httpSecured.delete(`/records/${this.item.id}`).then(() => {
         this.$store.commit('removeSingleRecord', this.item)
         this.$store.commit('addAlert', { message: `Deleted item`, type: 'info'})
       }).catch(function (error) {

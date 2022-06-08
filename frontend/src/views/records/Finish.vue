@@ -30,7 +30,7 @@ export default {
       console.log("Saving new record")
       let nC = this.$store.state.newRecord
 
-      this.$http.secured.patch(`/record/${nC.id}`, {
+      this.$httpSecured.patch(`/records/${nC.id}`, {
         frecord: {
           ident: nC.ident,
           sources: nC.sources

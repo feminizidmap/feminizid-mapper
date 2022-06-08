@@ -13,7 +13,7 @@ export default {
     }
   },
   created() {
-    //this.$http.secured.get('/record/')
+    //this.$httpSecured.get('/records/')
     //    .then(response => { this.records = response.data.data })
     //    .catch(error => this.$store.commit('addAlert', { type: 'error', message: error}))
 

@@ -23,7 +23,7 @@
      // if (!this.$store.state.signedIn) {
      //   this.$router.replace('/')
      // } else {
-     //   this.$http.secured.get('/changes')
+     //   this.$httpSecured.get('/changes')
      //       .then(response => { this.changes = response.data })
      //       .catch(error => this.setError(error, 'Something went wrong'))
      // }
