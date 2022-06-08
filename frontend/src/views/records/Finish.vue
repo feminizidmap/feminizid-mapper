@@ -1,7 +1,7 @@
 <template>
 <div>
-  <div v-if="hasNewCase" class="text-center border border-4  p-4">
-    <p>Fall <strong>{{ $store.state.newCase.ident}}</strong></p>
+  <div v-if="hasNewRecord" class="text-center border border-4  p-4">
+    <p>Fall <strong>{{ $store.state.newRecord.ident}}</strong></p>
     <p>@todo render summary</p>
 
     <button
@@ -11,39 +11,39 @@
       <span class="visually-hidden">Loading...</span>
     </button>
     <button v-else class="btn btn-primary"
-            @click.prevent="saveNewCase">Fall speichern</button>
+            @click.prevent="saveNewRecord">Fall speichern</button>
   </div>
 </div>
 </template>
 <script>
 
 export default {
-  name: 'CaseFinish',
+  name: 'RecordFinish',
   data() {
     return {
       isLoading: false
     }
   },
   methods: {
-    saveNewCase() {
+    saveNewRecord() {
       this.isLoading = true
-      console.log("Saving new case")
-      let nC = this.$store.state.newCase
+      console.log("Saving new record")
+      let nC = this.$store.state.newRecord
 
-      this.$http.secured.patch(`/case/${nC.id}`, {
-        fcase: {
+      this.$http.secured.patch(`/record/${nC.id}`, {
+        frecord: {
           ident: nC.ident,
           sources: nC.sources
         }
       }).then(response => {
-        this.$store.commit('updateSingleCase', response.data)
+        this.$store.commit('updateSingleRecord', response.data)
         this.isLoading = false
       }).catch(error => { this.$store.commit('addAlert', { message: `Error bill robinson ${error}`, type: 'error'})})
     }
   },
   computed: {
-    hasNewCase() {
-      return !this.$store.getters.isNewCaseEmpty
+    hasNewRecord() {
+      return !this.$store.getters.isNewRecordEmpty
     }
   }
 }

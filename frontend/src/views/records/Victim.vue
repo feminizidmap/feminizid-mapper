@@ -1,21 +1,21 @@
 <template>
 <div>
-  <CaseFormWrapper title="Infos zum Opfer"
+  <RecordFormWrapper title="Infos zum Opfer"
                    name="victimForm"
                    :allowedLists="allowedCodelists"
                    :modelName="modelName">
     <label for="address" class="form-label">Adresse</label>
     <input type="url" class="form-control" id="address" placeholder="Str Hausnummer">
 
-  </CaseFormWrapper>
+  </RecordFormWrapper>
 
   <div class="text-center border border-4  p-4 mt-5">
     <div class="d-flex justify-content-between">
-      <router-link :to="{ name: 'CaseNewCrime' }" class="btn btn-primary">
+      <router-link :to="{ name: 'RecordNewCrime' }" class="btn btn-primary">
         <i class="fas fa-arrow-circle-left"></i>
         Zurück zur Tat</router-link>
 
-      <router-link :to="{ name: 'CaseNewPerpetrator' }" class="btn btn-primary">
+      <router-link :to="{ name: 'RecordNewPerpetrator' }" class="btn btn-primary">
         Infos zum Täter eintragen
         <i class="fas fa-arrow-circle-right"></i>
       </router-link>
@@ -24,11 +24,11 @@
 </div>
 </template>
 <script>
-  import CaseFormWrapper from '@/components/cases/CaseFormWrapper'
+  import RecordFormWrapper from '@/components/records/RecordFormWrapper'
 
 export default {
-  name: 'CaseVictim',
-  components: { CaseFormWrapper },
+  name: 'RecordVictim',
+  components: { RecordFormWrapper },
   data() {
     return {
       modelName: 'victim',

@@ -7,9 +7,8 @@ import ResetPassword from '@/views/ResetPassword'
 
 import Protected from '@/views/Protected'
 
-import cases from './case'
-import admin from './admin'
 import records from './record'
+import admin from './admin'
 
 const routes = [
   {
@@ -42,7 +41,6 @@ const routes = [
         name: 'Dashboard',
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
       },
-      cases,
       admin,
       records
     ]

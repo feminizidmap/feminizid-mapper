@@ -11,3 +11,6 @@
 User.create(email: 'admin@test.de', role: :admin, password: 'foobar')
 User.create(email: 'reviewer@test.de', role: :reviewer, password: 'foobar')
 User.create(email: 'user@test.de', role: :user, password: 'foobar')
+
+SystemSetting.create(key: 'settings_features', value: '[]')
+SystemSetting.create(key: 'settings_schema', value: '[]')

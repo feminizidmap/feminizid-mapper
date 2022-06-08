@@ -12,7 +12,7 @@ export const store = createStore({
       category_items: [],
       records: [],
       newRecord: {},
-      newCaseHistory: [],
+      newRecordHistory: [],
       schema: [],
       schemaHasChanged: false,
       settings: []
@@ -85,20 +85,20 @@ export const store = createStore({
     removeAlert(state, item) {
       state.alerts.splice(state.alerts.indexOf(item), 1)
     },
-    pushNewCaseHistory(state, item) {
-      state.newCaseHistory.push(item)
+    pushNewRecordHistory(state, item) {
+      state.newRecordHistory.push(item)
     },
-    clearNewCaseHistory(state) {
-      state.newCaseHistory = []
+    clearNewRecordHistory(state) {
+      state.newRecordHistory = []
     },
-    setNewCase(state, item) {
-      state.newCase = item
+    setNewRecord(state, item) {
+      state.newRecord = item
     },
-    setNewCaseProperty(state, propValue) {
-      state.newCase[propValue.prop] = propValue.value
+    setNewRecordProperty(state, propValue) {
+      state.newRecord[propValue.prop] = propValue.value
     },
-    clearNewCase(state) {
-      state.newCase = {}
+    clearNewRecord(state) {
+      state.newRecord = {}
     },
     setSchema(state, value) {
       state.schema = value
@@ -120,10 +120,10 @@ export const store = createStore({
     currentUserId(state) {
       return state.currentUser && state.currentUser.id
     },
-    getCaseById: (state) => (id) => {
-      //const item = state.cases.filter(x => x.id === id)
+    getRecordById: (state) => (id) => {
+      //const item = state.records.filter(x => x.id === id)
       //return item.length > 0 ? item[0] : null
-      return state.cases.find(fcase => fcase.id == id)
+      return state.records.find(frecord => frecord.id == id)
     },
     getCategoryById: (state) => (catID) => {
       return state.categories.find(c => c.id === catID)
@@ -137,8 +137,8 @@ export const store = createStore({
     allAlerts(state) {
       return state.alerts
     },
-    isNewCaseEmpty(state) {
-      return Object.entries(state.newCase).length === 0
+    isNewRecordEmpty(state) {
+      return Object.entries(state.newRecord).length === 0
     },
     getSetting: (state) => (setting) => {
       return state.settings?.find(s => s.key === setting)

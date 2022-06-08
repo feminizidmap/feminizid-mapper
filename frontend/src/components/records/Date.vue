@@ -6,7 +6,7 @@
 </template>
 <script>
 export default {
-  name: 'CaseDate',
+  name: 'RecordDate',
   props: ['item'],
   methods: {
     dateFormat(date) {

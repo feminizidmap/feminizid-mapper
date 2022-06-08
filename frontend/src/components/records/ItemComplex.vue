@@ -1,7 +1,7 @@
 <template>
-<li class="list-group-item d-flex justify-content-between border-3 mb-2 case-item-complex">
+<li class="list-group-item d-flex justify-content-between border-3 mb-2 record-item-complex">
   <div class="">
-    <QuickView :fcase="item" />
+    <QuickView :frecord="item" />
     <CDate :item="item" />
   </div>
   <div>
@@ -14,15 +14,15 @@
     </template>
     <template v-else>
     <router-link  class="btn btn-outline-primary me-2"
-                  :to="{name: 'CaseSingle', params: { caseid: item.id}}">
+                  :to="{name: 'RecordSingle', params: { recordid: item.id}}">
       <i class="fa fa-eye"></i>
       <span class="visually-hidden">{{ $t('forms.see') }}</span></router-link>
-    <router-link to="/cases"  class="btn btn-outline-primary me-2">
+    <router-link to="/records"  class="btn btn-outline-primary me-2">
       <i class="fa fa-edit"></i>
       <span class="visually-hidden">{{ $t('forms.edit') }}</span></router-link>
     <button v-if="showIfAdmin()"
             class="btn btn-outline-danger"
-            @click.prevent="rmCase">
+            @click.prevent="rmRecord">
       <i class="fa fa-trash-alt"></i>
       <span class="visually-hidden">{{ $t('forms.delete') }}</span></button>
     </template>
@@ -30,11 +30,11 @@
 </li>
 </template>
 <script>
-  import QuickView from '@/components/cases/QuickView'
-  import CDate from '@/components/cases/Date'
+  import QuickView from '@/components/records/QuickView'
+  import CDate from '@/components/records/Date'
 
 export default {
-  name: 'CaseItemComplex',
+  name: 'RecordItemComplex',
   components: { QuickView, CDate },
   props: ['item'],
   data() {
@@ -50,9 +50,9 @@ export default {
     showIfAdmin() {
       return this.$store.getters.isAdmin
     },
-    reallyRmCase() {
-      this.$http.secured.delete(`/case/${this.item.id}`).then(() => {
-        this.$store.commit('removeSingleCase', this.item)
+    reallyRmRecord() {
+      this.$http.secured.delete(`/record/${this.item.id}`).then(() => {
+        this.$store.commit('removeSingleRecord', this.item)
         this.$store.commit('addAlert', { message: `Deleted item`, type: 'info'})
       }).catch(function (error) {
         this.$store.commit('addAlert', { message: `Error bill robinson ${error}`, type: 'error'})
@@ -66,11 +66,11 @@ export default {
       this.rmTimerLeftWidth = `width: ${this.rmTimerLeft}%;`
 
       if (diff > this.rmMaxTime + 1000) {
-        this.reallyRmCase()
+        this.reallyRmRecord()
         clearInterval(this.rmIntervalId)
       }
     },
-    rmCase() {
+    rmRecord() {
       this.rmTimer = new Date()
       this.rmTimerLeft = 0
       this.rmTimerLeftWidth = 'width: 0%;'
@@ -86,7 +86,7 @@ export default {
 }
 </script>
 <style>
-  .case-item-complex:hover {
+  .record-item-complex:hover {
   background-color: lightgrey;
   }
 </style>

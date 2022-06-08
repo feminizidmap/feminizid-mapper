@@ -29,8 +29,8 @@ export default {
     }
   },
   created() {
-    if (!this.$store.isNewCaseEmpty) {
-      this.sources = JSON.parse(this.$store.state.newCase.sources)
+    if (!this.$store.isNewRecordEmpty) {
+      this.sources = JSON.parse(this.$store.state.newRecord.sources)
     }
   },
   methods: {
@@ -41,20 +41,20 @@ export default {
                           slug: `source-${id}`,
                           name: `Quelle ${id}`,
                           url: ''})
-      this.$store.commit('pushNewCaseHistory', { message: `Added source ${id}`, date: d, type: 'info'})
+      this.$store.commit('pushNewRecordHistory', { message: `Added source ${id}`, date: d, type: 'info'})
     },
     rmSourceField(id) {
       let d = new Date()
       this.sources.splice(this.sources.indexOf(id), 1)
-      this.$store.commit('pushNewCaseHistory', { message: `Removed source ${id.id}`, date: d, type: 'info'})
+      this.$store.commit('pushNewRecordHistory', { message: `Removed source ${id.id}`, date: d, type: 'info'})
     },
     updateSourceValue(ev) {
       let d = new Date()
       let s = JSON.stringify(this.sources
                              .map(x => { return { id: x.id, url: x.url }})
                              .filter(x => x.url !== ''))
-      this.$store.commit('setNewCaseProperty', { prop: 'sources', value: s })
-      this.$store.commit('pushNewCaseHistory', { message: `Changed source ${ev.target.id} to ${ev.target.value}`, date: d, type: 'info'})
+      this.$store.commit('setNewRecordProperty', { prop: 'sources', value: s })
+      this.$store.commit('pushNewRecordHistory', { message: `Changed source ${ev.target.id} to ${ev.target.value}`, date: d, type: 'info'})
     }
   }
 }

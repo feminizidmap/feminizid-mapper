@@ -4,16 +4,16 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <router-link to="/cases" class="">Alle Fälle</router-link>
+          <router-link to="/records" class="">Alle Fälle</router-link>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">{{ fcase.attributes.ident }}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ frecord.attributes.ident }}</li>
       </ol>
     </nav>
     <hr>
   </div>
   <header class="mt-3 mb-2">
-    <h1 class="fs-1 fw-bold">{{ fcase.attributes.ident }}</h1>
-    <CDate :item="fcase" />
+    <h1 class="fs-1 fw-bold">{{ frecord.attributes.ident }}</h1>
+    <CDate :item="frecord" />
   </header>
   <div class="row my-3">
     <h3>Quellen</h3>
@@ -30,8 +30,8 @@
     <p v-else>No sources</p>
   </div>
 
-  <div class="row my-2" v-if="fcase.relationships.length">
-    <div v-for="(r,i) in fcase.relationships" :key="i" class="col col-12">
+  <div class="row my-2" v-if="frecord.relationships.length">
+    <div v-for="(r,i) in frecord.relationships" :key="i" class="col col-12">
       <h3 class="h2">{{r.data[0].type}}</h3>
       <div v-for="(x, j) in r.data" :key="j">
         {{x.id}}
@@ -42,23 +42,23 @@
 </template>
 
 <script>
-import CDate from '@/components/cases/Date'
+import CDate from '@/components/records/Date'
 
 export default {
-  name: 'CaseSingle',
+  name: 'RecordSingle',
   components: { CDate },
   data() {
     return {
-      fcase: null
+      frecord: null
     }
   },
   created() {
-    this.fcase = this.$store.getters.getCaseById(this.$route.params.caseid)
+    this.frecord = this.$store.getters.getRecordById(this.$route.params.recordid)
   },
   computed: {
     deserializedSources() {
-      if (this.fcase && this.fcase !== '') {
-        return JSON.parse(this.fcase.attributes.sources)
+      if (this.frecord && this.frecord !== '') {
+        return JSON.parse(this.frecord.attributes.sources)
       } else {
         return null
       }

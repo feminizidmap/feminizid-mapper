@@ -14,20 +14,20 @@
 </template>
 
 <script>
-import SourcesField from '@/components/cases/SourcesField'
-//import CDate from '@/components/cases/Date'
+import SourcesField from '@/components/records/SourcesField'
+//import CDate from '@/components/records/Date'
 
 export default {
-  name: 'CaseSingle',
+  name: 'RecordSingle',
   components: { SourcesField },
-  props: ['fcase'],
+  props: ['frecord'],
   data() {
     return {
       //isNew: false
     }
   },
   created() {
-    //this.isNew = this.fcase ? false : true;
+    //this.isNew = this.frecord ? false : true;
 
   },
   computed: {
@@ -36,7 +36,7 @@ export default {
       return `${d.getFullYear()}-${d.getMonth()}-${ 0 }-${ 0 }`
     },
     isNew() {
-      return this.fcase ? false : true;
+      return this.frecord ? false : true;
     }
   },
   methods: {

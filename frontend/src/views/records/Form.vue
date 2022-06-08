@@ -1,7 +1,7 @@
 <template>
 <div class="codelists container-fluid">
   <div class="row">
-    <router-link to="/cases">Übersicht</router-link>
+    <router-link to="/records">Übersicht</router-link>
   </div>
   <hr>
   <div class="row my-2">
@@ -13,16 +13,16 @@
       <nav>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <router-link :to="{ name: 'CaseNewMeta' }" class="nav-link active" aria-current="page">Quellen</router-link>
+            <router-link :to="{ name: 'RecordNewMeta' }" class="nav-link active" aria-current="page">Quellen</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'CaseNewCrime' }" class="nav-link active" aria-current="page">Tat</router-link>
+            <router-link :to="{ name: 'RecordNewCrime' }" class="nav-link active" aria-current="page">Tat</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'CaseNewVictim' }" class="nav-link active" aria-current="page">Opfer</router-link>
+            <router-link :to="{ name: 'RecordNewVictim' }" class="nav-link active" aria-current="page">Opfer</router-link>
           </li>
           <li class="nav-item">
-            <router-link :to="{ name: 'CaseNewPerpetrator' }" class="nav-link active" aria-current="page">Täter</router-link>
+            <router-link :to="{ name: 'RecordNewPerpetrator' }" class="nav-link active" aria-current="page">Täter</router-link>
           </li>
         </ul>
       </nav>
@@ -41,7 +41,7 @@
 
 
 export default {
-  name: 'CaseForm',
+  name: 'RecordForm',
   data() {
     return {
 

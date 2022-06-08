@@ -1,12 +1,12 @@
 <template>
-<div class="case-quickview">
-  <h3 class="h4 fw-bold" @click.prevent="toggleOpen" v-if="fcase.attributes">
+<div class="record-quickview">
+  <h3 class="h4 fw-bold" @click.prevent="toggleOpen" v-if="frecord.attributes">
     <i class="fa fa-caret-down" v-if="isOpen"></i>
     <i class="fa fa-caret-right" v-else></i>
-    {{ fcase.attributes.ident }}</h3>
-  <div v-if="isOpen && fcase.relationships"
+    {{ frecord.attributes.ident }}</h3>
+  <div v-if="isOpen && frecord.relationships"
        class="d-flex">
-    <div v-for="(r,i) in fcase.relationships" :key="i">
+    <div v-for="(r,i) in frecord.relationships" :key="i">
       <div v-if="r.data && r.data.length">
         <h4 class="h5">{{r.data[0].type}}</h4>
         <div v-for="(x, j) in r.data" :key="j">
@@ -19,8 +19,8 @@
 </template>
 <script>
 export default {
-  name: 'CaseQuickView',
-  props: ['fcase'],
+  name: 'RecordQuickView',
+  props: ['frecord'],
   data() {
     return {
       isOpen: false

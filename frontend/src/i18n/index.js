@@ -48,7 +48,7 @@ const messages = {
         }
       },
       userManagement: "User management",
-      caselist: "Cases",
+      recordlist: "Records",
       adminArea: "Admin area",
       overview: "Overview",
       incomplete: "Incomplete"
@@ -157,7 +157,7 @@ const messages = {
       },
       settings: "Einstellungen",
       userManagement: "Usermanagement",
-      caselist: "Fälle",
+      recordlist: "Fälle",
       adminArea: "Admin Area",
       admin: "Admin",
       schema: {
