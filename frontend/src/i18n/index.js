@@ -3,8 +3,11 @@ import { createI18n } from 'vue-i18n'
 const messages = {
   en: {
     forms: {
+      profileSettings: "Profile settings",
       email: "Email address",
+      name: "Username",
       password: "Password",
+      changePassword: "Change password",
       newPassword: "New password",
       passwordConfirmation: "Password confirmation",
       signIn: "Sign in",
@@ -17,7 +20,8 @@ const messages = {
       delete: "Delete",
       create: "Add",
       cancel: "Cancel",
-      close: "Close"
+      close: "Close",
+      deleteAccount: "Delete account"
     },
     dashboard: {
       title: "Dashboard"
@@ -35,6 +39,7 @@ const messages = {
         blurb: "Here is a blurb"
       },
       settings: "Settings",
+      profile: "Profile",
       schema: {
         title: "Data schema",
         blurb: "The schema defines the structure of the data, that means the possible fields on a single record. Think of it as the columns in a spreadsheet.",
@@ -115,7 +120,8 @@ const messages = {
       deleteCodelist: "Successfully deleted option list",
       deleteCodelistItem: "Successfully deleted option",
       schemaSet: "Schema successfully saved",
-      schemaNotSet: "Schema could not be saved"
+      schemaNotSet: "Schema could not be saved",
+      deleteAccount: "Successfully deleted account"
     },
     errors: {
       general: "Something went wrong",
@@ -124,8 +130,11 @@ const messages = {
   },
   de: {
     forms: {
+      profileSettings: "Profil Einstellungen",
       email: "Email-Addresse",
+      name: "Userinnenname",
       password: "Passwort",
+      changePassword: "Passwort ändern",
       newPassword: "Neues Passwort",
       passwordConfirmation: "Passwort bestätigen",
       signIn: "Anmelden",
@@ -138,7 +147,8 @@ const messages = {
       delete: "Löschen",
       create: "Hinzufügen",
       cancel: "Abbrechen",
-      close: "Schließen"
+      close: "Schließen",
+      deleteAccount: "Account löschen"
     },
     dashboard: {
       title: "Dashboard"
@@ -156,6 +166,7 @@ const messages = {
         blurb: "Kategorien sind Informationen mit vorher festgelegten Optionen."
       },
       settings: "Einstellungen",
+      profile: "Profil",
       userManagement: "Usermanagement",
       caselist: "Fälle",
       admin: "Admin",
@@ -233,7 +244,8 @@ const messages = {
       deleteCodelist: "Optionsliste erfolgreich gelöscht",
       deleteCodelistItem: "Option erfolgreich gelöscht",
       schemaSet: "Datenschema erfolgreich gespeichert",
-      schemaNotSet: "Datenschema konnte nicht gespeichert werden"
+      schemaNotSet: "Datenschema konnte nicht gespeichert werden",
+      deleteAccount: "Account erfolgreich gelöscht"
     },
     errors: {
       general: "Etwas is schief gelaufen",

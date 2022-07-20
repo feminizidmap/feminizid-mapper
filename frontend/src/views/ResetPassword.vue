@@ -12,7 +12,7 @@
           <label for="password_confirmation" class="form-label">{{ $t('forms.passwordConfirmation') }}</label>
         </div>
         <button type="submit" class="btn btn-lg btn-primary w-100 mb-4">{{ $t('forms.resetPassword') }}</button>
-        <div>
+        <div v-if="!checkSignedIn">
           <router-link to="/">{{ $t('forms.signIn') }}</router-link>
         </div>
       </form>
@@ -43,6 +43,9 @@
        this.password = ''
        this.password_confirmation = ''
        this.$router.replace('/')
+       if (this.checkSignedIn()) {
+         this.signOut()
+       }
      },
      resetFailed(error) {
        const e = (error.response && error.response.data && error.response.data.error) || this.$t('errors.general')
@@ -54,6 +57,18 @@
              this.resetFailed(error)
              this.$router.replace('/')
            })
+     },
+     checkSignedIn () {
+       return this.$store.state.signedIn
+     },
+     signOut () {
+       this.$httpSecured.delete('/signin')
+           .then(() => {
+             this.$store.commit('addAlert', { type: 'notice', message: this.$t('notice.singedOut') })
+             this.$store.commit('unsetCurrentUser')
+             this.$router.replace('/signin')
+           })
+           .catch(error => this.setError(error, this.$t('errors.cannotSignout')))
      }
    }
  }

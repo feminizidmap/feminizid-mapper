@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, controller: :users, only: %i[update destroy]
+  resources :users, controller: :users, only: %i[show update destroy]
   get '/me', controller: :users, action: :me
 
   resources :system_settings
