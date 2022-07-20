@@ -43,6 +43,15 @@ RSpec.describe UsersController, type: :controller do
       expect(user.reload.role).to eq('user')
       expect(response).to have_http_status(:ok)
     end
+
+    it 'does not allow admin to update role (here)' do
+      admin = create(:user, role: :admin)
+      sign_in_as(admin)
+      expect(admin.role).to eq('admin')
+      put :update, params: { id: admin.to_param, user: { role: 'user' } }
+      expect(admin.reload.role).to eq('admin')
+      expect(response).to have_http_status(:ok)
+    end
   end
 
   describe 'DELETE #destroy' do
