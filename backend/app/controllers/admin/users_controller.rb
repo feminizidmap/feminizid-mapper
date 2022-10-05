@@ -30,7 +30,7 @@ module Admin
 
     def update
       if current_user.id == @user.id
-        render json: { error: 'Admin cannot modify their own rile' }, status: :bad_request
+        render json: { error: 'Admin cannot modify their own role' }, status: :bad_request
       else
         @user.update!(user_params)
         JWTSessions::Session.new(namespace: "user_#{@user.id}").flush_namespaced_access_tokens

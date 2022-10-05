@@ -36,6 +36,12 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link"
+                        to="/profile">
+              <i class="fas fa-database"></i>
+              {{ $t('layout.profile') }}</router-link>
+          </li>
         </ul>
         <Signout class="d-flex" />
       </div>
