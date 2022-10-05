@@ -123,7 +123,7 @@ export const store = createStore({
     getRecordById: (state) => (id) => {
       //const item = state.records.filter(x => x.id === id)
       //return item.length > 0 ? item[0] : null
-      return state.records.find(frecord => frecord.id == id)
+      return state.records.find(record => record.id == id)
     },
     getCategoryById: (state) => (catID) => {
       return state.categories.find(c => c.id === catID)

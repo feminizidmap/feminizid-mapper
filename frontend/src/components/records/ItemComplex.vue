@@ -1,7 +1,7 @@
 <template>
 <li class="list-group-item d-flex justify-content-between border-3 mb-2 record-item-complex">
   <div class="">
-    <QuickView :frecord="item" />
+    <QuickView :record="item" />
     <CDate :item="item" />
   </div>
   <div>

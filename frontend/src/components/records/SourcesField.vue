@@ -30,7 +30,7 @@ export default {
   },
   created() {
     if (!this.$store.isNewRecordEmpty) {
-      this.sources = JSON.parse(this.$store.state.newRecord.sources)
+      this.sources = this.$store.state.newRecord.sources ? JSON.parse(this.$store.state.newRecord.sources) : []
     }
   },
   methods: {

@@ -31,7 +31,7 @@ export default {
       let nC = this.$store.state.newRecord
 
       this.$httpSecured.patch(`/records/${nC.id}`, {
-        frecord: {
+        record: {
           ident: nC.ident,
           sources: nC.sources
         }

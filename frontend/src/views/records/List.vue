@@ -17,9 +17,9 @@
     <div class="col col-lg-3"></div>
     <div class="col-12 col-lg-6">
       <RecordsList :records="filteredRecords" v-if="filteredRecords">
-        <RecordsItemComplex v-for="frecord in filteredRecords"
-                          :key="frecord.id"
-                          :item="frecord" />
+        <RecordsItemComplex v-for="record in filteredRecords"
+                          :key="record.id"
+                          :item="record" />
       </RecordsList>
     </div>
     <div class="col col-lg-3"></div>

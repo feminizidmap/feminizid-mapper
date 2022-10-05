@@ -20,14 +20,14 @@ import SourcesField from '@/components/records/SourcesField'
 export default {
   name: 'RecordSingle',
   components: { SourcesField },
-  props: ['frecord'],
+  props: ['record'],
   data() {
     return {
       //isNew: false
     }
   },
   created() {
-    //this.isNew = this.frecord ? false : true;
+    //this.isNew = this.record ? false : true;
 
   },
   computed: {
@@ -36,7 +36,7 @@ export default {
       return `${d.getFullYear()}-${d.getMonth()}-${ 0 }-${ 0 }`
     },
     isNew() {
-      return this.frecord ? false : true;
+      return this.record ? false : true;
     }
   },
   methods: {

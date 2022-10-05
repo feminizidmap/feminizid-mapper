@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-if="hasNewRecord" class="text-center border border-4  p-4">
-    <p>Du bearbeitest Fall <strong>{{ $store.state.newRecord.ident}}</strong>.</p>
+    <p>Du bearbeitest Fall <strong>{{ $store.state.newRecord.identifier}}</strong>.</p>
 
     <p><router-link :to="{ name: 'RecordNewMeta' }" class="btn btn-primary">
         Trage Infos zum Fall ein
@@ -44,7 +44,7 @@ export default {
       this.isLoading = true
       let d = new Date()
       const identTemp = `${d.getFullYear()}-${ ('0' + (d.getMonth() + 1)).slice(-2) }-${d.getDate() }-xx`
-      this.$httpSecured.post('/records/', { identifier: identTemp })
+      this.$httpSecured.post('/records/', { record: { 'identifier': identTemp}})
         .then(response => {
           this.$store.commit('setNewRecord', response.data)
           this.$store.commit('pushNewRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })

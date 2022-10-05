@@ -15,7 +15,7 @@
   <div class="row my-2">
     <div class="col col-2">
       <div v-if="!$store.getters.isNewRecordEmpty">
-        <p>{{ $store.state.newRecord.ident }}</p>
+        <p>{{ $store.state.newRecord.identifier }}</p>
 
         <div>
           @todo status

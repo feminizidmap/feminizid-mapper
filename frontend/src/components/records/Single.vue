@@ -1,6 +1,6 @@
 <template>
 <div class="records-single">
-  <h2 class="h1">{{ frecord.attributes.ident }}</h2>
+  <h2 class="h1">{{ record.attributes.ident }}</h2>
 </div>
 </template>
 <script>
