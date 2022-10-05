@@ -44,7 +44,7 @@ export default {
       this.isLoading = true
       let d = new Date()
       const identTemp = `${d.getFullYear()}-${ ('0' + (d.getMonth() + 1)).slice(-2) }-${d.getDate() }-xx`
-      this.$httpSecured.post('/records/', { frecord: { 'ident': identTemp}})
+      this.$httpSecured.post('/records/', { identifier: identTemp })
         .then(response => {
           this.$store.commit('setNewRecord', response.data)
           this.$store.commit('pushNewRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })
