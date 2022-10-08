@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-if="hasNewRecord" class="text-center border border-4  p-4">
-    <p>Fall <strong>{{ $store.state.newRecord.ident}}</strong></p>
+    <p>Fall <strong>{{ $store.state.newRecord.identifier}}</strong></p>
     <p>@todo render summary</p>
 
     <button
@@ -28,14 +28,15 @@ export default {
     saveNewRecord() {
       this.isLoading = true
       console.log("Saving new record")
-      let nC = this.$store.state.newRecord
+      let nR = this.$store.state.newRecord
 
-      this.$httpSecured.patch(`/records/${nC.id}`, {
+      this.$httpSecured.patch(`/records/${nR.id}`, {
         record: {
-          ident: nC.ident,
-          sources: nC.sources
+          identifier: nR.identifier,
+          sources: nR.sources
         }
       }).then(response => {
+        console.log("Saved!")
         this.$store.commit('updateSingleRecord', response.data)
         this.isLoading = false
       }).catch(error => { this.$store.commit('addAlert', { message: `Error bill robinson ${error}`, type: 'error'})})

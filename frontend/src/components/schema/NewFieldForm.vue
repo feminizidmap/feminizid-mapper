@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     fieldFeatures() {
-      return JSON.parse(this.$store.getters.getSetting('settings_features').value)
+      return this.$store.getters.getSetting('settings_features') ? JSON.parse(this.$store.getters.getSetting('settings_features').value) : []
     }
   }
 }

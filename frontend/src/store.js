@@ -10,6 +10,7 @@ export const store = createStore({
       csrf: null,
       categories: [],
       category_items: [],
+      codelists: [],
       records: [],
       newRecord: {},
       newRecordHistory: [],

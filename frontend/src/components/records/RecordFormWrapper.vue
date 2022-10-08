@@ -12,7 +12,7 @@
 </section>
 </template>
 <script>
-  import Accordion from '@/components/Accordion'
+import Accordion from '@/components/Accordion'
 export default {
   name: "RecordFormWrapper",
   props: { title: String,

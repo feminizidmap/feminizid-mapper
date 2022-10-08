@@ -1,6 +1,6 @@
 <template>
 <li class="list-group-item border-3 mb-2 record-item-simple">
-  <h3 class="fw-bold h4 mt-2">{{ item.attributes.identifier }}</h3>
+  <h3 class="fw-bold h4 mt-2">{{ item.identifier }}</h3>
   <CDate :item="item" />
 </li>
 </template>

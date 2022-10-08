@@ -51,7 +51,7 @@ export default {
     populateRecords() {
       this.$httpSecured.get('/records')
         .then(response => {
-          this.$store.commit('setRecords', response.data.data)
+          this.$store.commit('setRecords', response.data)
         })
         .catch(error => { this.setError(error, 'Something went wrong') })
     },
