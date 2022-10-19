@@ -14,7 +14,7 @@
     </template>
     <template v-else>
     <router-link  class="btn btn-outline-primary me-2"
-                  :to="{name: 'RecordSingle', params: { recordid: item.id}}">
+                  :to="{name: 'RecordSingle', params: { recordid: item.id } }">
       <i class="fa fa-eye"></i>
       <span class="visually-hidden">{{ $t('forms.see') }}</span></router-link>
     <router-link to="/records"  class="btn btn-outline-primary me-2">

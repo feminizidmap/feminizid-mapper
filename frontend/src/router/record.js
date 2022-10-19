@@ -2,11 +2,8 @@ import RecordList from '@/views/records/List'
 import RecordSingle from '@/views/records/Single'
 import RecordNewForm from '@/views/records/NewForm'
 import RecordWizard from '@/views/records/Wizard'
+import RecordEntityNewForm from '@/views/records/RecordEntityForm'
 import RecordFinish from '@/views/records/Finish'
-import RecordMeta from '@/views/records/Meta'
-import RecordCrime from '@/views/records/Crime'
-import RecordVictim from '@/views/records/Victim'
-import RecordPerp from '@/views/records/Perpetrator'
 
 export default {
   path: '/records/',
@@ -29,29 +26,14 @@ export default {
           component: RecordWizard
         },
         {
+          path: ':entityname',
+          name: 'RecordNewEntity',
+          component: RecordEntityNewForm
+        },
+        {
           path: 'finish',
           name: 'RecordNewFinish',
           component: RecordFinish
-        },
-        {
-          path: 'meta',
-          name: 'RecordNewMeta',
-          component: RecordMeta
-        },
-        {
-          path: 'crime',
-          name: 'RecordNewCrime',
-          component: RecordCrime
-        },
-        {
-          path: 'victim',
-          name: 'RecordNewVictim',
-          component: RecordVictim
-        },
-        {
-          path: 'perpetrator',
-          name: 'RecordNewPerpetrator',
-          component: RecordPerp
         }
       ]
     },

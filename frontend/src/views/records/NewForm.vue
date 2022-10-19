@@ -32,19 +32,14 @@
             v-for="entity in schemaSetting"
             :key="entity.id"
           >
-            <router-link :to="{ name: 'RecordNewWizard' }" class="nav-link">{{ entity.name }}</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewMeta' }" class="nav-link">Meta</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewCrime' }" class="nav-link">Tat</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewVictim' }" class="nav-link">Opfer</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewPerpetrator' }" class="nav-link">Täter</router-link>
+            <router-link 
+              :to="{name: 'RecordNewEntity', 
+                    params: { entityname: entity.name }, 
+                    query: { attributes: JSON.stringify(entity.attributes) } }" 
+                    class="nav-link"
+            >
+              {{ entity.name }}
+            </router-link>
           </li>
           <li><hr></li>
           <li class="nav-item">
@@ -55,8 +50,7 @@
 
     </div>
     <div class="col col-7">
-      {{ $store.state.newRecord }}
-      <router-view></router-view>
+      <router-view :key="$route.path"></router-view>
     </div>
     <div class="col col-3">
       <aside v-if="$store.state.newRecordHistory.length > 0">
@@ -98,7 +92,6 @@ export default {
 
       return settingsObject
     }
-
   }
 }
 </script>
