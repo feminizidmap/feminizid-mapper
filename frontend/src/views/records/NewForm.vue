@@ -28,6 +28,12 @@
             <router-link :to="{ name: 'RecordNewWizard' }" class="nav-link">Wizard</router-link>
           </li>
           <li><hr></li>
+          <li class="nav-item"
+            v-for="entity in schemaSetting"
+            :key="entity.id"
+          >
+            <router-link :to="{ name: 'RecordNewWizard' }" class="nav-link">{{ entity.name }}</router-link>
+          </li>
           <li class="nav-item">
             <router-link :to="{ name: 'RecordNewMeta' }" class="nav-link">Meta</router-link>
           </li>
@@ -70,17 +76,28 @@ export default {
   name: 'RecordForm',
   data() {
     return {
-      isLoading: false
+      isLoading: false,
+      schemaSetting: null
     }
   },
   created() {
-
+    this.schemaSetting = this.createSettingsSchemaObject()
   },
   methods: {
     formattedDate(datestr) {
       let d = new Date(datestr)
       return d.toLocaleTimeString('de-DE')
     },
+    createSettingsSchemaObject() {
+      const settings = this.$store.getters.getSetting('settings_schema') ? JSON.parse(this.$store.getters.getSetting('settings_schema').value) : []
+      let settingsObject = [];
+
+      settings.forEach(s => {
+        settingsObject.push(s)
+      })
+
+      return settingsObject
+    }
 
   }
 }
