@@ -28,6 +28,19 @@
             <router-link :to="{ name: 'RecordNewWizard' }" class="nav-link">Wizard</router-link>
           </li>
           <li><hr></li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'RecordNewMeta' }" class="nav-link">Meta</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'RecordNewCrime' }" class="nav-link">Tat</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'RecordNewVictim' }" class="nav-link">Opfer</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'RecordNewPerpetrator' }" class="nav-link">Täter</router-link>
+          </li>
+          <li><hr></li>
           <li class="nav-item"
             v-for="entity in schemaSetting"
             :key="entity.id"

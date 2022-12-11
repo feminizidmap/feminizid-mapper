@@ -4,10 +4,14 @@ import RecordNewForm from '@/views/records/NewForm'
 import RecordWizard from '@/views/records/Wizard'
 import RecordEntityNewForm from '@/views/records/RecordEntityForm'
 import RecordFinish from '@/views/records/Finish'
+import RecordMeta from '@/views/records/Meta'
+import RecordCrime from '@/views/records/Crime'
+import RecordVictim from '@/views/records/Victim'
+import RecordPerp from '@/views/records/Perpetrator'
 
 export default {
   path: '/records/',
-  name: 'Records',
+  name: 'records',
   component: () => import(/* webpackChunkName: "records" */ '@/views/RecordList.vue'),
   children: [
     {
@@ -24,6 +28,26 @@ export default {
           path: '',
           name: 'RecordNewWizard',
           component: RecordWizard
+        },
+        {
+          path: 'meta',
+          name: 'RecordNewMeta',
+          component: RecordMeta
+        },
+        {
+          path: 'crime',
+          name: 'RecordNewCrime',
+          component: RecordCrime
+        },
+        {
+          path: 'victim',
+          name: 'RecordNewVictim',
+          component: RecordVictim
+        },
+        {
+          path: 'perpetrator',
+          name: 'RecordNewPerpetrator',
+          component: RecordPerp
         },
         {
           path: ':entityname',
