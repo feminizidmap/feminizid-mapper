@@ -24,39 +24,16 @@
       </div>
       <nav>
         <ul class="nav nav-pills flex-column">
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewWizard' }" class="nav-link">Wizard</router-link>
-          </li>
-          <li><hr></li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewMeta' }" class="nav-link">Meta</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewCrime' }" class="nav-link">Tat</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewVictim' }" class="nav-link">Opfer</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewPerpetrator' }" class="nav-link">Täter</router-link>
-          </li>
-          <li><hr></li>
           <li class="nav-item"
-            v-for="entity in schemaSetting"
-            :key="entity.id"
+            v-for="step in steps"
+            :key="step.id"
           >
             <router-link 
-              :to="{name: 'RecordNewEntity', 
-                    params: { entityname: entity.name }, 
-                    query: { attributes: JSON.stringify(entity.attributes) } }" 
-                    class="nav-link"
+              :to="step.link" 
+              class="nav-link"
             >
-              {{ entity.name }}
+              {{ step.name }}
             </router-link>
-          </li>
-          <li><hr></li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewFinish' }" class="nav-link">Zusammenfassung</router-link>
           </li>
         </ul>
       </nav>
@@ -80,11 +57,12 @@
 </template>
 <script>
 export default {
-  name: 'RecordForm',
+  name: 'WizardPanel',
+  props: { steps: Array },
   data() {
     return {
       isLoading: false,
-      schemaSetting: null
+      schemaSetting: null,
     }
   },
   created() {

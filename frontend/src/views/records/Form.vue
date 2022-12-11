@@ -1,56 +1,55 @@
 <template>
-<div class="codelists container-fluid">
-  <div class="row">
-    <router-link to="/records">Übersicht</router-link>
+  <div>
+    <WizardPanel :steps="steps" />
+    <WizardControl />
   </div>
-  <hr>
-  <div class="row my-2">
-    <div class="col col-2">
-      <div>
-        <span class="">{{}}</span>
-        <span>@todo explain what the identifier is/ does</span>
-      </div>
-      <nav>
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewMeta' }" class="nav-link active" aria-current="page">Quellen</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewCrime' }" class="nav-link active" aria-current="page">Tat</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewVictim' }" class="nav-link active" aria-current="page">Opfer</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link :to="{ name: 'RecordNewPerpetrator' }" class="nav-link active" aria-current="page">Täter</router-link>
-          </li>
-        </ul>
-      </nav>
-
-    </div>
-    <div class="col col-7">
-      <router-view></router-view>
-    </div>
-    <div class="col col-3">
-      @todo maybe put changes history here?
-    </div>
-  </div>
-</div>
 </template>
 <script>
-
+import WizardPanel from '@/components/records/WizardPanel'
+import WizardControl from '@/components/records/WizardControl'
 
 export default {
-  name: 'RecordForm',
+  name: 'RecordNewForm',
+  components: { WizardPanel, WizardControl },
   data() {
     return {
-
+      schemaSetting: null,
+      steps: null
     }
   },
   created() {
-
+    this.schemaSetting = this.createSettingsSchemaObject(),
+    this.steps = this.buildStepsWithSchema()
   },
   methods: {
+    createSettingsSchemaObject() {
+      const settings = this.$store.getters.getSetting('settings_schema') ? JSON.parse(this.$store.getters.getSetting('settings_schema').value) : []
+      let settingsObject = [];
+
+      settings.forEach(s => {
+        settingsObject.push(s)
+      })
+
+      return settingsObject
+    },
+    buildStepsWithSchema() {
+      let steps = [
+        { name: 'Wizard', link: { name: 'RecordNewWizard' }}, 
+        { name: 'Meta', link: { name: 'RecordNewMeta' }},
+        { name: 'Tat', link: { name: 'RecordNewCrime' }},
+        { name: 'Opfer', link: { name: 'RecordNewVictim' }},
+        { name: 'Täter', link: { name: 'RecordNewPerpetrator' }}
+      ];
+
+      this.schemaSetting.forEach(s => {
+        steps.push({name: s.name, link: {name: 'RecordNewEntity', 
+                    params: { entityname: s.name }, 
+                    query: { attributes: JSON.stringify(s.attributes) }}})
+      })
+
+      steps.push({ name: 'Zusammenfassung', link: { name: 'RecordNewFinish'}});
+      return steps
+    }
   }
 }
 </script>
