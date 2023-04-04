@@ -10,7 +10,7 @@
     <hr>
   </div>
   <div class="row mt-3 mb-4">
-    <h1 class="fs-1 fw-bold">Neuer Fall hinzufügen</h1>
+    <h1 class="fs-1 fw-bold">Neuen Fall hinzufügen</h1>
   </div>
   <div class="row my-2">
     <div class="col col-2">

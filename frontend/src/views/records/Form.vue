@@ -1,7 +1,7 @@
 <template>
   <div>
     <WizardPanel :steps="steps" />
-    <WizardControl />
+    <WizardControl :steps="steps" />
   </div>
 </template>
 <script>
