@@ -6,13 +6,13 @@
         <li class="breadcrumb-item">
           <router-link to="/records" class="">Alle Fälle</router-link>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">{{ record.attributes.ident }}</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ record.ident }}</li>
       </ol>
     </nav>
     <hr>
   </div>
   <header class="mt-3 mb-2">
-    <h1 class="fs-1 fw-bold">{{ record.attributes.ident }}</h1>
+    <h1 class="fs-1 fw-bold">{{ record.ident }}</h1>
     <CDate :item="record" />
   </header>
   <div class="row my-3">
@@ -30,7 +30,7 @@
     <p v-else>No sources</p>
   </div>
 
-  <div class="row my-2" v-if="record.relationships.length">
+  <div class="row my-2" v-if="record.relationships">
     <div v-for="(r,i) in record.relationships" :key="i" class="col col-12">
       <h3 class="h2">{{r.data[0].type}}</h3>
       <div v-for="(x, j) in r.data" :key="j">
@@ -53,12 +53,18 @@ export default {
     }
   },
   created() {
+    if (!this.$store.state.signedIn) {
+      this.$router.replace('/')
+    } else {
+      this.$store.dispatch('fetchRecords')
+    }
+    console.log(this.$store.getters.getRecordById(this.$route.params.recordid))
     this.record = this.$store.getters.getRecordById(this.$route.params.recordid)
   },
   computed: {
     deserializedSources() {
-      if (this.record && this.record !== '') {
-        return JSON.parse(this.record.attributes.sources)
+      if (this.record && this.record.sources) {
+        return JSON.parse(this.record.sources)
       } else {
         return null
       }

@@ -1,5 +1,6 @@
 <template>
 <li class="list-group-item d-flex justify-content-between border-3 mb-2 record-item-complex">
+  <h3 class="fw-bold h4 mt-2">{{ item.identifier }}</h3>
   <div class="">
     <QuickView :record="item" />
     <CDate :item="item" />

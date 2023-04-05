@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import { securedAxiosInstance } from './backend/axios'
 
 export const store = createStore({
   state() {
@@ -146,6 +147,18 @@ export const store = createStore({
     },
     hasStoreLocalChange(state) {
       return Object.keys(state.schema).length !== 0
+    }
+  },
+  actions: {
+    fetchRecords({ commit }) {
+      securedAxiosInstance.get('/records')
+        .then(response => {
+          commit('setRecords', response.data)
+        })
+        .catch(error => {
+          const e = (error.response && error.response.data && error.response.data.error) || 'Something went wrong.'
+          commit('addAlert', { type: 'error', message: e})
+        })
     }
   },
   plugins: [createPersistedState()]

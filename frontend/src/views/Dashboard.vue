@@ -29,8 +29,9 @@
 </template>
 
 <script>
-  import RecordsList from '@/components/records/List'
-  import RecordsItemSimple from '@/components/records/ItemSimple'
+import RecordsList from '@/components/records/List'
+import RecordsItemSimple from '@/components/records/ItemSimple'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Dashboard',
@@ -44,26 +45,11 @@ export default {
     if (!this.$store.state.signedIn) {
       this.$router.replace('/')
     } else {
-      this.populateRecords()
-    }
-  },
-  methods: {
-    populateRecords() {
-      this.$httpSecured.get('/records')
-        .then(response => {
-          this.$store.commit('setRecords', response.data)
-        })
-        .catch(error => { this.setError(error, 'Something went wrong') })
-    },
-    setError (error, text) {
-      const e = (error.response && error.response.data && error.response.data.error) || text
-      this.$store.commit('addAlert', { type: 'error', message: e})
+      this.$store.dispatch('fetchRecords')
     }
   },
   computed: {
-    records() {
-      return this.$store.state.records
-    }
+    ...mapState(['records'])
   }
 }
 </script>

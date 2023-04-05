@@ -40,7 +40,7 @@
 
     </div>
     <div class="col col-7">
-      <div v-if="hasNewRecord">
+      <div v-if="hasNewRecord" class="h-100 d-flex flex-column">
         <router-view :key="$route.path"></router-view>
         <WizardControl :steps="steps" />
       </div>
@@ -56,7 +56,7 @@
                 @click.prevent="createNewRecord">Mit neuem Fall Starten</button>
       </div>
     </div>
-    <div class="col col-3">
+    <div class="col col-3 d-flex flex-column">
       <aside v-if="$store.state.newRecordHistory.length > 0">
         <h4>Neuer Fall Schritte</h4>
         <ol>
@@ -65,7 +65,7 @@
           </li>
         </ol>
       </aside>
-      <div v-if="hasNewRecord">
+      <div v-if="hasNewRecord" class="mt-auto">
         <button class="btn btn-outline-primary mx-4" @click.prevent="clearNewRecord">Abbrechen</button>
         <router-link :to="{ name: 'RecordNewFinish' }" class="btn btn-outline-primary mx">Diesen Fall speichern und abschließen</router-link>
       </div>

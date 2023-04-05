@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center border border-4 p-4 mt-5">
+  <div class="text-center border border-4 p-4 mt-auto">
     <div class="d-flex justify-content-between">
       <router-link v-if="activeStepIndex > 0" :to="steps[activeStepIndex - 1].link" class="btn btn-primary">
         <i class="fas fa-arrow-circle-left"></i>
