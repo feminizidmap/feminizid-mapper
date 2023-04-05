@@ -82,27 +82,13 @@ export default {
   components: { WizardControl },
   data() {
     return {
-      isLoading: false,
-      schemaSetting: null,
+      isLoading: false
     }
-  },
-  created() {
-    this.schemaSetting = this.createSettingsSchemaObject()
   },
   methods: {
     formattedDate(datestr) {
       let d = new Date(datestr)
       return d.toLocaleTimeString('de-DE')
-    },
-    createSettingsSchemaObject() {
-      const settings = this.$store.getters.getSetting('settings_schema') ? JSON.parse(this.$store.getters.getSetting('settings_schema').value) : []
-      let settingsObject = [];
-
-      settings.forEach(s => {
-        settingsObject.push(s)
-      })
-
-      return settingsObject
     },
     createNewRecord() {
       this.isLoading = true
