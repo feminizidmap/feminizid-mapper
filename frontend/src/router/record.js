@@ -1,7 +1,7 @@
 import RecordList from '@/views/records/List'
 import RecordSingle from '@/views/records/Single'
 import RecordNew from '@/views/records/Form'
-import RecordWizard from '@/views/records/Wizard'
+import RecordStart from '@/views/records/Start'
 import RecordEntityNewForm from '@/views/records/RecordEntityForm'
 import RecordFinish from '@/views/records/Finish'
 import RecordMeta from '@/views/records/Meta'
@@ -26,8 +26,8 @@ export default {
       children: [
         {
           path: '',
-          name: 'RecordNewWizard',
-          component: RecordWizard
+          name: 'RecordNewStart',
+          component: RecordStart
         },
         {
           path: 'meta',

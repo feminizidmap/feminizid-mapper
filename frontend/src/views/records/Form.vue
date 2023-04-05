@@ -1,16 +1,14 @@
 <template>
   <div>
-    <WizardPanel :steps="steps" />
-    <WizardControl :steps="steps" />
+    <Wizard :steps="steps" />
   </div>
 </template>
 <script>
-import WizardPanel from '@/components/records/WizardPanel'
-import WizardControl from '@/components/records/WizardControl'
+import Wizard from '@/components/records/Wizard'
 
 export default {
   name: 'RecordNewForm',
-  components: { WizardPanel, WizardControl },
+  components: { Wizard },
   data() {
     return {
       schemaSetting: null,
@@ -33,8 +31,8 @@ export default {
       return settingsObject
     },
     buildStepsWithSchema() {
-      let steps = [
-        { name: 'Wizard', link: { name: 'RecordNewWizard' }}, 
+      let steps = [ 
+        { name: 'Start', link: { name: 'RecordNewStart' }},
         { name: 'Meta', link: { name: 'RecordNewMeta' }},
         { name: 'Tat', link: { name: 'RecordNewCrime' }},
         { name: 'Opfer', link: { name: 'RecordNewVictim' }},

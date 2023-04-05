@@ -1,18 +1,7 @@
 <template>
 <div>
   <div v-if="hasNewRecord" class="text-center border border-4  p-4">
-    <p>Du bearbeitest Fall <strong>{{ $store.state.newRecord.identifier}}</strong>.</p>
-
-    <p><router-link :to="{ name: 'RecordNewMeta' }" class="btn btn-primary">
-        Trage Infos zum Fall ein
-        <i class="fas fa-arrow-circle-right"></i></router-link>
-    </p>
-
-    <hr class="border border-top border-2 border-secondary">
-    <router-link :to="{ name: 'RecordNewFinish' }" class="btn btn-outline-primary mx">Diesen Fall speichern und abschließen</router-link>
-
-    <button class="btn btn-outline-primary mx-4"
-            @click.prevent="clearNewRecord">Neuen Fall starten</button>
+    @todo Infos über das aktuelle Datenschema (?)
   </div>
   <div v-else class="text-center border border-4  p-4">
     <h3 class="my-4">Starte hier um einen neuen Fall einzutragen!</h3>
@@ -30,7 +19,7 @@
 <script>
 
 export default {
-  name: 'RecordWizard',
+  name: 'RecordStart',
   data() {
     return {
       isLoading: false

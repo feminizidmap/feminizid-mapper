@@ -40,7 +40,22 @@ export default {
         this.$store.commit('updateSingleRecord', response.data)
         this.isLoading = false
       }).catch(error => { this.$store.commit('addAlert', { message: `Error bill robinson ${error}`, type: 'error'})})
-    }
+    },
+    createNewRecord() { // for save and directly create new record option
+      this.isLoading = true
+      let d = new Date()
+      const identTemp = `${d.getFullYear()}-${ ('0' + (d.getMonth() + 1)).slice(-2) }-${d.getDate() }-xx`
+      this.$httpSecured.post('/records/', { record: { 'identifier': identTemp}})
+        .then(response => {
+          this.$store.commit('setNewRecord', response.data)
+          this.$store.commit('pushNewRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })
+          this.isLoading = false
+        })
+        .catch(error => {
+          this.$store.commit('addAlert', { message: error, type: 'danger' })
+          this.isLoading = false
+        })
+    },
   },
   computed: {
     hasNewRecord() {

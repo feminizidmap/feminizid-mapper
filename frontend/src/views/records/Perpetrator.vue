@@ -8,19 +8,6 @@
     <input type="url" class="form-control" id="address" placeholder="Str Hausnummer">
 
   </RecordFormWrapper>
-
-  <div class="text-center border border-4  p-4 mt-5">
-    <div class="d-flex justify-content-between">
-      <router-link :to="{ name: 'RecordNewVictim' }" class="btn btn-primary">
-        <i class="fas fa-arrow-circle-left"></i>
-        Zurück zum Opfer</router-link>
-
-      <router-link :to="{ name: 'RecordNewFinish' }" class="btn btn-primary">
-        Fall beenden
-        <i class="fas fa-arrow-circle-right"></i>
-      </router-link>
-    </div>
-  </div>
 </div>
 </template>
 <script>

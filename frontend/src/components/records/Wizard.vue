@@ -15,7 +15,7 @@
   <div class="row my-2">
     <div class="col col-2">
       <div v-if="!$store.getters.isNewRecordEmpty">
-        <p>{{ $store.state.newRecord.identifier }}</p>
+        <p>Du bearbeitest Fall <strong>{{ $store.state.newRecord.identifier}}</strong>.</p>
 
         <div>
           @todo status
@@ -40,7 +40,21 @@
 
     </div>
     <div class="col col-7">
-      <router-view :key="$route.path"></router-view>
+      <div v-if="hasNewRecord">
+        <router-view :key="$route.path"></router-view>
+        <WizardControl :steps="steps" />
+      </div>
+      <div v-else class="text-center border border-4  p-4">
+        <h3 class="my-4">Starte hier um einen neuen Fall einzutragen!</h3>
+        <button
+          v-if="isLoading"
+          class="btn btn-primary" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="visually-hidden">Loading...</span>
+        </button>
+        <button v-else class="btn btn-primary"
+                @click.prevent="createNewRecord">Mit neuem Fall Starten</button>
+      </div>
     </div>
     <div class="col col-3">
       <aside v-if="$store.state.newRecordHistory.length > 0">
@@ -51,14 +65,21 @@
           </li>
         </ol>
       </aside>
+      <div v-if="hasNewRecord">
+        <button class="btn btn-outline-primary mx-4" @click.prevent="clearNewRecord">Abbrechen</button>
+        <router-link :to="{ name: 'RecordNewFinish' }" class="btn btn-outline-primary mx">Diesen Fall speichern und abschließen</router-link>
+      </div>
     </div>
   </div>
 </div>
 </template>
 <script>
+import WizardControl from '@/components/records/WizardControl'
+
 export default {
-  name: 'WizardPanel',
+  name: 'Wizard',
   props: { steps: Array },
+  components: { WizardControl },
   data() {
     return {
       isLoading: false,
@@ -82,6 +103,32 @@ export default {
       })
 
       return settingsObject
+    },
+    createNewRecord() {
+      this.isLoading = true
+      let d = new Date()
+      const identTemp = `${d.getFullYear()}-${ ('0' + (d.getMonth() + 1)).slice(-2) }-${d.getDate() }-xx`
+      this.$httpSecured.post('/records/', { record: { 'identifier': identTemp}})
+        .then(response => {
+          this.$store.commit('setNewRecord', response.data)
+          this.$store.commit('pushNewRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })
+          this.isLoading = false
+          this.$router.replace('/records/new/meta')
+        })
+        .catch(error => {
+          this.$store.commit('addAlert', { message: error, type: 'danger' })
+          this.isLoading = false
+        })
+    },
+    clearNewRecord() {
+      this.$store.commit('clearNewRecord')
+      this.$store.commit('clearNewRecordHistory')
+      this.$router.replace('/records/new')
+    }
+  },
+  computed: {
+    hasNewRecord() {
+      return !this.$store.getters.isNewRecordEmpty
     }
   }
 }
