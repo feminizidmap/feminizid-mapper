@@ -171,11 +171,7 @@ export const store = createStore({
         })
     },
     async loadRecord({ commit }, recordId) {
-      const response = await securedAxiosInstance.get(`/records/${recordId}`, {
-        params: {
-          include: 'sources'
-        }
-      });
+      const response = await securedAxiosInstance.get(`/records/${recordId}`);
       commit('setCurrentRecord', response.data)
       console.log(response.data)
     }

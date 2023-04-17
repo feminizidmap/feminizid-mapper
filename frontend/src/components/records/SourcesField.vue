@@ -10,7 +10,7 @@
            @change="updateSourceValue"
            v-model="sources[i].url ">
 
-    <button class="btn btn-outline-danger" type="button" @click.prevent="rmSourceField(source)">Quelle entfernen</button>
+    <button class="btn btn-outline-danger" type="button" @click.prevent="rmSourceField(i)">Quelle entfernen</button>
   </div>
 
   <div><button
@@ -43,15 +43,18 @@ export default {
       let d = new Date()
       this.sources.splice(this.sources.indexOf(id), 1)
       this.$store.commit('pushCurrentRecordHistory', { message: `Removed source ${id.id}`, date: d, type: 'info'})
+      this.$store.commit('setCurrentRecordProperty', { prop: 'sources', value: this.sources })
     },
     updateSourceValue(ev) {
       let d = new Date()
-      let s = JSON.stringify(this.sources
-                             .map(x => { return { id: x.id, url: x.url }})
-                             .filter(x => x.url !== ''))
-      this.$store.commit('setCurrentRecordProperty', { prop: 'sources', value: s })
-      this.$store.commit('pushCurrentRecordHistory', { message: `Changed source ${ev.target.id} to ${ev.target.value}`, date: d, type: 'info'})
+      let index = this.sources.findIndex(x => x.id === Number(ev.target.id))
+      if (index >= 0) {
+        this.sources[index].url = ev.target.value
+        this.$store.commit('pushCurrentRecordHistory', { message: `Changed source ${ev.target.id} to ${ev.target.value}`, date: d, type: 'info'})
+        this.$store.commit('setCurrentRecordProperty', { prop: 'sources', value: this.sources })
+      }
     }
+
   }
 }
 

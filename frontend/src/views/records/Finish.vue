@@ -16,7 +16,6 @@
 </div>
 </template>
 <script>
-
 export default {
   name: 'RecordFinish',
   data() {
@@ -32,9 +31,13 @@ export default {
 
       console.log(nR.sources)
 
-      let sources = JSON.parse(JSON.stringify(nR.sources)).map((s) => {
+      let sources = JSON.parse(JSON.stringify(nR.sources))
+      .map((s) => {
         return { url: s.url };
-      });
+      })
+      .filter((s) => s.url !== "");
+
+      console.log(sources.length)
 
       let entities = !nR.entities ? [] : nR.entities.map((e) => {
         let properties = e.properties.map((p) => {
@@ -67,6 +70,7 @@ export default {
           console.log("Saved!");
           this.$store.commit("updateSingleRecord", response.data);
           this.isLoading = false;
+          console.log(this.$store.state.currentRecord.sources)
           this.$router.replace("/records/");
         })
         .catch((error) => {
