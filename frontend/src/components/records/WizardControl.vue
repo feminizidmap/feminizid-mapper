@@ -18,16 +18,6 @@
 export default {
   name: "WizardControl",
   props: { steps: Array },
-  data() {
-    return {
-      sources: [],
-    };
-  },
-  created() {
-    if (!this.$store.isNewRecordEmpty) {
-      this.sources = this.$store.state.newRecord.sources ? JSON.parse(this.$store.state.newRecord.sources) : [];
-    }
-  },
   computed: {
     activeStepIndex() {
       const currentRoute = this.$route;

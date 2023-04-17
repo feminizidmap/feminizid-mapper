@@ -4,22 +4,23 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link to="/records">Alle Fälle</router-link></li>
-        <li class="breadcrumb-item active" aria-current="page">Neuer Fall</li>
+        <li v-if="isNewRecord" class="breadcrumb-item active" aria-current="page">Neuer Fall</li>
+        <li v-if="!isNewRecord" class="breadcrumb-item active" aria-current="page">Fall bearbeiten</li>
       </ol>
     </nav>
     <hr>
   </div>
   <div class="row mt-3 mb-4">
-    <h1 class="fs-1 fw-bold">Neuen Fall hinzufügen</h1>
+    <h1 v-if="$store.getters.isCurrentRecordEmpty" class="fs-1 fw-bold">Neuen Fall hinzufügen</h1>
   </div>
   <div class="row my-2">
     <div class="col col-2">
-      <div v-if="!$store.getters.isNewRecordEmpty">
-        <p>Du bearbeitest Fall <strong>{{ $store.state.newRecord.identifier}}</strong>.</p>
+      <div v-if="!$store.getters.isCurrentRecordEmpty">
+        <p>Du bearbeitest Fall <strong>{{ $store.state.currentRecord.identifier}}</strong>.</p>
 
         <div>
           @todo status
-          {{ $store.state.newRecordHistory.length }}
+          {{ $store.state.currentRecordHistory.length }}
         </div>
       </div>
       <nav>
@@ -40,34 +41,23 @@
 
     </div>
     <div class="col col-7">
-      <div v-if="hasNewRecord" class="h-100 d-flex flex-column">
+      <div class="h-100 d-flex flex-column">
         <router-view :key="$route.path"></router-view>
         <WizardControl :steps="steps" />
       </div>
-      <div v-else class="text-center border border-4  p-4">
-        <h3 class="my-4">Starte hier um einen neuen Fall einzutragen!</h3>
-        <button
-          v-if="isLoading"
-          class="btn btn-primary" type="button" disabled>
-          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          <span class="visually-hidden">Loading...</span>
-        </button>
-        <button v-else class="btn btn-primary"
-                @click.prevent="createNewRecord">Mit neuem Fall Starten</button>
-      </div>
     </div>
     <div class="col col-3 d-flex flex-column">
-      <aside v-if="$store.state.newRecordHistory.length > 0">
-        <h4>Neuer Fall Schritte</h4>
+      <aside v-if="$store.state.currentRecordHistory.length > 0">
+        <h4>History</h4>
         <ol>
-          <li v-for="(item, i) in $store.state.newRecordHistory" :key="i">
+          <li v-for="(item, i) in $store.state.currentRecordHistory" :key="i">
             <span :class="`badge bg-${item.type}`">{{item.type}}</span> {{item.message}} <span class="text-secondary">{{ formattedDate(item.date) }}</span>
           </li>
         </ol>
       </aside>
-      <div v-if="hasNewRecord" class="mt-auto">
-        <button class="btn btn-outline-primary mx-4" @click.prevent="clearNewRecord">Abbrechen</button>
-        <router-link :to="{ name: 'RecordNewFinish' }" class="btn btn-outline-primary mx">Diesen Fall speichern und abschließen</router-link>
+      <div class="mt-auto">
+        <button class="btn btn-outline-primary mx-4" @click.prevent="clearRecord">Abbrechen</button>
+        <router-link :to="{ name: isNewRecord ? 'RecordNewFinish' : 'RecordEditFinish'  }" class="btn btn-outline-primary mx">Diesen Fall speichern und abschließen</router-link>
       </div>
     </div>
   </div>
@@ -90,31 +80,15 @@ export default {
       let d = new Date(datestr)
       return d.toLocaleTimeString('de-DE')
     },
-    createNewRecord() {
-      this.isLoading = true
-      let d = new Date()
-      const identTemp = `${d.getFullYear()}-${ ('0' + (d.getMonth() + 1)).slice(-2) }-${d.getDate() }-xx`
-      this.$httpSecured.post('/records/', { record: { 'identifier': identTemp}})
-        .then(response => {
-          this.$store.commit('setNewRecord', response.data)
-          this.$store.commit('pushNewRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })
-          this.isLoading = false
-          this.$router.replace('/records/new/meta')
-        })
-        .catch(error => {
-          this.$store.commit('addAlert', { message: error, type: 'danger' })
-          this.isLoading = false
-        })
-    },
-    clearNewRecord() {
-      this.$store.commit('clearNewRecord')
-      this.$store.commit('clearNewRecordHistory')
-      this.$router.replace('/records/new')
+    clearRecord() {
+      this.$store.commit('clearCurrentRecord')
+      this.$store.commit('clearCurrentRecordHistory')
+      this.$router.replace('/records/')
     }
   },
   computed: {
-    hasNewRecord() {
-      return !this.$store.getters.isNewRecordEmpty
+    isNewRecord() {
+      return this.$store.getters.isCurrentRecordNew
     }
   }
 }

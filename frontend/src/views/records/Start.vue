@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="hasNewRecord" class="text-center border border-4  p-4">
+  <div v-if="hasCurrentRecord" class="text-center border border-4  p-4">
     @todo Infos über das aktuelle Datenschema (?)
   </div>
   <div v-else class="text-center border border-4  p-4">
@@ -12,7 +12,7 @@
       <span class="visually-hidden">Loading...</span>
     </button>
     <button v-else class="btn btn-primary"
-            @click.prevent="createNewRecord">Mit neuem Fall Starten</button>
+            @click.prevent="createCurrentRecord">Mit neuem Fall Starten</button>
   </div>
 </div>
 </template>
@@ -29,14 +29,14 @@ export default {
     //debugger //  eslint-disable-line
   },
   methods: {
-    createNewRecord() {
+    createCurrentRecord() {
       this.isLoading = true
       let d = new Date()
       const identTemp = `${d.getFullYear()}-${ ('0' + (d.getMonth() + 1)).slice(-2) }-${d.getDate() }-xx`
       this.$httpSecured.post('/records/', { record: { 'identifier': identTemp}})
         .then(response => {
-          this.$store.commit('setNewRecord', response.data)
-          this.$store.commit('pushNewRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })
+          this.$store.commit('setCurrentRecord', response.data)
+          this.$store.commit('pushCurrentRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })
           this.isLoading = false
         })
         .catch(error => {
@@ -44,14 +44,14 @@ export default {
           this.isLoading = false
         })
     },
-    clearNewRecord() {
-      this.$store.commit('clearNewRecord')
-      this.$store.commit('clearNewRecordHistory')
+    clearCurrentRecord() {
+      this.$store.commit('clearCurrentRecord')
+      this.$store.commit('clearCurrentRecordHistory')
     }
   },
   computed: {
-    hasNewRecord() {
-      return !this.$store.getters.isNewRecordEmpty
+    hasCurrentRecord() {
+      return !this.$store.getters.isCurrentRecordEmpty
     }
   }
 }

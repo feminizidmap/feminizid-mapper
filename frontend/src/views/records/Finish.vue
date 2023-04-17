@@ -1,7 +1,7 @@
 <template>
 <div>
-  <div v-if="hasNewRecord" class="text-center border border-4  p-4">
-    <p>Fall <strong>{{ $store.state.newRecord.identifier}}</strong></p>
+  <div v-if="hasCurrentRecord" class="text-center border border-4  p-4">
+    <p>Fall <strong>{{ $store.state.currentRecord.identifier}}</strong></p>
     <p>@todo render summary</p>
 
     <button
@@ -11,7 +11,7 @@
       <span class="visually-hidden">Loading...</span>
     </button>
     <button v-else class="btn btn-primary"
-            @click.prevent="saveNewRecord">Fall speichern</button>
+            @click.prevent="saveCurrentRecord">Fall speichern</button>
   </div>
 </div>
 </template>
@@ -25,30 +25,66 @@ export default {
     }
   },
   methods: {
-    saveNewRecord() {
-      this.isLoading = true
-      console.log("Saving new record")
-      let nR = this.$store.state.newRecord
+    saveCurrentRecord() {
+      this.isLoading = true;
+      console.log("Saving new record");
+      let nR = this.$store.state.currentRecord;
 
-      this.$httpSecured.patch(`/records/${nR.id}`, {
-        record: {
-          identifier: nR.identifier,
-          sources: nR.sources
-        }
-      }).then(response => {
-        console.log("Saved!")
-        this.$store.commit('updateSingleRecord', response.data)
-        this.isLoading = false
-      }).catch(error => { this.$store.commit('addAlert', { message: `Error bill robinson ${error}`, type: 'error'})})
+      console.log(nR.sources)
+
+      let sources = JSON.parse(JSON.stringify(nR.sources)).map((s) => {
+        return { url: s.url };
+      });
+
+      let entities = !nR.entities ? [] : nR.entities.map((e) => {
+        let properties = e.properties.map((p) => {
+          return {
+            name: p.name,
+            value: p.value,
+            _destroy: p._destroy,
+            id: p.id,
+          };
+        });
+
+        return {
+          name: e.name,
+          description: e.description,
+          _destroy: e._destroy,
+          id: e.id,
+          properties_attributes: properties,
+        };
+      });
+
+      this.$httpSecured
+        .patch(`/records/${nR.id}`, {
+          record: {
+            identifier: nR.identifier,
+            sources_attributes: sources,
+            entities_attributes: entities,
+          },
+        })
+        .then((response) => {
+          console.log("Saved!");
+          this.$store.commit("updateSingleRecord", response.data);
+          this.isLoading = false;
+          this.$router.replace("/records/");
+        })
+        .catch((error) => {
+          this.$store.commit("addAlert", {
+            message: `Error: ${error}`,
+            type: "error",
+          });
+        });
     },
-    createNewRecord() { // for save and directly create new record option
+
+    createCurrentRecord() { //TODO for save and directly create new record option
       this.isLoading = true
       let d = new Date()
       const identTemp = `${d.getFullYear()}-${ ('0' + (d.getMonth() + 1)).slice(-2) }-${d.getDate() }-xx`
       this.$httpSecured.post('/records/', { record: { 'identifier': identTemp}})
         .then(response => {
-          this.$store.commit('setNewRecord', response.data)
-          this.$store.commit('pushNewRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })
+          this.$store.commit('setCurrentRecord', response.data)
+          this.$store.commit('pushCurrentRecordHistory', { message: `Neuer Fall begonnen (${identTemp})`, date: d, type: 'info' })
           this.isLoading = false
         })
         .catch(error => {
@@ -58,8 +94,8 @@ export default {
     },
   },
   computed: {
-    hasNewRecord() {
-      return !this.$store.getters.isNewRecordEmpty
+    hasCurrentRecord() {
+      return !this.$store.getters.isCurrentRecordEmpty
     }
   }
 }

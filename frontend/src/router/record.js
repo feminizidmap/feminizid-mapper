@@ -1,8 +1,8 @@
 import RecordList from '@/views/records/List'
 import RecordSingle from '@/views/records/Single'
-import RecordNew from '@/views/records/Form'
+import RecordForm from '@/views/records/Form'
 import RecordStart from '@/views/records/Start'
-import RecordEntityNewForm from '@/views/records/RecordEntityForm'
+import RecordEntity from '@/views/records/RecordEntityForm'
 import RecordFinish from '@/views/records/Finish'
 import RecordMeta from '@/views/records/Meta'
 import RecordCrime from '@/views/records/Crime'
@@ -22,7 +22,7 @@ export default {
     {
       path: 'new',
       name: 'RecordNew',
-      component: RecordNew,
+      component: RecordForm,
       children: [
         {
           path: '',
@@ -52,7 +52,7 @@ export default {
         {
           path: ':entityname',
           name: 'RecordNewEntity',
-          component: RecordEntityNewForm
+          component: RecordEntity
         },
         {
           path: 'finish',
@@ -61,18 +61,48 @@ export default {
         }
       ]
     },
-    // {
-    //   path: 'edit/:recordid',
-    //   name: 'RecordEdit',
-    //   component: RecordForm,
-    //   children: [
-    //     {
-    //       path: '',
-    //       name: 'RecordEditMeta',
-    //       component: RecordMeta
-    //     }
-    //   ]
-    // },
+    {
+      path: 'edit/:recordid',
+      name: 'RecordEdit',
+      component: RecordForm,
+      children: [
+        {
+          path: '',
+          name: 'RecordEditStart',
+          component: RecordStart // TODO
+        },
+        {
+          path: 'meta',
+          name: 'RecordEditMeta',
+          component: RecordMeta
+        },
+        {
+          path: 'crime',
+          name: 'RecordEditCrime',
+          component: RecordCrime
+        },
+        {
+          path: 'victim',
+          name: 'RecordEditVictim',
+          component: RecordVictim
+        },
+        {
+          path: 'perpetrator',
+          name: 'RecordEditPerpetrator',
+          component: RecordPerp
+        },
+        {
+          path: ':entityname',
+          name: 'RecordEditEntity',
+          component: RecordEntity
+        },
+        {
+          path: 'finish',
+          name: 'RecordEditFinish',
+          component: RecordFinish
+        }
+      ]
+    },
     {
       path: ':recordid',
       name: 'RecordSingle',

@@ -14,6 +14,9 @@ class SourcesController < ApplicationController
   end
 
   def create
+    puts "########"
+    puts params.inspect
+    puts "########"
     @source = Record.find(params[:record_id]).sources.new
     @source.update(source_params)
 

@@ -13,8 +13,9 @@ export const store = createStore({
       category_items: [],
       codelists: [],
       records: [],
-      newRecord: {},
-      newRecordHistory: [],
+      currentRecord: {},
+      currentRecordHistory: [],
+      currentRecordNew: false,
       schema: [],
       schemaHasChanged: false,
       settings: []
@@ -87,20 +88,23 @@ export const store = createStore({
     removeAlert(state, item) {
       state.alerts.splice(state.alerts.indexOf(item), 1)
     },
-    pushNewRecordHistory(state, item) {
-      state.newRecordHistory.push(item)
+    pushCurrentRecordHistory(state, item) {
+      state.currentRecordHistory.push(item)
     },
-    clearNewRecordHistory(state) {
-      state.newRecordHistory = []
+    clearCurrentRecordHistory(state) {
+      state.currentRecordHistory = []
     },
-    setNewRecord(state, item) {
-      state.newRecord = item
+    setCurrentRecord(state, item) {
+      state.currentRecord = item
     },
-    setNewRecordProperty(state, propValue) {
-      state.newRecord[propValue.prop] = propValue.value
+    setCurrentRecordNew(state, value) {
+      state.currentRecordNew = value
     },
-    clearNewRecord(state) {
-      state.newRecord = {}
+    setCurrentRecordProperty(state, propValue) {
+      state.currentRecord[propValue.prop] = propValue.value
+    },
+    clearCurrentRecord(state) {
+      state.currentRecord = {}
     },
     setSchema(state, value) {
       state.schema = value
@@ -133,14 +137,20 @@ export const store = createStore({
     getItemsForCategory: (state) => (category) => {
       return state.category_items.filter(i => i.category_id === category.id)
     },
+    getCodelistItemsByListId: (state) => (listId) => {
+      return state.codelists.find(cl => cl.id === listId)
+    },
     isSignedIn(state) {
       return state.signedIn
     },
     allAlerts(state) {
       return state.alerts
     },
-    isNewRecordEmpty(state) {
-      return Object.entries(state.newRecord).length === 0
+    isCurrentRecordEmpty(state) {
+      return Object.entries(state.currentRecord).length === 0
+    },
+    isCurrentRecordNew(state) {
+      return state.currentRecordNew;
     },
     getSetting: (state) => (setting) => {
       return state.settings?.find(s => s.key === setting)
@@ -159,6 +169,15 @@ export const store = createStore({
           const e = (error.response && error.response.data && error.response.data.error) || 'Something went wrong.'
           commit('addAlert', { type: 'error', message: e})
         })
+    },
+    async loadRecord({ commit }, recordId) {
+      const response = await securedAxiosInstance.get(`/records/${recordId}`, {
+        params: {
+          include: 'sources'
+        }
+      });
+      commit('setCurrentRecord', response.data)
+      console.log(response.data)
     }
   },
   plugins: [createPersistedState()]

@@ -23,14 +23,10 @@
 <script>
 export default {
   name: 'SourcesField',
-  data() {
-    return {
-      sources: []
-    }
-  },
-  created() {
-    if (!this.$store.isNewRecordEmpty) {
-      this.sources = this.$store.state.newRecord.sources ? JSON.parse(this.$store.state.newRecord.sources) : []
+  props: {
+    sources: {
+      type: Array,
+      default: () => []
     }
   },
   methods: {
@@ -41,20 +37,20 @@ export default {
                           slug: `source-${id}`,
                           name: `Quelle ${id}`,
                           url: ''})
-      this.$store.commit('pushNewRecordHistory', { message: `Added source ${id}`, date: d, type: 'info'})
+      this.$store.commit('pushCurrentRecordHistory', { message: `Added source ${id}`, date: d, type: 'info'})
     },
     rmSourceField(id) {
       let d = new Date()
       this.sources.splice(this.sources.indexOf(id), 1)
-      this.$store.commit('pushNewRecordHistory', { message: `Removed source ${id.id}`, date: d, type: 'info'})
+      this.$store.commit('pushCurrentRecordHistory', { message: `Removed source ${id.id}`, date: d, type: 'info'})
     },
     updateSourceValue(ev) {
       let d = new Date()
       let s = JSON.stringify(this.sources
                              .map(x => { return { id: x.id, url: x.url }})
                              .filter(x => x.url !== ''))
-      this.$store.commit('setNewRecordProperty', { prop: 'sources', value: s })
-      this.$store.commit('pushNewRecordHistory', { message: `Changed source ${ev.target.id} to ${ev.target.value}`, date: d, type: 'info'})
+      this.$store.commit('setCurrentRecordProperty', { prop: 'sources', value: s })
+      this.$store.commit('pushCurrentRecordHistory', { message: `Changed source ${ev.target.id} to ${ev.target.value}`, date: d, type: 'info'})
     }
   }
 }

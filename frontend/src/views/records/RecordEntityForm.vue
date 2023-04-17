@@ -11,17 +11,18 @@
     >
         <label :for="a.name" class="form-label">{{ a.name }}</label>
         <p>{{ a.description }}</p>
-        <input v-if="a.type === 'field'" type="" class="form-control" :id="a.name" placeholder="">
-        <select v-if="a.type === 'category'" class="form-control" :id="a.name"></select> // TODO collection
+        <input v-if="a.type === 'field'" type="" class="form-control" :id="a.name" :value="currentRecord[a.name]" placeholder="">
+        <select v-if="a.type === 'category'" class="form-control" :id="a.name" :value="currentRecord[a.name]"></select> // TODO collection
     </div>
   </RecordFormWrapper>
 </div>
 </template>
 <script>
 import RecordFormWrapper from '@/components/records/RecordFormWrapper'
+import { mapState } from 'vuex'
 
 export default {
-  name: 'RecordCrime',
+  name: 'RecordEntity',
   components: { RecordFormWrapper },
   data() {
     return {
@@ -38,6 +39,9 @@ export default {
   },
   mounted() {
     console.log(this.attributes)
+  },
+  computed: {
+    ...mapState(['currentRecord']),
   }
 }
 </script>

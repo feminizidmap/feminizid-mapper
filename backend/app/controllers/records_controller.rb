@@ -10,7 +10,7 @@ class RecordsController < ApplicationController
   end
 
   def show
-    render json: @record
+    render json: @record.to_json(include: :sources)
   end
 
   def create
@@ -38,10 +38,15 @@ class RecordsController < ApplicationController
   private
 
   def set_record
-    @record = Record.find(params[:id])
-  end
+    @record = Record.includes(:sources, :entities).find(params[:id])
+  end  
 
   def record_params
-    params.require(:record).permit(:identifier, :version)
+    params.require(:record).permit(
+      :identifier,
+      sources_attributes: [:url],
+      entities_attributes: [:id, :name, :description, :_destroy, properties_attributes: [:id, :name, :value, :_destroy]]
+    )
   end
+  
 end
