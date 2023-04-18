@@ -41,8 +41,9 @@ export default {
     },
     rmSourceField(id) {
       let d = new Date()
+      let source = this.sources[id]
       this.sources.splice(this.sources.indexOf(id), 1)
-      this.$store.commit('pushCurrentRecordHistory', { message: `Removed source ${id.id}`, date: d, type: 'info'})
+      this.$store.commit('pushCurrentRecordHistory', { message: `Removed source ${source.url}`, date: d, type: 'info'})
       this.$store.commit('setCurrentRecordProperty', { prop: 'sources', value: this.sources })
     },
     updateSourceValue(ev) {

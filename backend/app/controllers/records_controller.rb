@@ -24,6 +24,10 @@ class RecordsController < ApplicationController
   end
 
   def update
+    # Delete sources that are missing from the request
+    source_ids_in_request = params[:record][:sources_attributes].map { |s| s[:id] }
+    @record.sources.where.not(id: source_ids_in_request).destroy_all
+    
     if @record.update(record_params)
       render json: @record.as_json(include: [:sources, :entities])
     else
@@ -44,7 +48,7 @@ class RecordsController < ApplicationController
   def record_params
     params.require(:record).permit(
       :identifier,
-      sources_attributes: [:id, :url],
+      sources_attributes: [:id, :url, :record_id, :created_at, :updated_at],
       entities_attributes: [:id, :name, :description, :_destroy, properties_attributes: [:id, :name, :value, :_destroy]]
     )
   end
