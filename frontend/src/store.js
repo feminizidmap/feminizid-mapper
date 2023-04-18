@@ -166,14 +166,20 @@ export const store = createStore({
           commit('setRecords', response.data)
         })
         .catch(error => {
-          const e = (error.response && error.response.data && error.response.data.error) || 'Something went wrong.'
+          const e = (error.response && error.response.data && error.response.data.error) || 'Something went wrong while loading records.'
           commit('addAlert', { type: 'error', message: e})
         })
     },
-    async loadRecord({ commit }, recordId) {
-      const response = await securedAxiosInstance.get(`/records/${recordId}`);
-      commit('setCurrentRecord', response.data)
-      console.log(response.data)
+    loadRecord({ commit }, recordId) {
+      securedAxiosInstance.get(`/records/${recordId}`)
+        .then(response => {
+          commit('setCurrentRecord', response.data)
+          console.log(response.data)
+        })
+        .catch(error => {
+          const e = (error.response && error.response.data && error.response.data.error) || `Something went wrong while loading the record #${recordId}.`;
+          commit('addAlert', { type: 'error', message: e})
+        })
     }
   },
   plugins: [createPersistedState()]

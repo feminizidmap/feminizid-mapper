@@ -25,7 +25,7 @@ class RecordsController < ApplicationController
 
   def update
     if @record.update(record_params)
-      render json: @record
+      render json: @record.as_json(include: [:sources, :entities])
     else
       render json: @record.errors, status: :unprocessable_entity
     end
@@ -44,7 +44,7 @@ class RecordsController < ApplicationController
   def record_params
     params.require(:record).permit(
       :identifier,
-      sources_attributes: [:url],
+      sources_attributes: [:id, :url],
       entities_attributes: [:id, :name, :description, :_destroy, properties_attributes: [:id, :name, :value, :_destroy]]
     )
   end

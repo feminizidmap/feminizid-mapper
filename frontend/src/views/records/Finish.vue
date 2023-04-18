@@ -29,13 +29,9 @@ export default {
       console.log("Saving new record");
       let nR = this.$store.state.currentRecord;
 
-      console.log(nR.sources)
+      console.log(nR.sources.length)
 
       let sources = JSON.parse(JSON.stringify(nR.sources))
-      .map((s) => {
-        return { url: s.url };
-      })
-      .filter((s) => s.url !== "");
 
       console.log(sources.length)
 
@@ -69,8 +65,10 @@ export default {
         .then((response) => {
           console.log("Saved!");
           this.$store.commit("updateSingleRecord", response.data);
+          console.log("RESPONSE DATA")
+          console.log(response.data)
           this.isLoading = false;
-          console.log(this.$store.state.currentRecord.sources)
+          console.log(this.$store.state.currentRecord.sources.length)
           this.$router.replace("/records/");
         })
         .catch((error) => {

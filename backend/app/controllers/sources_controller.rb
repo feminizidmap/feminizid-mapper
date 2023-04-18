@@ -14,18 +14,15 @@ class SourcesController < ApplicationController
   end
 
   def create
-    puts "########"
-    puts params.inspect
-    puts "########"
-    @source = Record.find(params[:record_id]).sources.new
-    @source.update(source_params)
-
+    @record = Record.find(params[:record_id])
+    @source = @record.sources.build(source_params)
+  
     if @source.save
-      render json: @source, status: :created, location: record_source_url(@source.id, @source.record.id)
+      render json: @source, status: :created, location: record_source_url(@record.id, @source.id)
     else
       render json: @source.errors, status: :unprocessable_entity
     end
-  end
+  end  
 
   def update
     if @source.update(source_params)

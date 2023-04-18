@@ -32,8 +32,8 @@ export default {
   methods: {
     addSourceField() {
       let d = new Date()
-      let id = this.sources.length ? this.sources[this.sources.length -1].id + 1 : 0
-      this.sources.push({ id: id,
+      let id = this.sources.length ? this.sources[this.sources.length - 1].id + 1 : 1
+      this.sources.push({ 
                           slug: `source-${id}`,
                           name: `Quelle ${id}`,
                           url: ''})
