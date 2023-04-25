@@ -8,7 +8,7 @@
            :id="source.id"
            placeholder="http://yoursource.de"
            @change="updateSourceValue"
-           v-model="sources[i].url ">
+           v-model="sources[i].url">
 
     <button class="btn btn-outline-danger" type="button" @click.prevent="rmSourceField(i)">Quelle entfernen</button>
   </div>

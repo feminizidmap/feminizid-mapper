@@ -11,7 +11,7 @@
 </div>
 </template>
 <script>
-  import RecordFormWrapper from '@/components/records/RecordFormWrapper'
+import RecordFormWrapper from '@/components/records/RecordFormWrapper'
 
 export default {
   name: 'RecordVictim',

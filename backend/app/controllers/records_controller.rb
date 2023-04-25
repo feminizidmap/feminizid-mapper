@@ -10,8 +10,9 @@ class RecordsController < ApplicationController
   end
 
   def show
-    render json: @record.to_json(include: :sources)
+    render json: @record.to_json(include: [:sources, { entities: { include: [:fields, :properties] } }])
   end
+  
 
   def create
     @record = Record.new(record_params)
@@ -29,7 +30,7 @@ class RecordsController < ApplicationController
     @record.sources.where.not(id: source_ids_in_request).destroy_all
     
     if @record.update(record_params)
-      render json: @record.as_json(include: [:sources, :entities])
+      render json: @record.as_json(include: [:sources, { entities: { include: [:fields, :properties] } }])
     else
       render json: @record.errors, status: :unprocessable_entity
     end
@@ -49,7 +50,15 @@ class RecordsController < ApplicationController
     params.require(:record).permit(
       :identifier,
       sources_attributes: [:id, :url, :record_id, :created_at, :updated_at],
-      entities_attributes: [:id, :name, :description, :_destroy, properties_attributes: [:id, :name, :value, :_destroy]]
+      entities_attributes: [
+        :id, 
+        :name, 
+        :description,
+        :slug, 
+        :record_id,
+        fields_attributes: [:id, :name, :value], 
+        properties_attributes: [:id, :name, :value]
+      ]
     )
   end
   

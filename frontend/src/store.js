@@ -157,7 +157,24 @@ export const store = createStore({
     },
     hasStoreLocalChange(state) {
       return Object.keys(state.schema).length !== 0
-    }
+    },
+    getEntityValue: (state) => (entityName, key, type) => {
+      const entity = state.currentRecord.entities?.find(entity => entity.name === entityName)
+      if (entity) {
+        if (type === 'field') {
+          const field = entity.fields?.find(field => field.name === key)
+          if (field) {
+            return field.value
+          }
+        } else if (type === 'category') {
+          const category = entity.properties?.find(property => property.name === key)
+          if (category) {
+            return category.value
+          }
+        }
+      }
+      return null
+    }    
   },
   actions: {
     fetchRecords({ commit }) {
@@ -173,8 +190,8 @@ export const store = createStore({
     loadRecord({ commit }, recordId) {
       securedAxiosInstance.get(`/records/${recordId}`)
         .then(response => {
+          const record = response.data
           commit('setCurrentRecord', response.data)
-          console.log(response.data)
         })
         .catch(error => {
           const e = (error.response && error.response.data && error.response.data.error) || `Something went wrong while loading the record #${recordId}.`;

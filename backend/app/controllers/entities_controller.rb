@@ -10,14 +10,15 @@ class EntitiesController < ApplicationController
   end
 
   def show
-    render json: @entity
+    json: @entity.to_json(include: [:fields, :properties])
   end
 
   def create
-    @entity = Entity.new(entity_params)
+    @record = Record.find(params[:record_id])
+    @entity = @record.entities.build(entity_params)
 
     if @entity.save
-      render json: @entity, status: :created, location: entities_url(@entity.id)
+      render json: @entity, status: :created, location: record_entity_url(@record.id, @entity.id)
     else
       render json: @entity.errors, status: :unprocessable_entity
     end
@@ -42,8 +43,11 @@ class EntitiesController < ApplicationController
   end
 
   def entity_params
-    params.require(:entity).permit(:record_id,
-                                   :name,
-                                   :slug)
+    params.require(:entity).permit(
+      :record_id, :name, :slug, :description,
+      fields_attributes: [:id, :name, :value],
+      properties_attributes: [:id, :name, :value]
+    )
   end
+  
 end

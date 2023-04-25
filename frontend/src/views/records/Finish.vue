@@ -27,37 +27,43 @@ export default {
     saveCurrentRecord() {
       this.isLoading = true;
       console.log("Saving new record");
-      let nR = this.$store.state.currentRecord;
+      let cR = this.$store.state.currentRecord;
 
-      console.log(nR.sources.length)
+      let sources = JSON.parse(JSON.stringify(cR.sources))
 
-      let sources = JSON.parse(JSON.stringify(nR.sources))
-
-      console.log(sources.length)
-
-      let entities = !nR.entities ? [] : nR.entities.map((e) => {
+      let entities = !cR.entities ? [] : cR.entities.map((e) => {
         let properties = e.properties.map((p) => {
           return {
-            name: p.name,
-            value: p.value,
-            _destroy: p._destroy,
             id: p.id,
+            name: p.name,
+            value: p.value, // TODO category_id and category_item_id
           };
         });
 
+        let fields = e.fields.map((f) => {
+          return {
+            id: f.id,
+            name: f.name,
+            value: f.value
+          }
+        })
+
         return {
+          id: e.id,
           name: e.name,
           description: e.description,
-          _destroy: e._destroy,
-          id: e.id,
+          slug: e.slug,
           properties_attributes: properties,
+          fields_attributes: fields
         };
       });
 
+      console.log("Entities object:", entities)
+
       this.$httpSecured
-        .patch(`/records/${nR.id}`, {
+        .patch(`/records/${cR.id}`, {
           record: {
-            identifier: nR.identifier,
+            identifier: cR.identifier,
             sources_attributes: sources,
             entities_attributes: entities,
           },
@@ -65,10 +71,7 @@ export default {
         .then((response) => {
           console.log("Saved!");
           this.$store.commit("updateSingleRecord", response.data);
-          console.log("RESPONSE DATA")
-          console.log(response.data)
           this.isLoading = false;
-          console.log(this.$store.state.currentRecord.sources.length)
           this.$router.replace("/records/");
         })
         .catch((error) => {
