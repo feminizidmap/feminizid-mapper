@@ -39,13 +39,13 @@ export default {
     }
   },
   mounted() {
-    console.log(this.attributes)
+    // console.log(this.attributes)
   },
   computed: {
     ...mapState(['currentRecord']),
     ...mapGetters(['getEntityValue']),
     currentEntities() {
-      return this.currentRecord ? this.currentRecord.entities : []
+      return this.currentRecord.entities ? this.currentRecord.entities : []
     }
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
     updateEntityValue(name, value, type) {
       const entityIndex = this.currentEntities?.findIndex(entity => entity.name === this.title)
 
-      console.log(currentRecord)
+      console.log(this.currentRecord)
 
       if (entityIndex === -1 || entityIndex === undefined) {
         // Entity does not exist, create a new one

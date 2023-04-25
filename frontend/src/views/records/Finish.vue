@@ -29,7 +29,7 @@ export default {
       console.log("Saving new record");
       let cR = this.$store.state.currentRecord;
 
-      let sources = JSON.parse(JSON.stringify(cR.sources))
+      let sources = cR.sources ? JSON.parse(JSON.stringify(cR.sources)) : []
 
       let entities = !cR.entities ? [] : cR.entities.map((e) => {
         let properties = e.properties.map((p) => {
