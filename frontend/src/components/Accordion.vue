@@ -10,7 +10,7 @@
             <div :id="collapseId(index)" class="accordion-collapse collapse" :aria-labelledby="`#${headingId(index)}`" :data-bs-parent="`#${accName}`">
                 <div class="accordion-body">
                     <p v-if="list.description">{{ list.description}}</p>
-
+                    // @todo make different components
                     <template v-if="list.type === 'category'">
                         <div class="form-check" v-for="item in categoryItems(list)"
                              :key="item.id">
@@ -21,12 +21,12 @@
                         </div>
                     </template>
                     <template v-else>
+                        // @todo there will be special fields, like picking a location, nationality etc
                         <label :for="list.name" class="form-label">{{ list.name }}</label>
                         <input type="" class="form-control" :id="list.id" :value="entityValue(list.name, list.type)" @change="updateEntityValue(list.name, $event.target.value, list.type)" placeholder="">
                     </template>
 
                     <slot></slot>
-
                 </div>
             </div>
         </div>
@@ -63,7 +63,5 @@
              return this.currentRecord.entities ? this.currentRecord.entities : []
          },
      }
-
-
  }
 </script>
