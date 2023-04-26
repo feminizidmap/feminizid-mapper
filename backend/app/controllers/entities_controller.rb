@@ -10,7 +10,7 @@ class EntitiesController < ApplicationController
   end
 
   def show
-    json: @entity.to_json(include: [:fields, :properties])
+    render json: @entity.to_json(include: [:fields, :properties])
   end
 
   def create
@@ -49,5 +49,5 @@ class EntitiesController < ApplicationController
       properties_attributes: [:id, :name, :value]
     )
   end
-  
+
 end

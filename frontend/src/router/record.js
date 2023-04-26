@@ -5,9 +5,6 @@ import RecordStart from '@/views/records/Start'
 import RecordEntity from '@/views/records/RecordEntityForm'
 import RecordFinish from '@/views/records/Finish'
 import RecordMeta from '@/views/records/Meta'
-import RecordCrime from '@/views/records/Crime'
-import RecordVictim from '@/views/records/Victim'
-import RecordPerp from '@/views/records/Perpetrator'
 
 export default {
   path: '/records/',
@@ -35,21 +32,6 @@ export default {
           component: RecordMeta
         },
         {
-          path: 'crime',
-          name: 'RecordNewCrime',
-          component: RecordCrime
-        },
-        {
-          path: 'victim',
-          name: 'RecordNewVictim',
-          component: RecordVictim
-        },
-        {
-          path: 'perpetrator',
-          name: 'RecordNewPerpetrator',
-          component: RecordPerp
-        },
-        {
           path: ':entityname',
           name: 'RecordNewEntity',
           component: RecordEntity
@@ -75,21 +57,6 @@ export default {
           path: 'meta',
           name: 'RecordEditMeta',
           component: RecordMeta
-        },
-        {
-          path: 'crime',
-          name: 'RecordEditCrime',
-          component: RecordCrime
-        },
-        {
-          path: 'victim',
-          name: 'RecordEditVictim',
-          component: RecordVictim
-        },
-        {
-          path: 'perpetrator',
-          name: 'RecordEditPerpetrator',
-          component: RecordPerp
         },
         {
           path: ':entityname',

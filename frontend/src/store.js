@@ -11,7 +11,7 @@ export const store = createStore({
       csrf: null,
       categories: [],
       category_items: [],
-      codelists: [],
+      //codelists: [],
       records: [],
       currentRecord: {},
       currentRecordHistory: [],
@@ -127,8 +127,6 @@ export const store = createStore({
       return state.currentUser && state.currentUser.id
     },
     getRecordById: (state) => (id) => {
-      //const item = state.records.filter(x => x.id === id)
-      //return item.length > 0 ? item[0] : null
       return state.records.find(record => record.id == id)
     },
     getCategoryById: (state) => (catID) => {
@@ -136,9 +134,6 @@ export const store = createStore({
     },
     getItemsForCategory: (state) => (category) => {
       return state.category_items.filter(i => i.category_id === category.id)
-    },
-    getCodelistItemsByListId: (state) => (listId) => {
-      return state.codelists.find(cl => cl.id === listId)
     },
     isSignedIn(state) {
       return state.signedIn
@@ -174,7 +169,7 @@ export const store = createStore({
         }
       }
       return null
-    }    
+    }
   },
   actions: {
     fetchRecords({ commit }) {
