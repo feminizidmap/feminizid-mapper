@@ -41,7 +41,7 @@
      methods: {
          ...mapActions(['updateCurrentRecordProperty']),
          entityValue(name, type) {
-             return this.getEntityValue(this.title, name, type)
+             return this.getEntityValue(this.$route.params.entityname, name, type)
          },
          categoryItems(list) {
              return this.$store.getters.getItemsForCategory(list)
