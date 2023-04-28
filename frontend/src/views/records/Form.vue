@@ -31,6 +31,7 @@ export default {
   methods: {
     ...mapActions(['loadRecord']),
     createSettingsSchemaObject() {
+
       const settings = this.$store.getters.getSetting('settings_schema') ? JSON.parse(this.$store.getters.getSetting('settings_schema').value) : []
       let settingsObject = [];
 
@@ -41,17 +42,14 @@ export default {
       return settingsObject
     },
     buildStepsWithSchema() {
-      let steps = [ 
+      let steps = [
         { name: 'Start', link: { name: this.isNewRecord ? 'RecordNewStart' : 'RecordEditStart' }},
         { name: 'Meta', link: { name: this.isNewRecord ? 'RecordNewMeta' : 'RecordEditMeta' }},
-        { name: 'Tat', link: { name: this.isNewRecord ? 'RecordNewCrime' : 'RecordEditCrime' }},
-        { name: 'Opfer', link: { name: this.isNewRecord ? 'RecordNewVictim' : 'RecordEditVictim' }},
-        { name: 'Täter', link: { name: this.isNewRecord ? 'RecordNewPerpetrator' : 'RecordEditPerpetrator' }}
       ];
 
       this.schemaSetting.forEach(s => {
-        steps.push({name: s.name, link: {name: this.isNewRecord ? 'RecordNewEntity' : 'RecordEditEntity', 
-                    params: { entityname: s.name }, 
+        steps.push({name: s.name, link: {name: this.isNewRecord ? 'RecordNewEntity' : 'RecordEditEntity',
+                    params: { entityname: s.name },
                     query: { attributes: JSON.stringify(s.attributes) }}})
       })
 

@@ -1,5 +1,5 @@
 <template>
-<form @submit.prevent="submitForm" name="">
+    <form @submit.prevent="submitForm" name="">
   <div v-for="(source, i) in sources"
        :key="i">
     <label :for="source.slug" class="form-label">{{ source.name }}</label>
@@ -32,8 +32,8 @@ export default {
   methods: {
     addSourceField() {
       let d = new Date()
-      let id = this.sources.length ? this.sources[this.sources.length - 1].id + 1 : 1
-      this.sources.push({ 
+      let id = this.sources.length + 1;
+      this.sources.push({
                           slug: `source-${id}`,
                           name: `Quelle ${id}`,
                           url: ''})
@@ -48,7 +48,7 @@ export default {
     },
     updateSourceValue(ev) {
       let d = new Date()
-      let index = this.sources.findIndex(x => x.id === Number(ev.target.id))
+      let index = this.sources.findIndex(x => x.id === parseInt(ev.target.id, 10))
       if (index >= 0) {
         this.sources[index].url = ev.target.value
         this.$store.commit('pushCurrentRecordHistory', { message: `Changed source ${ev.target.id} to ${ev.target.value}`, date: d, type: 'info'})
