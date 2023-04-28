@@ -1,99 +1,125 @@
 <template>
-    <div>
-        <section>
-            <h2>{{ title }}</h2>
+  <div>
+    <section>
+      <h2>{{ title }}</h2>
 
-            <form @submit.prevent="sendForm">
-                <Accordion :lists="categories"
-               :accName="`${title}-entiry-acc`"
-               @inputChange="updateEntityValue">
-                </Accordion>
-            </form>
-        </section>
-    </div>
+      <form @submit.prevent="sendForm">
+        <Accordion
+          :lists="categories"
+          :accName="`${title}-entiry-acc`"
+          @inputChange="updateEntityValue"
+        >
+        </Accordion>
+      </form>
+    </section>
+  </div>
 </template>
 
 <script>
- import { mapState, mapGetters, mapActions } from 'vuex'
- import Accordion from '@/components/Accordion'
+import { mapState, mapGetters, mapActions } from "vuex";
+import Accordion from "@/components/Accordion";
 
- export default {
-     name: 'RecordEntity',
-     components: { Accordion },
-     data() {
-         return {
-             modelName: 'entity',
-             title: this.$route.params.entityname,
-             attributes: []
-         }
-     },
-     created() {
-         if(this.$route.query.attributes) {
-             this.attributes = JSON.parse(this.$route.query.attributes)
-         }
-     },
-     methods: {
-         updateEntityValue(name, value, type) {
-             const entityIndex = this.currentEntities?.findIndex(entity => entity.name === this.title)
+export default {
+  name: "RecordEntity",
+  components: { Accordion },
+  data() {
+    return {
+      modelName: "entity",
+      title: this.$route.params.entityname,
+      attributes: [],
+    };
+  },
+  created() {
+    if (this.$route.query.attributes) {
+      this.attributes = JSON.parse(this.$route.query.attributes);
+    }
+  },
+  methods: {
+    updateEntityValue(name, value, type) {
+			console.log("Value: ", value)
+      const entityIndex = this.currentEntities?.findIndex(
+        (entity) => entity.name === this.title
+      );
 
-             console.log(this.currentRecord)
+      console.log(this.currentRecord);
+      console.log(this.categories);
+      if (entityIndex === -1 || entityIndex === undefined) {
+        // Entity does not exist, create a new one
+        const newEntity = {
+          name: this.title,
+          slug: this.title, // TODO
+          fields: [],
+          properties: [],
+        };
 
-             if (entityIndex === -1 || entityIndex === undefined) {
-                 // Entity does not exist, create a new one
-                 console.log("Creating a new entity entry for this record")
-                 const newEntity = {
-                     name: this.title,
-                     slug: this.slug, // TODO do we need this? // yes, thesse could be different, think of öäüß
-                     fields: [],
-                     properties: []
-                 }
+        if (type === "field") {
+          newEntity.fields = [{ name: name, value: value }];
+        } else if (type === "category") {
+          newEntity.properties = [
+            { category_id: name, category_item_id: value },
+          ];
+        }
 
-                 if (type === 'field') {
-                     newEntity.fields = [{ name: name, value: value }]
-                 } else if (type === 'category') {
-                     newEntity.properties = [{ name: name, value: value }]
-                 }
+        this.currentEntities.push(newEntity);
+        console.log("Creating a new entity entry for this record", newEntity);
+      } else {
+        // Entity already exists, update the property value
+        if (type === "field") {
+          const fieldIndex = this.currentEntities[entityIndex].fields.findIndex(
+            (field) => field.name === name
+          );
 
-                 this.currentEntities.push(newEntity)
-             } else {
-                 // Entity already exists, update the property value
-                 if (type === 'field') {
-                     const fieldIndex = this.currentEntities[entityIndex].fields.findIndex(field => field.name === name)
+          if (fieldIndex === -1) {
+            // Field does not exist, create a new one
+            this.currentEntities[entityIndex].fields.push({
+              name: name,
+              value: value,
+            });
+          } else {
+            // Field exists, update its value
+            this.currentEntities[entityIndex].fields[fieldIndex].value = value;
+          }
+        } else if (type === "category") {
+          const propIndex = this.currentEntities[
+            entityIndex
+          ].properties.findIndex((prop) => prop.category_id === name);
 
-                     if (fieldIndex === -1) {
-                         // Field does not exist, create a new one
-                         this.currentEntities[entityIndex].fields.push({ name: name, value: value })
-                     } else {
-                         // Field exists, update its value
-                         this.currentEntities[entityIndex].fields[fieldIndex].value = value
-                     }
-                 } else if (type === 'category') {
-                     const propIndex = this.currentEntities[entityIndex].properties.findIndex(prop => prop.name === name)
+          if (propIndex === -1) {
+            // Property does not exist, create a new one
+            this.currentEntities[entityIndex].properties.push({
+              category_id: name,
+              category_item_id: value,
+            });
+          } else {
+            // Property exists, update its value
+            this.currentEntities[entityIndex].properties[
+              propIndex
+            ].category_item_id = value;
+          }
+        }
+      }
 
-                     if (propIndex === -1) {
-                         // Property does not exist, create a new one
-                         this.currentEntities[entityIndex].properties.push({ name: name, value: value })
-                     } else {
-                         // Property exists, update its value
-                         this.currentEntities[entityIndex].properties[propIndex].value = value
-                     }
-                 }
-             }
-
-             let d = new Date()
-             this.$store.commit('pushCurrentRecordHistory', { message: `Changed ${name} to ${value}`, date: d, type: 'info'})
-             this.$store.commit('setCurrentRecordProperty', { prop: 'entities', value: this.currentEntities })
-         }
-     },
-     computed: {
-         ...mapState(['currentRecord']),
-         ...mapGetters(['getEntityValue']),
-         currentEntities() {
-             return this.currentRecord.entities ? this.currentRecord.entities : []
-         },
-         categories() {
-             return this.attributes = JSON.parse(this.$route.query.attributes)
-         }
-     },
- }
+      let d = new Date();
+      this.$store.commit("pushCurrentRecordHistory", {
+        message: `Changed ${name} to ${value}`,
+        date: d,
+        type: "info",
+      });
+      this.$store.commit("setCurrentRecordProperty", {
+        prop: "entities",
+        value: this.currentEntities,
+      });
+    },
+  },
+  computed: {
+    ...mapState(["currentRecord"]),
+    ...mapGetters(["getEntityValue"]),
+    currentEntities() {
+      return this.currentRecord.entities ? this.currentRecord.entities : [];
+    },
+    categories() {
+      return (this.attributes = JSON.parse(this.$route.query.attributes));
+    },
+  },
+};
 </script>

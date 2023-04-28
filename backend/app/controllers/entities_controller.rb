@@ -46,7 +46,7 @@ class EntitiesController < ApplicationController
     params.require(:entity).permit(
       :record_id, :name, :slug, :description,
       fields_attributes: [:id, :name, :value],
-      properties_attributes: [:id, :name, :value]
+      properties_attributes: [:id, :category_id, :category_item_id]
     )
   end
 

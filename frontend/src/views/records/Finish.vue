@@ -35,8 +35,8 @@ export default {
         let properties = e.properties.map((p) => {
           return {
             id: p.id,
-            name: p.name,
-            value: p.value, // TODO category_id and category_item_id
+            category_id: p.category_id,
+            category_item_id: p.category_item_id
           };
         });
 

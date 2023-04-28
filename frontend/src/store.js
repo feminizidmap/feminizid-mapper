@@ -162,9 +162,9 @@ export const store = createStore({
             return field.value
           }
         } else if (type === 'category') {
-          const category = entity.properties?.find(property => property.name === key)
+          const category = entity.properties?.find(property => property.category_id === key)
           if (category) {
-            return category.value
+            return category.category_item_id
           }
         }
       }

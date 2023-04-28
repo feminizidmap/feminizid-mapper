@@ -57,7 +57,7 @@ class RecordsController < ApplicationController
         :slug,
         :record_id,
         fields_attributes: [:id, :name, :value],
-        properties_attributes: [:id, :name, :value]
+        properties_attributes: [:id, :category_id, :category_item_id]
       ]
     )
   end
